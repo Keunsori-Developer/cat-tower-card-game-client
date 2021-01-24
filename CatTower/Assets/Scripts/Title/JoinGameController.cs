@@ -1,26 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace CatTower
 {
-    public class GameStart : MonoBehaviour
+    public class JoinGameController : MonoBehaviour
     {
+        [SerializeField] GameObject joinGamePanel = null;
         // Start is called before the first frame update
         void Start()
-        {
-
-        }
+    {
+        
+    }
 
         // Update is called once per frame
         void Update()
+    {
+        
+    }
+        public void OpenJoinPage()
         {
-
-        }
-        public void GoToLobby()
-        {
-            SceneManager.LoadScene("Lobby");
+            joinGamePanel.gameObject.SetActive(true);
         }
     }
 }
