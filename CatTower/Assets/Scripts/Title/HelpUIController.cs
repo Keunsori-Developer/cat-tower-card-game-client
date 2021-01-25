@@ -10,11 +10,13 @@ namespace CatTower
         [SerializeField] GameObject helpPanel = null;
         [SerializeField] Button previousPage = null;
         [SerializeField] Button nextPage = null;
+        [SerializeField] GameObject helpPage1 = null;
+        [SerializeField] GameObject helpPage2 = null;
+        [SerializeField] GameObject helpPage3 = null;
         // Start is called before the first frame update
         int page;
         void Start()
         {
-            page = 1;
             helpPanel.gameObject.SetActive(false);
         }
 
@@ -26,25 +28,45 @@ namespace CatTower
         public void NextPage()
         {
             page++;
-            if(page>1)
-            {
-                previousPage.gameObject.SetActive(true);
-            }
-            if(page==3)
-            {
-                nextPage.gameObject.SetActive(false);
-            }
+            HelpPageControl();
         }
         public void PreviousPage()
         {
             page--;
-            if(page<3)
-            {
-                nextPage.gameObject.SetActive(true);
-            }
+            HelpPageControl();
+        }
+        public void OpenHelpPage()
+        {
+            page = 1;
+            helpPanel.gameObject.SetActive(true);
+            HelpPageControl();
+        }
+        public void HelpPageControl()
+        {
             if (page == 1)
             {
+                helpPage1.gameObject.SetActive(true);
+                helpPage2.gameObject.SetActive(false);
+                helpPage3.gameObject.SetActive(false);
                 previousPage.gameObject.SetActive(false);
+                nextPage.gameObject.SetActive(true);
+
+            }
+            if (page == 2)
+            {
+                helpPage1.gameObject.SetActive(false);
+                helpPage2.gameObject.SetActive(true);
+                helpPage3.gameObject.SetActive(false);
+                previousPage.gameObject.SetActive(true);
+                nextPage.gameObject.SetActive(true);
+            }
+            if (page == 3)
+            {
+                helpPage1.gameObject.SetActive(false);
+                helpPage2.gameObject.SetActive(false);
+                helpPage3.gameObject.SetActive(true);
+                previousPage.gameObject.SetActive(true);
+                nextPage.gameObject.SetActive(false);
             }
         }
     }
