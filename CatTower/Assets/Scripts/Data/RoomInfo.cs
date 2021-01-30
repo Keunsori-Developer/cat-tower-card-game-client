@@ -7,7 +7,7 @@ namespace CatTower
     {
         public string hostId;
         public string name;
-        public string capacity;
+        public int capacity;//string으로 되어있길래 바꿈
         public int mode;
     }
 
