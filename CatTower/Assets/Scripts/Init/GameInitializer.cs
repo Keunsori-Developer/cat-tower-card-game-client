@@ -14,17 +14,6 @@ namespace CatTower
         // Start is called before the first frame update
         void Start()
         {
-<<<<<<< Updated upstream
-=======
-            /*exampleCode
-            HttpManager.Instance.Post<RoomInfoRequest, RoomInfoResponse>("/rooms/create", 
-            new RoomInfoRequest {
-                hostId = "11111",
-                name = "방이름"
-            }, null);
-            */
-
->>>>>>> Stashed changes
             message.AddListener(() => loader.MoveNext());
             loader = Loader();
             loader.MoveNext();
