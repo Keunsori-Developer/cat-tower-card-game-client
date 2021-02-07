@@ -120,6 +120,116 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &3441892
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3441893}
+  - component: {fileID: 3441897}
+  - component: {fileID: 3441896}
+  - component: {fileID: 3441895}
+  - component: {fileID: 3441894}
+  m_Layer: 5
+  m_Name: slot 56
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &3441893
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3441892}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1307414185}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 60, y: 80}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &3441894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3441892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21f9136adf5e7a243bde894932960b2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  index: 56
+  myBr: 0
+--- !u!114 &3441895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3441892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c41f280da874bea47a705bf0d00b20e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myImage: {fileID: 3441896}
+  index: 56
+  mySlot: {fileID: 3441894}
+  myCard: {fileID: 0}
+  gameObj: {fileID: 625681446}
+  checkObj: {fileID: 1185709054}
+  dragAble: 0
+--- !u!114 &3441896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3441892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &3441897
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3441892}
+  m_CullTransparentMesh: 0
 --- !u!1 &91979757
 GameObject:
   m_ObjectHideFlags: 0
@@ -303,10 +413,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 19
   myBr: 0
-  card:
-    br: 0
-    catImage: {fileID: 0}
-    special: 0
 --- !u!114 &178463066
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -322,7 +428,9 @@ MonoBehaviour:
   myImage: {fileID: 178463063}
   index: 19
   mySlot: {fileID: 178463065}
+  myCard: {fileID: 0}
   gameObj: {fileID: 625681446}
+  checkObj: {fileID: 1185709054}
   dragAble: 0
 --- !u!1 &230665588
 GameObject:
@@ -415,10 +523,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 2
   myBr: 0
-  card:
-    br: 0
-    catImage: {fileID: 0}
-    special: 0
 --- !u!114 &230665593
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -434,106 +538,10 @@ MonoBehaviour:
   myImage: {fileID: 230665590}
   index: 2
   mySlot: {fileID: 230665592}
+  myCard: {fileID: 0}
   gameObj: {fileID: 625681446}
+  checkObj: {fileID: 1185709054}
   dragAble: 0
---- !u!1 &293725797
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 293725800}
-  - component: {fileID: 293725799}
-  - component: {fileID: 293725798}
-  - component: {fileID: 293725801}
-  m_Layer: 0
-  m_Name: MyCard
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &293725798
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 293725797}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_UiScaleMode: 1
-  m_ReferencePixelsPerUnit: 100
-  m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
-  m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
-  m_PhysicalUnit: 3
-  m_FallbackScreenDPI: 96
-  m_DefaultSpriteDPI: 96
-  m_DynamicPixelsPerUnit: 1
---- !u!223 &293725799
-Canvas:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 293725797}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 519420031}
-  m_PlaneDistance: 100
-  m_PixelPerfect: 0
-  m_ReceivesEvents: 1
-  m_OverrideSorting: 0
-  m_OverridePixelPerfect: 0
-  m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
-  m_TargetDisplay: 0
---- !u!224 &293725800
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 293725797}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0, y: 0}
---- !u!114 &293725801
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 293725797}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
 --- !u!1 &396394228
 GameObject:
   m_ObjectHideFlags: 0
@@ -625,10 +633,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 25
   myBr: 0
-  card:
-    br: 0
-    catImage: {fileID: 0}
-    special: 0
 --- !u!114 &396394233
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -644,7 +648,9 @@ MonoBehaviour:
   myImage: {fileID: 396394230}
   index: 25
   mySlot: {fileID: 396394232}
+  myCard: {fileID: 0}
   gameObj: {fileID: 625681446}
+  checkObj: {fileID: 1185709054}
   dragAble: 0
 --- !u!1 &459344448
 GameObject:
@@ -737,10 +743,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 10
   myBr: 0
-  card:
-    br: 0
-    catImage: {fileID: 0}
-    special: 0
 --- !u!114 &459344453
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -756,7 +758,9 @@ MonoBehaviour:
   myImage: {fileID: 459344450}
   index: 10
   mySlot: {fileID: 459344452}
+  myCard: {fileID: 0}
   gameObj: {fileID: 625681446}
+  checkObj: {fileID: 1185709054}
   dragAble: 0
 --- !u!1 &519420028
 GameObject:
@@ -932,10 +936,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 12
   myBr: 0
-  card:
-    br: 0
-    catImage: {fileID: 0}
-    special: 0
 --- !u!114 &523171699
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -951,7 +951,9 @@ MonoBehaviour:
   myImage: {fileID: 523171696}
   index: 12
   mySlot: {fileID: 523171698}
+  myCard: {fileID: 0}
   gameObj: {fileID: 625681446}
+  checkObj: {fileID: 1185709054}
   dragAble: 0
 --- !u!1 &526249722
 GameObject:
@@ -1135,10 +1137,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 0
   myBr: 0
-  card:
-    br: 0
-    catImage: {fileID: 0}
-    special: 0
 --- !u!114 &554717904
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1154,7 +1152,9 @@ MonoBehaviour:
   myImage: {fileID: 554717901}
   index: 0
   mySlot: {fileID: 554717903}
+  myCard: {fileID: 0}
   gameObj: {fileID: 625681446}
+  checkObj: {fileID: 1185709054}
   dragAble: 0
 --- !u!1 &606216890
 GameObject:
@@ -1247,10 +1247,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 3
   myBr: 0
-  card:
-    br: 0
-    catImage: {fileID: 0}
-    special: 0
 --- !u!114 &606216895
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1266,7 +1262,9 @@ MonoBehaviour:
   myImage: {fileID: 606216892}
   index: 3
   mySlot: {fileID: 606216894}
+  myCard: {fileID: 0}
   gameObj: {fileID: 625681446}
+  checkObj: {fileID: 1185709054}
   dragAble: 0
 --- !u!1 &625681446
 GameObject:
@@ -1281,7 +1279,7 @@ GameObject:
   - component: {fileID: 625681449}
   - component: {fileID: 625681450}
   m_Layer: 5
-  m_Name: GameObject
+  m_Name: SlotManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1305,6 +1303,7 @@ RectTransform:
   - {fileID: 899030394}
   - {fileID: 2084662653}
   - {fileID: 1673296731}
+  - {fileID: 1307414185}
   m_Father: {fileID: 2017638278}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1364,8 +1363,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0bfb2d910b9bc94b89a7be97ba021be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  arrSlotIndex: 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-  arrSlotBreed: 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  arrSlotIndex: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  arrSlotBreed: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
 --- !u!1 &627101486
 GameObject:
   m_ObjectHideFlags: 0
@@ -1457,10 +1456,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 9
   myBr: 0
-  card:
-    br: 0
-    catImage: {fileID: 0}
-    special: 0
 --- !u!114 &627101491
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1476,7 +1471,9 @@ MonoBehaviour:
   myImage: {fileID: 627101488}
   index: 9
   mySlot: {fileID: 627101490}
+  myCard: {fileID: 0}
   gameObj: {fileID: 625681446}
+  checkObj: {fileID: 1185709054}
   dragAble: 0
 --- !u!1 &637077647
 GameObject:
@@ -1569,10 +1566,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 8
   myBr: 0
-  card:
-    br: 0
-    catImage: {fileID: 0}
-    special: 0
 --- !u!114 &637077652
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1588,7 +1581,9 @@ MonoBehaviour:
   myImage: {fileID: 637077649}
   index: 8
   mySlot: {fileID: 637077651}
+  myCard: {fileID: 0}
   gameObj: {fileID: 625681446}
+  checkObj: {fileID: 1185709054}
   dragAble: 0
 --- !u!1 &668427900
 GameObject:
@@ -1681,10 +1676,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 28
   myBr: 0
-  card:
-    br: 0
-    catImage: {fileID: 0}
-    special: 0
 --- !u!114 &668427905
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1700,7 +1691,9 @@ MonoBehaviour:
   myImage: {fileID: 668427902}
   index: 28
   mySlot: {fileID: 668427904}
+  myCard: {fileID: 0}
   gameObj: {fileID: 625681446}
+  checkObj: {fileID: 1185709054}
   dragAble: 0
 --- !u!1 &693598072
 GameObject:
@@ -1883,10 +1876,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 4
   myBr: 0
-  card:
-    br: 0
-    catImage: {fileID: 0}
-    special: 0
 --- !u!114 &734021982
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1902,7 +1891,9 @@ MonoBehaviour:
   myImage: {fileID: 734021979}
   index: 4
   mySlot: {fileID: 734021981}
+  myCard: {fileID: 0}
   gameObj: {fileID: 625681446}
+  checkObj: {fileID: 1185709054}
   dragAble: 0
 --- !u!1 &783217739
 GameObject:
@@ -1995,10 +1986,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 7
   myBr: 0
-  card:
-    br: 0
-    catImage: {fileID: 0}
-    special: 0
 --- !u!114 &783217744
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2014,7 +2001,9 @@ MonoBehaviour:
   myImage: {fileID: 783217741}
   index: 7
   mySlot: {fileID: 783217743}
+  myCard: {fileID: 0}
   gameObj: {fileID: 625681446}
+  checkObj: {fileID: 1185709054}
   dragAble: 0
 --- !u!1 &899030393
 GameObject:
@@ -2196,10 +2185,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 32
   myBr: 0
-  card:
-    br: 0
-    catImage: {fileID: 0}
-    special: 0
 --- !u!114 &959509322
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2213,9 +2198,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myImage: {fileID: 959509319}
-  index: 2
+  index: 32
   mySlot: {fileID: 959509321}
+  myCard: {fileID: 0}
   gameObj: {fileID: 625681446}
+  checkObj: {fileID: 1185709054}
   dragAble: 0
 --- !u!1 &964172720
 GameObject:
@@ -2308,10 +2295,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 40
   myBr: 0
-  card:
-    br: 0
-    catImage: {fileID: 0}
-    special: 0
 --- !u!114 &964172725
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2327,7 +2310,9 @@ MonoBehaviour:
   myImage: {fileID: 964172722}
   index: 40
   mySlot: {fileID: 964172724}
+  myCard: {fileID: 0}
   gameObj: {fileID: 625681446}
+  checkObj: {fileID: 1185709054}
   dragAble: 0
 --- !u!1 &990989695
 GameObject:
@@ -2420,10 +2405,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 17
   myBr: 0
-  card:
-    br: 0
-    catImage: {fileID: 0}
-    special: 0
 --- !u!114 &990989700
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2439,7 +2420,9 @@ MonoBehaviour:
   myImage: {fileID: 990989697}
   index: 17
   mySlot: {fileID: 990989699}
+  myCard: {fileID: 0}
   gameObj: {fileID: 625681446}
+  checkObj: {fileID: 1185709054}
   dragAble: 0
 --- !u!1 &1021313038
 GameObject:
@@ -2532,10 +2515,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 6
   myBr: 0
-  card:
-    br: 0
-    catImage: {fileID: 0}
-    special: 0
 --- !u!114 &1021313043
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2551,7 +2530,9 @@ MonoBehaviour:
   myImage: {fileID: 1021313040}
   index: 6
   mySlot: {fileID: 1021313042}
+  myCard: {fileID: 0}
   gameObj: {fileID: 625681446}
+  checkObj: {fileID: 1185709054}
   dragAble: 0
 --- !u!1 &1128162248
 GameObject:
@@ -2644,10 +2625,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 35
   myBr: 0
-  card:
-    br: 0
-    catImage: {fileID: 0}
-    special: 0
 --- !u!114 &1128162253
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2663,7 +2640,9 @@ MonoBehaviour:
   myImage: {fileID: 1128162250}
   index: 35
   mySlot: {fileID: 1128162252}
+  myCard: {fileID: 0}
   gameObj: {fileID: 625681446}
+  checkObj: {fileID: 1185709054}
   dragAble: 0
 --- !u!1 &1141219965
 GameObject:
@@ -2694,7 +2673,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1141219968
 MonoBehaviour:
@@ -2801,6 +2780,135 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 2
   m_VerticalFit: 2
+--- !u!1 &1185709054
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1185709058}
+  - component: {fileID: 1185709057}
+  - component: {fileID: 1185709056}
+  - component: {fileID: 1185709055}
+  - component: {fileID: 1185709059}
+  m_Layer: 5
+  m_Name: MyCards
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1185709055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1185709054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!114 &1185709056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1185709054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_UiScaleMode: 0
+  m_ReferencePixelsPerUnit: 100
+  m_ScaleFactor: 1
+  m_ReferenceResolution: {x: 800, y: 600}
+  m_ScreenMatchMode: 0
+  m_MatchWidthOrHeight: 0
+  m_PhysicalUnit: 3
+  m_FallbackScreenDPI: 96
+  m_DefaultSpriteDPI: 96
+  m_DynamicPixelsPerUnit: 1
+--- !u!223 &1185709057
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1185709054}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 0
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
+--- !u!224 &1185709058
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1185709054}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0, y: 0}
+--- !u!114 &1185709059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1185709054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 834f4bab4f6b7294e8c8b4f47cdb9e8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  usableCard: 0
+  gameObj: {fileID: 625681446}
+  siamBool: 0
+  russianBool: 0
+  mackBool: 0
+  persBool: 0
+  ragBool: 0
+  thrBool: 0
+  oddBool: 0
+  siamNum: 0
+  russiaNum: 0
+  mackNum: 0
+  ragNum: 0
+  persNum: 0
+  thrNum: 0
+  oddNum: 0
+  savaNum: 0
+  turn: 1
 --- !u!1 &1242933606
 GameObject:
   m_ObjectHideFlags: 0
@@ -2892,10 +3000,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 5
   myBr: 0
-  card:
-    br: 0
-    catImage: {fileID: 0}
-    special: 0
 --- !u!114 &1242933611
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2911,7 +3015,9 @@ MonoBehaviour:
   myImage: {fileID: 1242933608}
   index: 5
   mySlot: {fileID: 1242933610}
+  myCard: {fileID: 0}
   gameObj: {fileID: 625681446}
+  checkObj: {fileID: 1185709054}
   dragAble: 0
 --- !u!1 &1273367587
 GameObject:
@@ -3004,10 +3110,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 21
   myBr: 0
-  card:
-    br: 0
-    catImage: {fileID: 0}
-    special: 0
 --- !u!114 &1273367592
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3023,8 +3125,96 @@ MonoBehaviour:
   myImage: {fileID: 1273367589}
   index: 21
   mySlot: {fileID: 1273367591}
+  myCard: {fileID: 0}
   gameObj: {fileID: 625681446}
+  checkObj: {fileID: 1185709054}
   dragAble: 0
+--- !u!1 &1307414184
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1307414185}
+  - component: {fileID: 1307414188}
+  - component: {fileID: 1307414187}
+  - component: {fileID: 1307414186}
+  m_Layer: 5
+  m_Name: Line7
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1307414185
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1307414184}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 3441893}
+  m_Father: {fileID: 625681447}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 450, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1307414186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1307414184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalFit: 2
+  m_VerticalFit: 2
+--- !u!222 &1307414187
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1307414184}
+  m_CullTransparentMesh: 0
+--- !u!114 &1307414188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1307414184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 4
+  m_Spacing: 60
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 1
+  m_ChildControlWidth: 0
+  m_ChildControlHeight: 0
+  m_ChildScaleWidth: 0
+  m_ChildScaleHeight: 0
 --- !u!1 &1323698027
 GameObject:
   m_ObjectHideFlags: 0
@@ -3116,10 +3306,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 42
   myBr: 0
-  card:
-    br: 0
-    catImage: {fileID: 0}
-    special: 0
 --- !u!114 &1323698032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3135,7 +3321,9 @@ MonoBehaviour:
   myImage: {fileID: 1323698029}
   index: 42
   mySlot: {fileID: 1323698031}
+  myCard: {fileID: 0}
   gameObj: {fileID: 625681446}
+  checkObj: {fileID: 1185709054}
   dragAble: 0
 --- !u!1 &1359520226
 GameObject:
@@ -3180,30 +3368,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 753ae1c409c4f5841beaf03bb0a97ffb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parentObject: {fileID: 293725797}
+  parentObject: {fileID: 1185709054}
   cardDBs:
-  - br: 0
+  - br: 1
     catImage: {fileID: 21300000, guid: 09748260a9b7c3d47b09ebf08c60f9ab, type: 3}
     special: 0
-  - br: 1
+  - br: 2
     catImage: {fileID: 21300000, guid: c8231a9603404e04597db0242f6f0e9b, type: 3}
     special: 0
-  - br: 2
+  - br: 3
     catImage: {fileID: 21300000, guid: 137e9e494253e244297a8b027a2c9944, type: 3}
     special: 0
-  - br: 3
+  - br: 4
     catImage: {fileID: 21300000, guid: 6808487b9663f0c41bdc2ef7cb72ac8f, type: 3}
     special: 0
-  - br: 4
+  - br: 5
     catImage: {fileID: 21300000, guid: 3378d7f3e227eab4689c2d132e6dfee2, type: 3}
     special: 0
-  - br: 5
+  - br: 6
     catImage: {fileID: 21300000, guid: f488ca54cd6818840a0ee53dcad8b3cd, type: 3}
     special: 1
-  - br: 6
+  - br: 7
     catImage: {fileID: 21300000, guid: b24e3ef65eda4b74c9a3a92570697b8c, type: 3}
     special: 1
-  - br: 7
+  - br: 8
     catImage: {fileID: 21300000, guid: 997937cd3aceef54fa35dc532350f181, type: 3}
     special: 1
   MyCardPrefab: {fileID: 5222962578036433921, guid: db04e6917c90f9744a04ba9b43336345,
@@ -3278,7 +3466,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1432859861
 GameObject:
@@ -3371,10 +3559,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 41
   myBr: 0
-  card:
-    br: 0
-    catImage: {fileID: 0}
-    special: 0
 --- !u!114 &1432859866
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3390,7 +3574,9 @@ MonoBehaviour:
   myImage: {fileID: 1432859863}
   index: 41
   mySlot: {fileID: 1432859865}
+  myCard: {fileID: 0}
   gameObj: {fileID: 625681446}
+  checkObj: {fileID: 1185709054}
   dragAble: 0
 --- !u!1 &1436929023
 GameObject:
@@ -3483,10 +3669,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 1
   myBr: 0
-  card:
-    br: 0
-    catImage: {fileID: 0}
-    special: 0
 --- !u!114 &1436929028
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3502,7 +3684,9 @@ MonoBehaviour:
   myImage: {fileID: 1436929025}
   index: 1
   mySlot: {fileID: 1436929027}
+  myCard: {fileID: 0}
   gameObj: {fileID: 625681446}
+  checkObj: {fileID: 1185709054}
   dragAble: 0
 --- !u!1 &1503524599
 GameObject:
@@ -3688,10 +3872,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 33
   myBr: 0
-  card:
-    br: 0
-    catImage: {fileID: 0}
-    special: 0
 --- !u!114 &1531645113
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3707,7 +3887,9 @@ MonoBehaviour:
   myImage: {fileID: 1531645110}
   index: 33
   mySlot: {fileID: 1531645112}
+  myCard: {fileID: 0}
   gameObj: {fileID: 625681446}
+  checkObj: {fileID: 1185709054}
   dragAble: 0
 --- !u!1 &1564000490
 GameObject:
@@ -3800,10 +3982,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 13
   myBr: 0
-  card:
-    br: 0
-    catImage: {fileID: 0}
-    special: 0
 --- !u!114 &1564000495
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3819,7 +3997,9 @@ MonoBehaviour:
   myImage: {fileID: 1564000492}
   index: 13
   mySlot: {fileID: 1564000494}
+  myCard: {fileID: 0}
   gameObj: {fileID: 625681446}
+  checkObj: {fileID: 1185709054}
   dragAble: 0
 --- !u!1 &1586484429
 GameObject:
@@ -3912,10 +4092,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 49
   myBr: 0
-  card:
-    br: 0
-    catImage: {fileID: 0}
-    special: 0
 --- !u!114 &1586484434
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3931,7 +4107,9 @@ MonoBehaviour:
   myImage: {fileID: 1586484431}
   index: 49
   mySlot: {fileID: 1586484433}
+  myCard: {fileID: 0}
   gameObj: {fileID: 625681446}
+  checkObj: {fileID: 1185709054}
   dragAble: 0
 --- !u!1 &1673296730
 GameObject:
@@ -4111,10 +4289,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 16
   myBr: 0
-  card:
-    br: 0
-    catImage: {fileID: 0}
-    special: 0
 --- !u!114 &1683039884
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4130,7 +4304,9 @@ MonoBehaviour:
   myImage: {fileID: 1683039881}
   index: 16
   mySlot: {fileID: 1683039883}
+  myCard: {fileID: 0}
   gameObj: {fileID: 625681446}
+  checkObj: {fileID: 1185709054}
   dragAble: 0
 --- !u!1 &1701601313
 GameObject:
@@ -4223,10 +4399,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 34
   myBr: 0
-  card:
-    br: 0
-    catImage: {fileID: 0}
-    special: 0
 --- !u!114 &1701601318
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4242,7 +4414,9 @@ MonoBehaviour:
   myImage: {fileID: 1701601315}
   index: 34
   mySlot: {fileID: 1701601317}
+  myCard: {fileID: 0}
   gameObj: {fileID: 625681446}
+  checkObj: {fileID: 1185709054}
   dragAble: 0
 --- !u!1 &1703105769
 GameObject:
@@ -4335,10 +4509,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 20
   myBr: 0
-  card:
-    br: 0
-    catImage: {fileID: 0}
-    special: 0
 --- !u!114 &1703105774
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4354,7 +4524,9 @@ MonoBehaviour:
   myImage: {fileID: 1703105771}
   index: 20
   mySlot: {fileID: 1703105773}
+  myCard: {fileID: 0}
   gameObj: {fileID: 625681446}
+  checkObj: {fileID: 1185709054}
   dragAble: 0
 --- !u!1 &1824430682
 GameObject:
@@ -4447,10 +4619,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 26
   myBr: 0
-  card:
-    br: 0
-    catImage: {fileID: 0}
-    special: 0
 --- !u!114 &1824430687
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4466,7 +4634,9 @@ MonoBehaviour:
   myImage: {fileID: 1824430684}
   index: 26
   mySlot: {fileID: 1824430686}
+  myCard: {fileID: 0}
   gameObj: {fileID: 625681446}
+  checkObj: {fileID: 1185709054}
   dragAble: 0
 --- !u!1 &1924671503
 GameObject:
@@ -4559,10 +4729,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 18
   myBr: 0
-  card:
-    br: 0
-    catImage: {fileID: 0}
-    special: 0
 --- !u!114 &1924671508
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4578,7 +4744,9 @@ MonoBehaviour:
   myImage: {fileID: 1924671505}
   index: 18
   mySlot: {fileID: 1924671507}
+  myCard: {fileID: 0}
   gameObj: {fileID: 625681446}
+  checkObj: {fileID: 1185709054}
   dragAble: 0
 --- !u!1 &2017638274
 GameObject:
@@ -4673,7 +4841,7 @@ RectTransform:
   - {fileID: 1359520227}
   - {fileID: 625681447}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -4771,10 +4939,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 24
   myBr: 0
-  card:
-    br: 0
-    catImage: {fileID: 0}
-    special: 0
 --- !u!114 &2022975110
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4790,7 +4954,9 @@ MonoBehaviour:
   myImage: {fileID: 2022975107}
   index: 24
   mySlot: {fileID: 2022975109}
+  myCard: {fileID: 0}
   gameObj: {fileID: 625681446}
+  checkObj: {fileID: 1185709054}
   dragAble: 0
 --- !u!1 &2044311618
 GameObject:
@@ -4883,10 +5049,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 27
   myBr: 0
-  card:
-    br: 0
-    catImage: {fileID: 0}
-    special: 0
 --- !u!114 &2044311623
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4902,7 +5064,9 @@ MonoBehaviour:
   myImage: {fileID: 2044311620}
   index: 27
   mySlot: {fileID: 2044311622}
+  myCard: {fileID: 0}
   gameObj: {fileID: 625681446}
+  checkObj: {fileID: 1185709054}
   dragAble: 0
 --- !u!1 &2073663115
 GameObject:
@@ -4995,10 +5159,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 14
   myBr: 0
-  card:
-    br: 0
-    catImage: {fileID: 0}
-    special: 0
 --- !u!114 &2073663120
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5014,7 +5174,9 @@ MonoBehaviour:
   myImage: {fileID: 2073663117}
   index: 14
   mySlot: {fileID: 2073663119}
+  myCard: {fileID: 0}
   gameObj: {fileID: 625681446}
+  checkObj: {fileID: 1185709054}
   dragAble: 0
 --- !u!1 &2074725755
 GameObject:
@@ -5107,10 +5269,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 11
   myBr: 0
-  card:
-    br: 0
-    catImage: {fileID: 0}
-    special: 0
 --- !u!114 &2074725760
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5126,7 +5284,9 @@ MonoBehaviour:
   myImage: {fileID: 2074725757}
   index: 11
   mySlot: {fileID: 2074725759}
+  myCard: {fileID: 0}
   gameObj: {fileID: 625681446}
+  checkObj: {fileID: 1185709054}
   dragAble: 0
 --- !u!1 &2084662652
 GameObject:
@@ -5307,10 +5467,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 48
   myBr: 0
-  card:
-    br: 0
-    catImage: {fileID: 0}
-    special: 0
 --- !u!114 &2123819896
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5326,5 +5482,7 @@ MonoBehaviour:
   myImage: {fileID: 2123819893}
   index: 48
   mySlot: {fileID: 2123819895}
+  myCard: {fileID: 0}
   gameObj: {fileID: 625681446}
+  checkObj: {fileID: 1185709054}
   dragAble: 0

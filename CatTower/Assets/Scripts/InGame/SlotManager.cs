@@ -6,15 +6,17 @@ namespace CatTower
 {
     public class SlotManager : MonoBehaviour
     {
-        public int[] arrSlotIndex = new int[57];
-        public Breed[] arrSlotBreed = new Breed[57];
-        // Start is called before the first frame update
+        public int[] arrSlotIndex = new int[58];
+        public Breed[] arrSlotBreed = new Breed[58];
+
         void Start()
         {
-
+            for (int i = 0; i < 58; i++)
+            {
+                arrSlotIndex[i] = 0;
+            }
         }
 
-        // Update is called once per frame
         void Update()
         {
 

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 namespace CatTower {
     public enum Breed
     {
+        none,
         Siamese,
         RussianBlue,
         Mackerel,
