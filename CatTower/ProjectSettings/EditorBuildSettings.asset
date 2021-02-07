@@ -13,7 +13,7 @@ EditorBuildSettings:
     guid: f95b0664c14b8d0468054de2353e83c3
   - enabled: 1
     path: Assets/Scenes/Lobby.unity
-    guid: 5fdaf92ade3fc074ea14bab4a765ad64
+    guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
     path: Assets/Scenes/InGame.unity
     guid: 8d76ad4ed5a4141f0b30c71e9548dc84
