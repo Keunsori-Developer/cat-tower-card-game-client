@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System.Linq;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,59 +16,73 @@ namespace CatTower
 
         // Start is called before the first frame update
         void Start()
-    {
-        
-    }
+        {
+
+        }
 
         // Update is called once per frame
         void Update()
-    {
-        
-    }
+        {
+
+        }
         public void OpenJoinPage()
         {
             joinGamePanel.gameObject.SetActive(true);
             RefreshRoomList();
         }
-        public void CreateRoomList(RoomListResponse RL)//프리팹 한개 복사하는함수
+        public void CreateRoomList(RoomListResponse RL)
         {
             GameObject clone = Instantiate(roomPrefap, Vector3.zero, Quaternion.identity) as GameObject;//대충 새로만들고 복사한다는내용
             clone.transform.SetParent(prefapParents.transform);
             clone.name = RL.name;
-            clone.transform.FindChild("RoomName").GetComponentInChildren<Text>().text=RL.name;
-            clone.transform.FindChild("RoomId").GetComponentInChildren<Text>().text = RL.id;
-            clone.transform.FindChild("CurrentMember").GetComponentInChildren<Text>().text = RL.joined.ToString();
-            clone.transform.FindChild("Capacity").GetComponentInChildren<Text>().text = RL.capacity.ToString();
-        }
+            clone.transform.Find("RoomName").GetComponentInChildren<Text>().text = RL.name;
+            clone.transform.Find("RoomId").GetComponentInChildren<Text>().text = RL.id;
+            clone.transform.Find("CurrentMember").GetComponentInChildren<Text>().text = RL.joined.ToString();
+            clone.transform.Find("Capacity").GetComponentInChildren<Text>().text = RL.capacity.ToString();
+            Button join = clone.GetComponentInChildren<Button>();//프리팹 join 버튼 연결
+            join.onClick.AddListener(JoinRoomByClick);
+        }//낱개 프리팹 복사하는함수
         public void RefreshRoomList()
         {
-            Transform _previousList = prefapParents.GetComponentInChildren<Transform>();//기존 창 날리는거
+            Transform _previousList = prefapParents.GetComponentInChildren<Transform>();
             foreach (Transform _previousChild in _previousList)
             {
-                if(_previousChild!=_previousList)
+                if (_previousChild != _previousList)
                 {
                     Destroy(_previousChild.gameObject);
                 }
-            }
-
-            // api를 날리고 받는거 미구현
-
+            }//기존에 생성된 프리팹들 삭제
+            HttpManager.Instance.Get<List<RoomListResponse>>("/rooms/active",ReadRoomList);// 방정보 Get            
             for (int i = 0; i < roomList.Count; i++)
             {
                 CreateRoomList(roomList[i]);
+                Debug.Log("ID : "+ roomList[i].id+ " 이름 : "+ roomList[i].name+ " "+ roomList[i].joined+ "/"+ roomList[i].capacity);
             }//리스트 만드는거
         }
-        public void Makedummy()//방목록 api받는거 아직 미완성이라 일단 실험용으로 만든거
+        public void Makedummy()
         {
             roomList.Add(new RoomListResponse() { name = _dummyNo.ToString(), id = _dummyNo.ToString(), capacity = 4, joined = 3 });
             Debug.Log("made dummy : " + _dummyNo);
             _dummyNo++;
-        }
+        }//방목록 api받는거 아직 미완성이라 일단 실험용으로 만든거
+        public void ReadRoomList(List<RoomListResponse> temp) 
+        {
+            roomList = temp.ToList();
+        }// Get으로 가져온거 그대로 복사하는 함수
 
-        public void JoinRoom()
+        public void JoinRoomByClick()
+        {
+            Debug.Log("test");
+            //HttpManager.Instance.Post<JoinRequest, JoinResponse>("/rooms/join", new JoinRequest
+            //{
+                
+            //}
+            //, null) ;
+        }
+        public void JoinRoomByCode()
         {
 
-        }
+        }//추후 방 코드입력으로 입장하기 위한 기능을 위해서 남겨놓음
 
     }
 }

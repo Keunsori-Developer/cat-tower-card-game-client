@@ -10,7 +10,7 @@ namespace CatTower
         [SerializeField] GameObject hostGamePanel = null;
         [SerializeField] Text roomName = null;
         [SerializeField] Text capacity = null;
-        [SerializeField] GameObject roomNameError = null;
+      //[SerializeField] GameObject roomNameError = null;
         [SerializeField] GameObject capacityError = null;
 
         int _capacity = 0;
@@ -56,7 +56,7 @@ namespace CatTower
                     name = _roomName,
                     capacity = _capacity
                 }, null) ;
-            Debug.Log("성공! 호스트 : " + UserInfo.mid +" 방이름 : " + _roomName + " 인원 : "  + _capacity);//확인용
+            Debug.Log("요청성공. 호스트 : " + UserInfo.mid +" 방이름 : " + _roomName + " 인원 : "  + _capacity);//확인용
         }
     }
 }
