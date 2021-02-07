@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 01614bd57c35d1a408aa68c4f74e69db
+guid: 82ebb68f174fb5144900ef245dacb62f
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -11,7 +11,8 @@ TrueTypeFontImporter:
   fontName: CookieRun
   fontNames:
   - CookieRun
-  fallbackFontReferences: []
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: cd397e2e4d149d54f9b7463ae473d99c, type: 3}
   customCharacters: 
   fontRenderingMode: 0
   ascentCalculationMode: 1
