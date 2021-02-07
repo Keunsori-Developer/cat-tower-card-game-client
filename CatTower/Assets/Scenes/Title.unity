@@ -3763,7 +3763,6 @@ MonoBehaviour:
   hostGamePanel: {fileID: 791180896}
   roomName: {fileID: 140637180}
   capacity: {fileID: 1380659643}
-  roomNameError: {fileID: 11076239}
   capacityError: {fileID: 136837630}
 --- !u!114 &1097601240
 MonoBehaviour:
