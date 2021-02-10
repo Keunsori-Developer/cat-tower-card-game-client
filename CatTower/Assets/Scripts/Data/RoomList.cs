@@ -17,11 +17,13 @@ namespace CatTower
         public string name;
         public int capacity;
         public int joined;
-        public class hostinfo
-        {
-            public string nickname;
-            public string mid;
-        }
+        public Hostinfo hostInfo;
     }
-    
+    [Serializable]
+    public class Hostinfo
+    {
+        public string nickname;
+        public string mid;
+    }
 }
+

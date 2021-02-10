@@ -10,11 +10,10 @@ namespace CatTower
         [SerializeField] GameObject hostGamePanel = null;
         [SerializeField] Text roomName = null;
         [SerializeField] Text capacity = null;
-      //[SerializeField] GameObject roomNameError = null;
+        [SerializeField] Text mode = null;
+        //[SerializeField] GameObject roomNameError = null;
         [SerializeField] GameObject capacityError = null;
 
-        int _capacity = 0;
-        string _roomName = "";
 
         // Start is called before the first frame update
         void Start()
@@ -34,9 +33,7 @@ namespace CatTower
         }
         public void CreateRoom()
         {
-            _capacity = int.Parse(capacity.text);
-            _roomName = roomName.text;
-            if (_capacity < 2 || _capacity > 6)
+            if (int.Parse(capacity.text) < 2 || int.Parse(capacity.text) > 6)
             {
                 capacityError.gameObject.SetActive(true);
                 /*
@@ -53,10 +50,11 @@ namespace CatTower
                 new RoomInfoRequest
                 {
                     hostId = UserInfo.mid,
-                    name = _roomName,
-                    capacity = _capacity
+                    name = roomName.text,
+                    capacity = int.Parse(capacity.text),
+                    mode = int.Parse(mode.text)//여기서 앞모드는 클래스의 mode 뒤의 모드는 입력받는 mode
                 }, null) ;
-            Debug.Log("요청성공. 호스트 : " + UserInfo.mid +" 방이름 : " + _roomName + " 인원 : "  + _capacity);//확인용
+            Debug.Log("요청성공. 호스트 : " + UserInfo.mid +" 방이름 : " + roomName.text + " 인원 : "  + int.Parse(capacity.text) + " 모드 : " + int.Parse(mode.text));//확인용
         }
     }
 }

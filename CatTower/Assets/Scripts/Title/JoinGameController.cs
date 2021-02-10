@@ -11,6 +11,7 @@ namespace CatTower
         [SerializeField] GameObject joinGamePanel = null;
         [SerializeField] GameObject roomPrefap = null;
         [SerializeField] GameObject prefapParents = null;
+        [SerializeField] Text roomCode = null;
         List<RoomListResponse> roomList = new List<RoomListResponse>();
         int _dummyNo;
 
@@ -32,6 +33,7 @@ namespace CatTower
         }
         public void CreateRoomList(RoomListResponse RL)
         {
+
             GameObject clone = Instantiate(roomPrefap, Vector3.zero, Quaternion.identity) as GameObject;//대충 새로만들고 복사한다는내용
             clone.transform.SetParent(prefapParents.transform);
             clone.name = RL.name;
@@ -40,7 +42,7 @@ namespace CatTower
             clone.transform.Find("CurrentMember").GetComponentInChildren<Text>().text = RL.joined.ToString();
             clone.transform.Find("Capacity").GetComponentInChildren<Text>().text = RL.capacity.ToString();
             Button join = clone.GetComponentInChildren<Button>();//프리팹 join 버튼 연결
-            join.onClick.AddListener(JoinRoomByClick);
+            //join.onClick.AddListener();
         }//낱개 프리팹 복사하는함수
         public void RefreshRoomList()
         {
@@ -52,7 +54,9 @@ namespace CatTower
                     Destroy(_previousChild.gameObject);
                 }
             }//기존에 생성된 프리팹들 삭제
-            HttpManager.Instance.Get<List<RoomListResponse>>("/rooms/active",ReadRoomList);// 방정보 Get            
+
+            HttpManager.Instance.Get<List<RoomListResponse>>("/rooms/active", ReadRoomList);// 방정보 Get  
+            
             for (int i = 0; i < roomList.Count; i++)
             {
                 CreateRoomList(roomList[i]);
@@ -67,22 +71,27 @@ namespace CatTower
         }//방목록 api받는거 아직 미완성이라 일단 실험용으로 만든거
         public void ReadRoomList(List<RoomListResponse> temp) 
         {
-            roomList = temp.ToList();
+            roomList.Add(new RoomListResponse() { name = temp[1].name, id = temp[1].id, capacity = temp[1].capacity, joined = temp[1].joined });
         }// Get으로 가져온거 그대로 복사하는 함수
 
-        public void JoinRoomByClick()
+        public void JoinRoomByClick(Button join)
         {
             Debug.Log("test");
-            //HttpManager.Instance.Post<JoinRequest, JoinResponse>("/rooms/join", new JoinRequest
-            //{
-                
-            //}
-            //, null) ;
+            HttpManager.Instance.Post<JoinRequest, JoinResponse>("/rooms/join",
+            new JoinRequest
+            {
+                roomId = "a",
+                userInfo = { nickname = UserInfo.nickName, mid = UserInfo.mid }
+            }, null) ;
         }
         public void JoinRoomByCode()
         {
-
-        }//추후 방 코드입력으로 입장하기 위한 기능을 위해서 남겨놓음
-
+            HttpManager.Instance.Post<JoinRequest, JoinResponse>("/rooms/join",
+            new JoinRequest
+            {
+                roomId = roomCode.text,
+                userInfo = {nickname = UserInfo.nickName, mid = UserInfo.mid }
+            }, null);
+        }//방 코드입력으로 입장
     }
 }

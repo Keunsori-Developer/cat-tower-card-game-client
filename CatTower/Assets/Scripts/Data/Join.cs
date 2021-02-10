@@ -6,11 +6,7 @@ namespace CatTower
     public class JoinRequest
     {
         public string roomId;
-        public class userInfo
-        {
-            public string nickname;
-            public string mid;
-        }
+        public Userinfo userInfo;
     }
 
     [Serializable]
@@ -18,4 +14,12 @@ namespace CatTower
     {
             //userlist미구현
     }
+
+    [Serializable]
+    public class Userinfo //UserInfo로 동일한 클래스가 이미 있는데 여기서 닉네임이랑 미드가 static이라 일단 걍 하나더 만듬
+    {
+        public string nickname;
+        public string mid;
+    }
+
 }

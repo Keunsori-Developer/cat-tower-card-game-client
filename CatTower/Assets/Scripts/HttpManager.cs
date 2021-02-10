@@ -29,7 +29,6 @@ namespace CatTower
             webRequest.method = UnityWebRequest.kHttpVerbGET;
             webRequest.downloadHandler = new DownloadHandlerBuffer();
             yield return webRequest.SendWebRequest();
-
             if (webRequest.isNetworkError)
             {
                 Debug.Log("network error");
@@ -41,6 +40,9 @@ namespace CatTower
                 yield break;
             }
             var responseBody = webRequest.downloadHandler.text;
+
+            Debug.Log(responseBody);
+
             if (responseHandler != null) responseHandler(JsonUtility.FromJson<TResponse>(responseBody));
             yield return null;
         }
@@ -60,6 +62,16 @@ namespace CatTower
             if (webRequest.isNetworkError)
             {
                 Debug.Log("network error");
+                yield break;
+            }
+            if (webRequest.responseCode == 400)
+            {
+                Debug.Log("responseCode is 400");
+                yield break;
+            }
+            if (webRequest.responseCode == 500)
+            {
+                Debug.Log("responseCode is 500");
                 yield break;
             }
             if (webRequest.responseCode != 200)
