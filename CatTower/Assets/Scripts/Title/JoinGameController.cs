@@ -12,13 +12,14 @@ namespace CatTower
         [SerializeField] GameObject roomPrefap = null;
         [SerializeField] GameObject prefapParents = null;
         [SerializeField] Text roomCode = null;
-        List<RoomListResponse> roomList = new List<RoomListResponse>();
+        List<RoomInfo> roomList = new List<RoomInfo>();
+        // RoomListResponse roomList = new RoomListResponse();
         int _dummyNo;
 
         // Start is called before the first frame update
         void Start()
         {
-
+            
         }
 
         // Update is called once per frame
@@ -31,7 +32,7 @@ namespace CatTower
             joinGamePanel.gameObject.SetActive(true);
             RefreshRoomList();
         }
-        public void CreateRoomList(RoomListResponse RL)
+        public void CreateRoomList(RoomInfo RL)
         {
 
             GameObject clone = Instantiate(roomPrefap, Vector3.zero, Quaternion.identity) as GameObject;//대충 새로만들고 복사한다는내용
@@ -55,7 +56,7 @@ namespace CatTower
                 }
             }//기존에 생성된 프리팹들 삭제
 
-            HttpManager.Instance.Get<List<RoomListResponse>>("/rooms/active", ReadRoomList);// 방정보 Get  
+            HttpManager.Instance.Get<RoomListResponse>("/rooms/active", ReadRoomList);// 방정보 Get  
             
             for (int i = 0; i < roomList.Count; i++)
             {
@@ -65,13 +66,18 @@ namespace CatTower
         }
         public void Makedummy()
         {
-            roomList.Add(new RoomListResponse() { name = _dummyNo.ToString(), id = _dummyNo.ToString(), capacity = 4, joined = 3 });
+            roomList.Add(new RoomInfo() { name = _dummyNo.ToString(), id = _dummyNo.ToString(), capacity = 4, joined = 3, });
             Debug.Log("made dummy : " + _dummyNo);
             _dummyNo++;
         }//방목록 api받는거 아직 미완성이라 일단 실험용으로 만든거
-        public void ReadRoomList(List<RoomListResponse> temp) 
+        public void ReadRoomList(RoomListResponse temp) 
         {
-            roomList.Add(new RoomListResponse() { name = temp[1].name, id = temp[1].id, capacity = temp[1].capacity, joined = temp[1].joined });
+            int i = 0;
+            foreach(RoomInfo room in temp.RoomList)
+            {
+                roomList.Add(new RoomInfo() { capacity = temp.RoomList[i].capacity, id = temp.RoomList[i].id, joined = temp.RoomList[i].joined, name = temp.RoomList[i].name });
+            }
+            
         }// Get으로 가져온거 그대로 복사하는 함수
 
         public void JoinRoomByClick(Button join)

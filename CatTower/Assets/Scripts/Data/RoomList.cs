@@ -13,17 +13,22 @@ namespace CatTower
     [Serializable]
     public class RoomListResponse
     {
-        public string id;
-        public string name;
-        public int capacity;
-        public int joined;
-        public Hostinfo hostInfo;
+        public List<RoomInfo> RoomList;
     }
     [Serializable]
     public class Hostinfo
     {
         public string nickname;
         public string mid;
+    }
+    [Serializable]
+    public class RoomInfo
+    {
+        public string id;
+        public string name;
+        public int capacity;
+        public int joined;
+        public Hostinfo hostInfo;
     }
 }
 
