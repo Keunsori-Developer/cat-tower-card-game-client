@@ -92,6 +92,7 @@ namespace CatTower
                 roomId = roomCode.text,
                 userInfo = {nickname = UserInfo.nickName, mid = UserInfo.mid }
             }, null);
+            
         }//방 코드입력으로 입장
     }
 }
