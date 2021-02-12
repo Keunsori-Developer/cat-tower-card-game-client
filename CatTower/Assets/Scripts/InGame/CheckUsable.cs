@@ -23,8 +23,8 @@ namespace CatTower
         public int thrNum = 0;
         public int oddNum = 0;
         public int savaNum = 0;
-        public bool turn = true;
-
+        public int myScore = 0;
+        public bool savana = false;
         public void CheckCard() //사용가능 카드를 확인
         {
             if (!((siamBool == true && siamNum > 0) || (russianBool == true && russiaNum > 0) || (mackBool == true && mackNum > 0) || (persBool == true && persNum > 0) || (ragBool == true && ragNum > 0) || (thrBool == true && thrNum > 0) || (oddBool == true && oddNum > 0)))
@@ -34,11 +34,32 @@ namespace CatTower
             else usableCard = true;
         }
 
-        public void TurnOff() //턴 시작할 때 호출
+        public void score() // 탈락 했을 때 호출
+        {
+            int roundScore = siamNum + russiaNum + mackNum + ragNum + persNum + thrNum + oddNum + savaNum;
+            if(savana)
+            {
+                //roundScore가 0인 사람에게 내 roundScore를 넘겨줌
+            }
+            if(roundScore == 0)
+            {
+                if(myScore < 0)
+                {
+                    myScore += 2;
+                }
+            }
+            else
+                myScore = myScore - roundScore;            
+        }
+        public void Turn() //턴 시작할 때 호출
         {
             if(usableCard == false)
             {
-                turn = false;
+                //탈락처리, 턴이 시작되지 않음
+            }
+            else
+            {
+                //턴시작
             }
         }
         public void CheckBr() //누군가 카드를 놓을때 호출, 사용가능한 고양이를 true로 바꿔줌
@@ -348,7 +369,7 @@ namespace CatTower
         // Start is called before the first frame update
         void Start()
         {
-            CheckBr(); //본인 차례 시작할 때  한번 호출(턴방식 구현하면 안해도 될듯?)
+            CheckBr(); //본인 차례 시작할 때  한번 호출
         }
 
         // Update is called once per frame
