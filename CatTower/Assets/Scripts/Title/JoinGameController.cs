@@ -13,6 +13,7 @@ namespace CatTower
         [SerializeField] GameObject prefapParents = null;
         [SerializeField] Text roomCode = null;
         List<RoomInfo> roomList = new List<RoomInfo>();
+
         // RoomListResponse roomList = new RoomListResponse();
         int _dummyNo;
 
@@ -43,7 +44,7 @@ namespace CatTower
             clone.transform.Find("CurrentMember").GetComponentInChildren<Text>().text = RL.joined.ToString();
             clone.transform.Find("Capacity").GetComponentInChildren<Text>().text = RL.capacity.ToString();
             Button join = clone.GetComponentInChildren<Button>();//프리팹 join 버튼 연결
-            //join.onClick.AddListener();
+            join.onClick.AddListener(() => JoinRoomByClick(clone));
         }//낱개 프리팹 복사하는함수
         public void RefreshRoomList()
         {
@@ -73,25 +74,26 @@ namespace CatTower
         public void ReadRoomList(RoomListResponse temp) 
         {
             int i = 0;
-            foreach(RoomInfo room in temp.RoomList)
+            foreach(RoomInfo room in temp.rooms)
             {
-                roomList.Add(new RoomInfo() { capacity = temp.RoomList[i].capacity, id = temp.RoomList[i].id, joined = temp.RoomList[i].joined, name = temp.RoomList[i].name });
+                roomList.Add(new RoomInfo() { capacity = temp.rooms[i].capacity, id = temp.rooms[i].id, joined = temp.rooms[i].joined, name = temp.rooms[i].name });
             }
             
         }// Get으로 가져온거 그대로 복사하는 함수
 
-        public void JoinRoomByClick(Button join)
+        public void JoinRoomByClick(GameObject room)
         {
-            Debug.Log("test");
+            Debug.Log("join요청 , roomid " + room.transform.Find("RoomId").GetComponentInChildren<Text>().text + " userinfo " + UserInfo.nickName + " id " +UserInfo.mid);
             HttpManager.Instance.Post<JoinRequest, JoinResponse>("/rooms/join",
             new JoinRequest
             {
-                roomId = "a",
+                roomId = room.transform.Find("RoomId").GetComponentInChildren<Text>().text,
                 userInfo = { nickname = UserInfo.nickName, mid = UserInfo.mid }
             }, null) ;
-        }
+        }//버튼클릭으로 입장
         public void JoinRoomByCode()
         {
+            Debug.Log("join요청 , roomid " + roomCode.text + " userinfo " + UserInfo.nickName + " id " + UserInfo.mid);
             HttpManager.Instance.Post<JoinRequest, JoinResponse>("/rooms/join",
             new JoinRequest
             {

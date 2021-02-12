@@ -10,9 +10,9 @@ namespace CatTower
     }
 
     [Serializable]
-    public class JoinResponse
+    public class JoinResponse : BaseResponse
     {
-            //userlist미구현
+        
     }
 
     [Serializable]
@@ -21,5 +21,4 @@ namespace CatTower
         public string nickname;
         public string mid;
     }
-
 }

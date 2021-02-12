@@ -11,9 +11,9 @@ namespace CatTower
     }
 
     [Serializable]
-    public class RoomListResponse
+    public class RoomListResponse : BaseResponse
     {
-        public List<RoomInfo> RoomList;
+        public List<RoomInfo> rooms;
     }
     [Serializable]
     public class Hostinfo

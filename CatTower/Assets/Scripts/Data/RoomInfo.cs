@@ -12,7 +12,7 @@ namespace CatTower
     }
 
     [Serializable]
-    public class RoomInfoResponse
+    public class RoomInfoResponse : BaseResponse
     {
         
     }
