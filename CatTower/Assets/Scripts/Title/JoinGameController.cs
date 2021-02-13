@@ -48,6 +48,7 @@ namespace CatTower
         }//낱개 프리팹 복사하는함수
         public void RefreshRoomList()
         {
+            roomList.RemoveAll(x => true);
             Transform _previousList = prefapParents.GetComponentInChildren<Transform>();
             foreach (Transform _previousChild in _previousList)
             {
@@ -57,13 +58,7 @@ namespace CatTower
                 }
             }//기존에 생성된 프리팹들 삭제
 
-            HttpManager.Instance.Get<RoomListResponse>("/rooms/active", ReadRoomList);// 방정보 Get  
-            
-            for (int i = 0; i < roomList.Count; i++)
-            {
-                CreateRoomList(roomList[i]);
-                Debug.Log("ID : "+ roomList[i].id+ " 이름 : "+ roomList[i].name+ " "+ roomList[i].joined+ "/"+ roomList[i].capacity);
-            }//리스트 만드는거
+            HttpManager.Instance.Get<RoomListResponse>("/rooms/active", ReadRoomList);// 방정보 Get후 생성 (코루틴으로 불러오는거라 저 함수서 처리못하면 생성이안됨)
         }
         public void Makedummy()
         {
@@ -77,13 +72,19 @@ namespace CatTower
             foreach(RoomInfo room in temp.rooms)
             {
                 roomList.Add(new RoomInfo() { capacity = temp.rooms[i].capacity, id = temp.rooms[i].id, joined = temp.rooms[i].joined, name = temp.rooms[i].name });
+                Debug.Log("RoomListAdded");
+                i++;
             }
-            
+            for (i = 0; i < roomList.Count; i++)
+            {
+                CreateRoomList(roomList[i]);
+                Debug.Log("ID : " + roomList[i].id + " 이름 : " + roomList[i].name + " " + roomList[i].joined + "/" + roomList[i].capacity);
+            }//리스트 만드는거
         }// Get으로 가져온거 그대로 복사하는 함수
 
         public void JoinRoomByClick(GameObject room)
         {
-            Debug.Log("join요청 , roomid " + room.transform.Find("RoomId").GetComponentInChildren<Text>().text + " userinfo " + UserInfo.nickName + " id " +UserInfo.mid);
+            Debug.Log("join요청 , roomid " + room.transform.Find("RoomId").GetComponentInChildren<Text>().text + " userinfo " + UserInfo.nickName + " id " + UserInfo.mid);
             HttpManager.Instance.Post<JoinRequest, JoinResponse>("/rooms/join",
             new JoinRequest
             {
