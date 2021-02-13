@@ -14,6 +14,7 @@ namespace CatTower
         // Start is called before the first frame update
         void Start()
         {
+            var asdf = WebSocketManager.Instance;
             message.AddListener(() => loader.MoveNext());
             loader = Loader();
             loader.MoveNext();
