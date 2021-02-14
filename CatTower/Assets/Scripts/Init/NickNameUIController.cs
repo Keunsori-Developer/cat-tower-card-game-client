@@ -44,7 +44,10 @@ namespace CatTower
 
         public void NicknameChangeOpen()
         {
-            nicknamePanel.gameObject.SetActive(true);
+            if(nicknamePanel.activeSelf == true)
+                nicknamePanel.gameObject.SetActive(false);
+            else
+                nicknamePanel.gameObject.SetActive(true);
         }
     }
 }

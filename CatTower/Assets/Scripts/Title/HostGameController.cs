@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 namespace CatTower
 { 
@@ -12,6 +13,7 @@ namespace CatTower
         [SerializeField] Text capacity = null;
         [SerializeField] Text mode = null;
         //[SerializeField] GameObject roomNameError = null;
+        //[SerializeField] GameObject modeeError = null;
         [SerializeField] GameObject capacityError = null;
 
 
@@ -53,8 +55,21 @@ namespace CatTower
                 name = roomName.text,
                 capacity = int.Parse(capacity.text),
                 mode = int.Parse(mode.text)//여기서 앞모드는 클래스의 mode 뒤의 모드는 입력받는 mode
-                }, null); 
+                }, JoinRoom); 
             Debug.Log("요청성공. 호스트 : " + UserInfo.mid +" 방이름 : " + roomName.text + " 인원 : "  + int.Parse(capacity.text) + " 모드 : " + int.Parse(mode.text));//확인용
+        }
+        public void JoinRoom(RoomInfoResponse room)
+        {
+            if (room.code == 20000)
+            {
+                JoinedRoom.roomId = room.roomId;
+                Debug.Log(room.roomId + " 입장");
+                SceneManager.LoadScene("Lobby");
+            }
+            else
+            {
+                Debug.Log("잘못된 요청");
+            }
         }
     }
 }

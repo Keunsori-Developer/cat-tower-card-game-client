@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 namespace CatTower
 {
@@ -12,6 +13,7 @@ namespace CatTower
         [SerializeField] GameObject roomPrefap = null;
         [SerializeField] GameObject prefapParents = null;
         [SerializeField] Text roomCode = null;
+        [SerializeField] GameObject joinWarnText = null;
         List<RoomInfo> roomList = new List<RoomInfo>();
 
         // RoomListResponse roomList = new RoomListResponse();
@@ -72,36 +74,50 @@ namespace CatTower
             foreach(RoomInfo room in temp.rooms)
             {
                 roomList.Add(new RoomInfo() { capacity = temp.rooms[i].capacity, id = temp.rooms[i].id, joined = temp.rooms[i].joined, name = temp.rooms[i].name });
-                Debug.Log("RoomListAdded");
+                //Debug.Log("RoomListAdded");
                 i++;
             }
             for (i = 0; i < roomList.Count; i++)
             {
                 CreateRoomList(roomList[i]);
-                Debug.Log("ID : " + roomList[i].id + " 이름 : " + roomList[i].name + " " + roomList[i].joined + "/" + roomList[i].capacity);
+                //Debug.Log("ID : " + roomList[i].id + " 이름 : " + roomList[i].name + " " + roomList[i].joined + "/" + roomList[i].capacity);
             }//리스트 만드는거
         }// Get으로 가져온거 그대로 복사하는 함수
 
         public void JoinRoomByClick(GameObject room)
         {
-            Debug.Log("join요청 , roomid " + room.transform.Find("RoomId").GetComponentInChildren<Text>().text + " userinfo " + UserInfo.nickName + " id " + UserInfo.mid);
+            Debug.Log("클릭join요청 , roomid " + room.transform.Find("RoomId").GetComponentInChildren<Text>().text + " userinfo " + UserInfo.nickName + " id " + UserInfo.mid);
             HttpManager.Instance.Post<JoinRequest, JoinResponse>("/rooms/join",
             new JoinRequest
             {
                 roomId = room.transform.Find("RoomId").GetComponentInChildren<Text>().text,
                 userInfo = { nickname = UserInfo.nickName, mid = UserInfo.mid }
-            }, null) ;
+            }, JoinRoom) ;
         }//버튼클릭으로 입장
         public void JoinRoomByCode()
         {
-            Debug.Log("join요청 , roomid " + roomCode.text + " userinfo " + UserInfo.nickName + " id " + UserInfo.mid);
+            Debug.Log("코드join요청 , roomid " + roomCode.text + " userinfo " + UserInfo.nickName + " id " + UserInfo.mid);
             HttpManager.Instance.Post<JoinRequest, JoinResponse>("/rooms/join",
             new JoinRequest
             {
-                roomId = roomCode.text,
-                userInfo = {nickname = UserInfo.nickName, mid = UserInfo.mid }
-            }, null);
-            
+                roomId = roomCode.text.ToUpper(),
+                userInfo = { nickname = UserInfo.nickName, mid = UserInfo.mid }
+            }, JoinRoom); ;
         }//방 코드입력으로 입장
+        public void JoinRoom(JoinResponse room)
+        {
+            if (room.code == 20000)
+            {
+                JoinedRoom.roomId = room.roomId;
+                Debug.Log(room.roomId + " 입장");
+                SceneManager.LoadScene("Lobby");
+            }
+            else
+            {
+                if (joinWarnText.activeSelf == false)
+                    joinWarnText.SetActive(true);
+                Debug.Log("잘못된 요청");
+            }
+        }
     }
 }

@@ -12,7 +12,7 @@ namespace CatTower
     [Serializable]
     public class JoinResponse : BaseResponse
     {
-        
+        public string roomId;
     }
 
     [Serializable]
