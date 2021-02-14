@@ -30,6 +30,7 @@ namespace CatTower
 
         /// <summary>
         /// TODO: 수정할 예정
+        /// 쓰지마세요
         /// </summary>
         /// <param name="_namespace"></param>
         /// <returns></returns>
@@ -40,7 +41,7 @@ namespace CatTower
             if (!socketList.TryGetValue(_namespace, out socket)) return false;
             socketList.Remove(_namespace);
             socket.Emit("disconnect");
-            socket.Disconnect();
+            //socket.Disconnect();
             return true;
         }
 
