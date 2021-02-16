@@ -24,7 +24,7 @@ namespace CatTower
         public int oddNum = 0;
         public int savaNum = 0;
         public int myScore = 0;
-        public bool savana = false;
+        public int roundScore;
         public void CheckCard() //사용가능 카드를 확인
         {
             if (!((siamBool == true && siamNum > 0) || (russianBool == true && russiaNum > 0) || (mackBool == true && mackNum > 0) || (persBool == true && persNum > 0) || (ragBool == true && ragNum > 0) || (thrBool == true && thrNum > 0) || (oddBool == true && oddNum > 0)))
@@ -34,10 +34,9 @@ namespace CatTower
             else usableCard = true;
         }
 
-        public void score() // 탈락 했을 때 호출
-        {
-            int roundScore = siamNum + russiaNum + mackNum + ragNum + persNum + thrNum + oddNum + savaNum;
-            if(savana)
+        public void score() // 라운가 종료 됐을 때 호출
+        { 
+            if(savaNum == 1)
             {
                 //roundScore가 0인 사람에게 내 roundScore를 넘겨줌
             }
@@ -51,6 +50,11 @@ namespace CatTower
             else
                 myScore = myScore - roundScore;            
         }
+
+        public void RoundOff()
+        {
+            //한명의
+        }
         public void Turn() //턴 시작할 때 호출
         {
             if(usableCard == false)
@@ -60,6 +64,46 @@ namespace CatTower
             else
             {
                 //턴시작
+            }
+        }
+        public void SetBreedBool(int i)
+        {
+            if (gameObj.GetComponent<SlotManager>().arrSlotIndex[i] == 0)
+            {
+                if (gameObj.GetComponent<SlotManager>().arrSlotIndex[i - 8] == 1 && gameObj.GetComponent<SlotManager>().arrSlotIndex[i - 7] == 1)
+                {
+                    thrBool = true;
+                    if (gameObj.GetComponent<SlotManager>().arrSlotBreed[i - 8] == Breed.Siamese || gameObj.GetComponent<SlotManager>().arrSlotBreed[i - 7] == Breed.Siamese)
+                    {
+                        siamBool = true;
+                        if (gameObj.GetComponent<SlotManager>().arrSlotIndex[i - 1] == 0 && gameObj.GetComponent<SlotManager>().arrSlotIndex[i + 1] == 0)
+                            oddBool = true;
+                    }
+                    if (gameObj.GetComponent<SlotManager>().arrSlotBreed[i - 8] == Breed.RussianBlue || gameObj.GetComponent<SlotManager>().arrSlotBreed[i - 7] == Breed.RussianBlue)
+                    {
+                        russianBool = true;
+                        if (gameObj.GetComponent<SlotManager>().arrSlotIndex[i - 1] == 0 && gameObj.GetComponent<SlotManager>().arrSlotIndex[i + 1] == 0)
+                            oddBool = true;
+                    }
+                    if (gameObj.GetComponent<SlotManager>().arrSlotBreed[i - 8] == Breed.Ragdoll || gameObj.GetComponent<SlotManager>().arrSlotBreed[i - 7] == Breed.Ragdoll)
+                    {
+                        ragBool = true;
+                        if (gameObj.GetComponent<SlotManager>().arrSlotIndex[i - 1] == 0 && gameObj.GetComponent<SlotManager>().arrSlotIndex[i + 1] == 0)
+                            oddBool = true;
+                    }
+                    if (gameObj.GetComponent<SlotManager>().arrSlotBreed[i - 8] == Breed.Persian || gameObj.GetComponent<SlotManager>().arrSlotBreed[i - 7] == Breed.Persian)
+                    {
+                        persBool = true;
+                        if (gameObj.GetComponent<SlotManager>().arrSlotIndex[i - 1] == 0 && gameObj.GetComponent<SlotManager>().arrSlotIndex[i + 1] == 0)
+                            oddBool = true;
+                    }
+                    if (gameObj.GetComponent<SlotManager>().arrSlotBreed[i - 8] == Breed.Mackerel || gameObj.GetComponent<SlotManager>().arrSlotBreed[i - 7] == Breed.Mackerel)
+                    {
+                        mackBool = true;
+                        if (gameObj.GetComponent<SlotManager>().arrSlotIndex[i - 1] == 0 && gameObj.GetComponent<SlotManager>().arrSlotIndex[i + 1] == 0)
+                            oddBool = true;
+                    }
+                }
             }
         }
         public void CheckBr() //누군가 카드를 놓을때 호출, 사용가능한 고양이를 true로 바꿔줌
@@ -90,244 +134,27 @@ namespace CatTower
             }
             for (int i = 9; i < 15; i++)
             {
-                if (gameObj.GetComponent<SlotManager>().arrSlotIndex[i] == 0)
-                {
-                    if (gameObj.GetComponent<SlotManager>().arrSlotIndex[i - 8] == 1 && gameObj.GetComponent<SlotManager>().arrSlotIndex[i - 7] == 1)
-                    {
-                        Debug.Log("asfasf");
-                        thrBool = true;
-                        if (gameObj.GetComponent<SlotManager>().arrSlotBreed[i - 8] == Breed.Siamese || gameObj.GetComponent<SlotManager>().arrSlotBreed[i - 7] == Breed.Siamese)
-                        {
-                            siamBool = true;
-                            if (gameObj.GetComponent<SlotManager>().arrSlotIndex[i - 1] == 0 && gameObj.GetComponent<SlotManager>().arrSlotIndex[i + 1] == 0)
-                                oddBool = true;
-                        }
-                        if (gameObj.GetComponent<SlotManager>().arrSlotBreed[i - 8] == Breed.RussianBlue || gameObj.GetComponent<SlotManager>().arrSlotBreed[i - 7] == Breed.RussianBlue)
-                        {
-                            russianBool = true;
-                            if (gameObj.GetComponent<SlotManager>().arrSlotIndex[i - 1] == 0 && gameObj.GetComponent<SlotManager>().arrSlotIndex[i + 1] == 0)
-                                oddBool = true;
-                        }
-                        if (gameObj.GetComponent<SlotManager>().arrSlotBreed[i - 8] == Breed.Ragdoll || gameObj.GetComponent<SlotManager>().arrSlotBreed[i - 7] == Breed.Ragdoll)
-                        {
-                            ragBool = true;
-                            if (gameObj.GetComponent<SlotManager>().arrSlotIndex[i - 1] == 0 && gameObj.GetComponent<SlotManager>().arrSlotIndex[i + 1] == 0)
-                                oddBool = true;
-                        }
-                        if (gameObj.GetComponent<SlotManager>().arrSlotBreed[i - 8] == Breed.Persian || gameObj.GetComponent<SlotManager>().arrSlotBreed[i - 7] == Breed.Persian)
-                        {
-                            persBool = true;
-                            if (gameObj.GetComponent<SlotManager>().arrSlotIndex[i - 1] == 0 && gameObj.GetComponent<SlotManager>().arrSlotIndex[i + 1] == 0)
-                                oddBool = true;
-                        }
-                        if (gameObj.GetComponent<SlotManager>().arrSlotBreed[i - 8] == Breed.Mackerel || gameObj.GetComponent<SlotManager>().arrSlotBreed[i - 7] == Breed.Mackerel)
-                        {
-                            mackBool = true;
-                            if (gameObj.GetComponent<SlotManager>().arrSlotIndex[i - 1] == 0 && gameObj.GetComponent<SlotManager>().arrSlotIndex[i + 1] == 0)
-                                oddBool = true;
-                        }
-                    }
-                }
+                SetBreedBool(i);
             }
             for(int i = 16; i < 22; i++)
             {
-                if (gameObj.GetComponent<SlotManager>().arrSlotIndex[i] == 0)
-                {
-                    if (gameObj.GetComponent<SlotManager>().arrSlotIndex[i - 8] == 1 && gameObj.GetComponent<SlotManager>().arrSlotIndex[i - 7] == 1)
-                    {
-                        thrBool = true;
-                        if (gameObj.GetComponent<SlotManager>().arrSlotBreed[i - 8] == Breed.Siamese || gameObj.GetComponent<SlotManager>().arrSlotBreed[i - 7] == Breed.Siamese)
-                        {
-                            siamBool = true;
-                            if (gameObj.GetComponent<SlotManager>().arrSlotIndex[i - 1] == 0 && gameObj.GetComponent<SlotManager>().arrSlotIndex[i + 1] == 0)
-                                oddBool = true;
-                        }
-                        if (gameObj.GetComponent<SlotManager>().arrSlotBreed[i - 8] == Breed.RussianBlue || gameObj.GetComponent<SlotManager>().arrSlotBreed[i - 7] == Breed.RussianBlue)
-                        {
-                            russianBool = true;
-                            if (gameObj.GetComponent<SlotManager>().arrSlotIndex[i - 1] == 0 && gameObj.GetComponent<SlotManager>().arrSlotIndex[i + 1] == 0)
-                                oddBool = true;
-                        }
-                        if (gameObj.GetComponent<SlotManager>().arrSlotBreed[i - 8] == Breed.Ragdoll || gameObj.GetComponent<SlotManager>().arrSlotBreed[i - 7] == Breed.Ragdoll)
-                        {
-                            ragBool = true;
-                            if (gameObj.GetComponent<SlotManager>().arrSlotIndex[i - 1] == 0 && gameObj.GetComponent<SlotManager>().arrSlotIndex[i + 1] == 0)
-                                oddBool = true;
-                        }
-                        if (gameObj.GetComponent<SlotManager>().arrSlotBreed[i - 8] == Breed.Persian || gameObj.GetComponent<SlotManager>().arrSlotBreed[i - 7] == Breed.Persian)
-                        {
-                            persBool = true;
-                            if (gameObj.GetComponent<SlotManager>().arrSlotIndex[i - 1] == 0 && gameObj.GetComponent<SlotManager>().arrSlotIndex[i + 1] == 0)
-                                oddBool = true;
-                        }
-                        if (gameObj.GetComponent<SlotManager>().arrSlotBreed[i - 8] == Breed.Mackerel || gameObj.GetComponent<SlotManager>().arrSlotBreed[i - 7] == Breed.Mackerel)
-                        {
-                            mackBool = true;
-                            if (gameObj.GetComponent<SlotManager>().arrSlotIndex[i - 1] == 0 && gameObj.GetComponent<SlotManager>().arrSlotIndex[i + 1] == 0)
-                                oddBool = true;
-                        }
-                    }
-                }
+                SetBreedBool(i);
             }
             for (int i = 24; i < 29; i++)
             {
-                if (gameObj.GetComponent<SlotManager>().arrSlotIndex[i] == 0)
-                {
-                    if (gameObj.GetComponent<SlotManager>().arrSlotIndex[i - 8] == 1 && gameObj.GetComponent<SlotManager>().arrSlotIndex[i - 7] == 1)
-                    {
-                        thrBool = true;
-                        if (gameObj.GetComponent<SlotManager>().arrSlotBreed[i - 8] == Breed.Siamese || gameObj.GetComponent<SlotManager>().arrSlotBreed[i - 7] == Breed.Siamese)
-                        {
-                            siamBool = true;
-                            if (gameObj.GetComponent<SlotManager>().arrSlotIndex[i - 1] == 0 && gameObj.GetComponent<SlotManager>().arrSlotIndex[i + 1] == 0)
-                                oddBool = true;
-                        }
-                        if (gameObj.GetComponent<SlotManager>().arrSlotBreed[i - 8] == Breed.RussianBlue || gameObj.GetComponent<SlotManager>().arrSlotBreed[i - 7] == Breed.RussianBlue)
-                        {
-                            russianBool = true;
-                            if (gameObj.GetComponent<SlotManager>().arrSlotIndex[i - 1] == 0 && gameObj.GetComponent<SlotManager>().arrSlotIndex[i + 1] == 0)
-                                oddBool = true;
-                        }
-                        if (gameObj.GetComponent<SlotManager>().arrSlotBreed[i - 8] == Breed.Ragdoll || gameObj.GetComponent<SlotManager>().arrSlotBreed[i - 7] == Breed.Ragdoll)
-                        {
-                            ragBool = true;
-                            if (gameObj.GetComponent<SlotManager>().arrSlotIndex[i - 1] == 0 && gameObj.GetComponent<SlotManager>().arrSlotIndex[i + 1] == 0)
-                                oddBool = true;
-                        }
-                        if (gameObj.GetComponent<SlotManager>().arrSlotBreed[i - 8] == Breed.Persian || gameObj.GetComponent<SlotManager>().arrSlotBreed[i - 7] == Breed.Persian)
-                        {
-                            persBool = true;
-                            if (gameObj.GetComponent<SlotManager>().arrSlotIndex[i - 1] == 0 && gameObj.GetComponent<SlotManager>().arrSlotIndex[i + 1] == 0)
-                                oddBool = true;
-                        }
-                        if (gameObj.GetComponent<SlotManager>().arrSlotBreed[i - 8] == Breed.Mackerel || gameObj.GetComponent<SlotManager>().arrSlotBreed[i - 7] == Breed.Mackerel)
-                        {
-                            mackBool = true;
-                            if (gameObj.GetComponent<SlotManager>().arrSlotIndex[i - 1] == 0 && gameObj.GetComponent<SlotManager>().arrSlotIndex[i + 1] == 0)
-                                oddBool = true;
-                        }
-                    }
-                }
+                SetBreedBool(i);
             }
             for (int i = 32; i < 36; i++)
             {
-                if (gameObj.GetComponent<SlotManager>().arrSlotIndex[i] == 0)
-                {
-                    if (gameObj.GetComponent<SlotManager>().arrSlotIndex[i - 8] == 1 && gameObj.GetComponent<SlotManager>().arrSlotIndex[i - 7] == 1)
-                    {
-                        thrBool = true;
-                        if (gameObj.GetComponent<SlotManager>().arrSlotBreed[i - 8] == Breed.Siamese || gameObj.GetComponent<SlotManager>().arrSlotBreed[i - 7] == Breed.Siamese)
-                        {
-                            siamBool = true;
-                            if (gameObj.GetComponent<SlotManager>().arrSlotIndex[i - 1] == 0 && gameObj.GetComponent<SlotManager>().arrSlotIndex[i + 1] == 0)
-                                oddBool = true;
-                        }
-                        if (gameObj.GetComponent<SlotManager>().arrSlotBreed[i - 8] == Breed.RussianBlue || gameObj.GetComponent<SlotManager>().arrSlotBreed[i - 7] == Breed.RussianBlue)
-                        {
-                            russianBool = true;
-                            if (gameObj.GetComponent<SlotManager>().arrSlotIndex[i - 1] == 0 && gameObj.GetComponent<SlotManager>().arrSlotIndex[i + 1] == 0)
-                                oddBool = true;
-                        }
-                        if (gameObj.GetComponent<SlotManager>().arrSlotBreed[i - 8] == Breed.Ragdoll || gameObj.GetComponent<SlotManager>().arrSlotBreed[i - 7] == Breed.Ragdoll)
-                        {
-                            ragBool = true;
-                            if (gameObj.GetComponent<SlotManager>().arrSlotIndex[i - 1] == 0 && gameObj.GetComponent<SlotManager>().arrSlotIndex[i + 1] == 0)
-                                oddBool = true;
-                        }
-                        if (gameObj.GetComponent<SlotManager>().arrSlotBreed[i - 8] == Breed.Persian || gameObj.GetComponent<SlotManager>().arrSlotBreed[i - 7] == Breed.Persian)
-                        {
-                            persBool = true;
-                            if (gameObj.GetComponent<SlotManager>().arrSlotIndex[i - 1] == 0 && gameObj.GetComponent<SlotManager>().arrSlotIndex[i + 1] == 0)
-                                oddBool = true;
-                        }
-                        if (gameObj.GetComponent<SlotManager>().arrSlotBreed[i - 8] == Breed.Mackerel || gameObj.GetComponent<SlotManager>().arrSlotBreed[i - 7] == Breed.Mackerel)
-                        {
-                            mackBool = true;
-                            if (gameObj.GetComponent<SlotManager>().arrSlotIndex[i - 1] == 0 && gameObj.GetComponent<SlotManager>().arrSlotIndex[i + 1] == 0)
-                                oddBool = true;
-                        }
-                    }
-                }
+                SetBreedBool(i);
             }
             for (int i = 40; i < 43; i++)
             {
-                if (gameObj.GetComponent<SlotManager>().arrSlotIndex[i] == 0)
-                {
-                    if (gameObj.GetComponent<SlotManager>().arrSlotIndex[i - 8] == 1 && gameObj.GetComponent<SlotManager>().arrSlotIndex[i - 7] == 1)
-                    {
-                        thrBool = true;
-                        if (gameObj.GetComponent<SlotManager>().arrSlotBreed[i - 8] == Breed.Siamese || gameObj.GetComponent<SlotManager>().arrSlotBreed[i - 7] == Breed.Siamese)
-                        {
-                            siamBool = true;
-                            if (gameObj.GetComponent<SlotManager>().arrSlotIndex[i - 1] == 0 && gameObj.GetComponent<SlotManager>().arrSlotIndex[i + 1] == 0)
-                                oddBool = true;
-                        }
-                        if (gameObj.GetComponent<SlotManager>().arrSlotBreed[i - 8] == Breed.RussianBlue || gameObj.GetComponent<SlotManager>().arrSlotBreed[i - 7] == Breed.RussianBlue)
-                        {
-                            russianBool = true;
-                            if (gameObj.GetComponent<SlotManager>().arrSlotIndex[i - 1] == 0 && gameObj.GetComponent<SlotManager>().arrSlotIndex[i + 1] == 0)
-                                oddBool = true;
-                        }
-                        if (gameObj.GetComponent<SlotManager>().arrSlotBreed[i - 8] == Breed.Ragdoll || gameObj.GetComponent<SlotManager>().arrSlotBreed[i - 7] == Breed.Ragdoll)
-                        {
-                            ragBool = true;
-                            if (gameObj.GetComponent<SlotManager>().arrSlotIndex[i - 1] == 0 && gameObj.GetComponent<SlotManager>().arrSlotIndex[i + 1] == 0)
-                                oddBool = true;
-                        }
-                        if (gameObj.GetComponent<SlotManager>().arrSlotBreed[i - 8] == Breed.Persian || gameObj.GetComponent<SlotManager>().arrSlotBreed[i - 7] == Breed.Persian)
-                        {
-                            persBool = true;
-                            if (gameObj.GetComponent<SlotManager>().arrSlotIndex[i - 1] == 0 && gameObj.GetComponent<SlotManager>().arrSlotIndex[i + 1] == 0)
-                                oddBool = true;
-                        }
-                        if (gameObj.GetComponent<SlotManager>().arrSlotBreed[i - 8] == Breed.Mackerel || gameObj.GetComponent<SlotManager>().arrSlotBreed[i - 7] == Breed.Mackerel)
-                        {
-                            mackBool = true;
-                            if (gameObj.GetComponent<SlotManager>().arrSlotIndex[i - 1] == 0 && gameObj.GetComponent<SlotManager>().arrSlotIndex[i + 1] == 0)
-                                oddBool = true;
-                        }
-                    }
-                }
+                SetBreedBool(i);
             }
             for (int i = 48; i < 50; i++)
             {
-                if (gameObj.GetComponent<SlotManager>().arrSlotIndex[i] == 0)
-                {
-                    if (gameObj.GetComponent<SlotManager>().arrSlotIndex[i - 8] == 1 && gameObj.GetComponent<SlotManager>().arrSlotIndex[i - 7] == 1)
-                    {
-                        thrBool = true;
-                        if (gameObj.GetComponent<SlotManager>().arrSlotBreed[i - 8] == Breed.Siamese || gameObj.GetComponent<SlotManager>().arrSlotBreed[i - 7] == Breed.Siamese)
-                        {
-                            siamBool = true;
-                            if (gameObj.GetComponent<SlotManager>().arrSlotIndex[i - 1] == 0 && gameObj.GetComponent<SlotManager>().arrSlotIndex[i + 1] == 0)
-                                oddBool = true;
-                        }
-                        if (gameObj.GetComponent<SlotManager>().arrSlotBreed[i - 8] == Breed.RussianBlue || gameObj.GetComponent<SlotManager>().arrSlotBreed[i - 7] == Breed.RussianBlue)
-                        {
-                            russianBool = true;
-                            if (gameObj.GetComponent<SlotManager>().arrSlotIndex[i - 1] == 0 && gameObj.GetComponent<SlotManager>().arrSlotIndex[i + 1] == 0)
-                                oddBool = true;
-                        }
-                        if (gameObj.GetComponent<SlotManager>().arrSlotBreed[i - 8] == Breed.Ragdoll || gameObj.GetComponent<SlotManager>().arrSlotBreed[i - 7] == Breed.Ragdoll)
-                        {
-                            ragBool = true;
-                            if (gameObj.GetComponent<SlotManager>().arrSlotIndex[i - 1] == 0 && gameObj.GetComponent<SlotManager>().arrSlotIndex[i + 1] == 0)
-                                oddBool = true;
-                        }
-                        if (gameObj.GetComponent<SlotManager>().arrSlotBreed[i - 8] == Breed.Persian || gameObj.GetComponent<SlotManager>().arrSlotBreed[i - 7] == Breed.Persian)
-                        {
-                            persBool = true;
-                            if (gameObj.GetComponent<SlotManager>().arrSlotIndex[i - 1] == 0 && gameObj.GetComponent<SlotManager>().arrSlotIndex[i + 1] == 0)
-                                oddBool = true;
-                        }
-                        if (gameObj.GetComponent<SlotManager>().arrSlotBreed[i - 8] == Breed.Mackerel || gameObj.GetComponent<SlotManager>().arrSlotBreed[i - 7] == Breed.Mackerel)
-                        {
-                            mackBool = true;
-                            if (gameObj.GetComponent<SlotManager>().arrSlotIndex[i - 1] == 0 && gameObj.GetComponent<SlotManager>().arrSlotIndex[i + 1] == 0)
-                                oddBool = true;
-                        }
-                    }
-                }
+                SetBreedBool(i);
             }
             if (gameObj.GetComponent<SlotManager>().arrSlotIndex[56] == 0 && gameObj.GetComponent<SlotManager>().arrSlotIndex[48] == 1 && gameObj.GetComponent<SlotManager>().arrSlotIndex[49] == 1)
             {
@@ -356,6 +183,11 @@ namespace CatTower
             }
         }
 
+        public void SumScore()
+        {
+            roundScore = siamNum + russiaNum + mackNum + ragNum + persNum + thrNum + oddNum + savaNum;
+        }
+                
         public void ResetBr()
         {
             siamBool = false;
@@ -369,13 +201,14 @@ namespace CatTower
         // Start is called before the first frame update
         void Start()
         {
+            SumScore();
             CheckBr(); //본인 차례 시작할 때  한번 호출
         }
 
         // Update is called once per frame
         void Update()
         {
-           
+
         }
     }
 }

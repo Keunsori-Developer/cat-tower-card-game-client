@@ -85,7 +85,16 @@ namespace CatTower
             }
         }
         
-
+        public void SetSlot()
+        {
+            mySlot.myBr = br;
+            myImage.sprite = mySprite;
+            gameObj.GetComponent<SlotManager>().arrSlotBreed[index] = mySlot.myBr;
+            gameObj.GetComponent<SlotManager>().arrSlotIndex[index] = 1;
+            del = true;
+            checkObj.GetComponent<CheckUsable>().ResetBr();
+            checkObj.GetComponent<CheckUsable>().CheckBr();
+        }
         public void OnDrop(PointerEventData eventData)
         {
             if (br != Breed.none)
@@ -98,13 +107,7 @@ namespace CatTower
                         {
                             if (gameObj.GetComponent<SlotManager>().arrSlotIndex[index] != 0)
                                 return;
-                            mySlot.myBr = br;
-                            myImage.sprite = mySprite;
-                            gameObj.GetComponent<SlotManager>().arrSlotIndex[index] = 1;
-                            gameObj.GetComponent<SlotManager>().arrSlotBreed[index] = mySlot.myBr;
-                            del = true;
-                            checkObj.GetComponent<CheckUsable>().ResetBr();
-                            checkObj.GetComponent<CheckUsable>().CheckBr();
+                            SetSlot();
                         }
                         else
                         {
@@ -112,13 +115,7 @@ namespace CatTower
                             {
                                 if (gameObj.GetComponent<SlotManager>().arrSlotIndex[index] != 0)
                                     return;
-                                mySlot.myBr = br;
-                                myImage.sprite = mySprite;
-                                gameObj.GetComponent<SlotManager>().arrSlotBreed[index] = mySlot.myBr;
-                                gameObj.GetComponent<SlotManager>().arrSlotIndex[index] = 1;
-                                del = true;
-                                checkObj.GetComponent<CheckUsable>().ResetBr();
-                                checkObj.GetComponent<CheckUsable>().CheckBr();
+                                SetSlot();
                             }
                             else return;
                         }
@@ -138,13 +135,7 @@ namespace CatTower
                             {
                                 if (gameObj.GetComponent<SlotManager>().arrSlotIndex[index] != 0)
                                     return;
-                                mySlot.myBr = br;
-                                myImage.sprite = mySprite;
-                                gameObj.GetComponent<SlotManager>().arrSlotIndex[index] = 1;
-                                gameObj.GetComponent<SlotManager>().arrSlotBreed[index] = mySlot.myBr;
-                                del = true;
-                                checkObj.GetComponent<CheckUsable>().ResetBr();
-                                checkObj.GetComponent<CheckUsable>().CheckBr();
+                                SetSlot();
                             }
                             else
                             {
@@ -152,13 +143,7 @@ namespace CatTower
                                 {
                                     if (gameObj.GetComponent<SlotManager>().arrSlotIndex[index] != 0)
                                         return;
-                                    mySlot.myBr = br;
-                                    myImage.sprite = mySprite;
-                                    gameObj.GetComponent<SlotManager>().arrSlotBreed[index] = mySlot.myBr;
-                                    gameObj.GetComponent<SlotManager>().arrSlotIndex[index] = 1;
-                                    del = true;
-                                    checkObj.GetComponent<CheckUsable>().ResetBr();
-                                    checkObj.GetComponent<CheckUsable>().CheckBr();
+                                    SetSlot();
                                 }
                                 else return;
                             }
@@ -169,39 +154,21 @@ namespace CatTower
                             {
                                 if (gameObj.GetComponent<SlotManager>().arrSlotIndex[1] == 0)
                                 {
-                                    mySlot.myBr = br;
-                                    myImage.sprite = mySprite;
-                                    gameObj.GetComponent<SlotManager>().arrSlotIndex[index] = 1;
-                                    gameObj.GetComponent<SlotManager>().arrSlotBreed[index] = mySlot.myBr;
-                                    del = true;
-                                    checkObj.GetComponent<CheckUsable>().ResetBr();
-                                    checkObj.GetComponent<CheckUsable>().CheckBr();
+                                    SetSlot();
                                 }
                             }
                             else if (index == 7)
                             {
                                 if (gameObj.GetComponent<SlotManager>().arrSlotIndex[6] == 0)
                                 {
-                                    mySlot.myBr = br;
-                                    myImage.sprite = mySprite;
-                                    gameObj.GetComponent<SlotManager>().arrSlotIndex[index] = 1;
-                                    gameObj.GetComponent<SlotManager>().arrSlotBreed[index] = mySlot.myBr;
-                                    del = true;
-                                    checkObj.GetComponent<CheckUsable>().ResetBr();
-                                    checkObj.GetComponent<CheckUsable>().CheckBr();
+                                    SetSlot();
                                 }
                             }
                             else if (index < 7 && index > 0)
                             {
                                 if (gameObj.GetComponent<SlotManager>().arrSlotIndex[index - 1] == 0 && gameObj.GetComponent<SlotManager>().arrSlotIndex[index + 1] == 0)
                                 {
-                                    mySlot.myBr = br;
-                                    myImage.sprite = mySprite;
-                                    gameObj.GetComponent<SlotManager>().arrSlotIndex[index] = 1;
-                                    gameObj.GetComponent<SlotManager>().arrSlotBreed[index] = mySlot.myBr;
-                                    del = true;
-                                    checkObj.GetComponent<CheckUsable>().ResetBr();
-                                    checkObj.GetComponent<CheckUsable>().CheckBr();
+                                    SetSlot();
                                 }
                             }
                             else
@@ -210,13 +177,7 @@ namespace CatTower
                                 {
                                     if (gameObj.GetComponent<SlotManager>().arrSlotIndex[index] != 0)
                                         return;
-                                    mySlot.myBr = br;
-                                    myImage.sprite = mySprite;
-                                    gameObj.GetComponent<SlotManager>().arrSlotBreed[index] = mySlot.myBr;
-                                    gameObj.GetComponent<SlotManager>().arrSlotIndex[index] = 1;
-                                    del = true;
-                                    checkObj.GetComponent<CheckUsable>().ResetBr();
-                                    checkObj.GetComponent<CheckUsable>().CheckBr();
+                                    SetSlot();
                                 }
                             }
                         }
@@ -242,6 +203,7 @@ namespace CatTower
                     checkObj = GameObject.Find("MyCards");
                     DecreaseCard();
                     checkObj.GetComponent<CheckUsable>().CheckCard();
+                    checkObj.GetComponent<CheckUsable>().SumScore();
                     Destroy(gameObj);
                     del = false;
                 }
