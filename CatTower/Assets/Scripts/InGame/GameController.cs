@@ -21,6 +21,7 @@ namespace CatTower
         private int currentOrder; // 현재 라운드 내에서 진행되고 있는 순서
         private (Userinfo, bool)[] playerOrder; // Tuple 형식으로 첫번째에는 유저 정보를, 두번째에는 유저의 포기 여부를 저장
         private int myOrder;
+        private IGameState gameState;
 
         /// <summary>
         /// Awake is called when the script instance is being loaded.
@@ -88,6 +89,9 @@ namespace CatTower
             currentOrder = (currentOrder + 1) % playerOrder.Length;
             if (currentOrder == 0) currentRound++;
             // TODO: currentRound 값을 확인해서 게임이 아예 종료되었는지를 판단해야 함
+
+            // TODO: 내 순서이면 gameState = new PlayingGameState() , 내 순서 아니면 gameState = new WaitGameState().
+            gameState.InStart();
         }
     }
 }
