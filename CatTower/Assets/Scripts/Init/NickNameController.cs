@@ -32,8 +32,8 @@ namespace CatTower
 
         public void UpdateUserInfo(string nickname)
         {
-            UserInfo.nickName = nickname;
-            Debug.Log(string.Format("mid: {0}, nickname: {1}", UserInfo.mid, UserInfo.nickName));
+            UserData.nickName = nickname;
+            Debug.Log(string.Format("mid: {0}, nickname: {1}", UserData.mid, UserData.nickName));
             var initializer = this.gameObject.GetComponent<GameInitializer>();
             if (initializer != null) initializer.message.Send();
             nicknameCanvas.SetActive(false);

@@ -5,15 +5,15 @@ namespace CatTower
     [Serializable]
     public class RoomInfoRequest
     {
-        public string hostId;
+        public Userinfo hostInfo;
         public string name;
         public int capacity;
         public int mode;
     }
 
     [Serializable]
-    public class RoomInfoResponse
+    public class RoomInfoResponse : BaseResponse
     {
-        
+        public string roomId;
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace CatTower
 {
-    public static class UserInfo
+    public static class UserData
     {
         private static string _midKey = "userInfo_mid";
         private static string _nickNameKey = "userInfo_nickName";

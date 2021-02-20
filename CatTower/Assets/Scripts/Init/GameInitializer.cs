@@ -27,7 +27,7 @@ namespace CatTower
 
         private IEnumerator Loader()
         {
-            if (string.IsNullOrEmpty(UserInfo.mid))
+            if (string.IsNullOrEmpty(UserData.mid))
             {
                 var controller = this.gameObject.GetComponent<NickNameController>();
                 if (controller != null) controller.OpenInputUI();
