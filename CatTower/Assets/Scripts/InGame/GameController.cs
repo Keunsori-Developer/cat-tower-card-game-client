@@ -72,23 +72,37 @@ namespace CatTower
         public void ShowInitialPlayersInfo(IngamePlayerOrder response)
         {
             playerOrder = new (Userinfo, bool)[response.playerOrder.Count];
+            for (int i = 0; i < response.playerOrder.Count; i++)
+            {
+                if (response.playerOrder[i].userInfo.mid == UserData.mid)
+                {
+                    myOrder = response.playerOrder[i].order;
+                }
+            }
+            // 위 아래는 같은 로직
             foreach (var player in response.playerOrder)
             {
-
+                if (player.userInfo.mid == UserData.mid)
+                {
+                    myOrder = player.order;
+                }
                 //TODO: response 데이터를 기반으로 화면에 유저들 정보를 보여주고, 내 순서 또한 확인해서 myOrder에 값을 넣음
             }
         }
 
-        public void UpdateBoard(IngameStatus currentStatus)
+        public void UpdateBoard(IngameStatus response)
         {
-            // TODO: currentStatus 정보를 토대로 게임판을 업데이트하고, 플레이어가 포기를 했는지 안했는지 또한 체크
+            if(response.order == myOrder) // 이제 내 순서인거 
+            // TODO: response 정보를 토대로 게임판을 업데이트하고, 플레이어가 포기를 했는지 안했는지 또한 체크
+            foreach (var player in response.player)
+            {
+
+            }
         }
 
         public void StateChanged()
         {
             currentOrder = (currentOrder + 1) % playerOrder.Length;
-            if (currentOrder == 0) currentRound++;
-            // TODO: currentRound 값을 확인해서 게임이 아예 종료되었는지를 판단해야 함
 
             // TODO: 내 순서이면 gameState = new PlayingGameState() , 내 순서 아니면 gameState = new WaitGameState().
             gameState.InStart();
