@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace CatTower {
+namespace CatTower
+{
     public enum Breed
     {
         none,
@@ -17,11 +18,17 @@ namespace CatTower {
         Odd
     }
 
-    [System.Serializable]
     public class Card
     {
         public Breed br;
         public Sprite catImage;
         public bool special;
+
+        public Card(Breed breed, Sprite image, bool isSpecial)
+        {
+            this.br = breed;
+            this.catImage = image;
+            this.special = isSpecial;
+        }
     }
 }
