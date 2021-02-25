@@ -14,6 +14,13 @@ namespace CatTower
         [SerializeField] GameObject prefapParents = null;
         [SerializeField] Text roomCode = null;
         [SerializeField] GameObject joinWarnText = null;
+        [SerializeField] Button openButton = null;
+        [SerializeField] Button refreshButton = null;
+        [SerializeField] Button exitButton = null;
+        [SerializeField] Button codePanelButton = null;
+        [SerializeField] Button codeJoinButton = null;
+        [SerializeField] Button exitCodeButton = null;
+        [SerializeField] GameObject codeInputPanel = null;
         List<RoomInfo> roomList = new List<RoomInfo>();
 
         // RoomListResponse roomList = new RoomListResponse();
@@ -22,7 +29,13 @@ namespace CatTower
         // Start is called before the first frame update
         void Start()
         {
-            
+            joinWarnText.gameObject.SetActive(false);
+            openButton.onClick.AddListener(OpenJoinPanel);
+            refreshButton.onClick.AddListener(RefreshRoomList);
+            exitButton.onClick.AddListener(CloseJoinPanel);
+            codePanelButton.onClick.AddListener(OpenCodePanel);
+            codeJoinButton.onClick.AddListener(JoinRoomByCode);
+            exitCodeButton.onClick.AddListener(CloseCodePanel);
         }
 
         // Update is called once per frame
@@ -30,7 +43,21 @@ namespace CatTower
         {
 
         }
-        public void OpenJoinPage()
+        public void CloseJoinPanel()
+        {
+            joinGamePanel.gameObject.SetActive(false);
+            joinWarnText.gameObject.SetActive(false);
+        }
+        public void OpenCodePanel()
+        {
+            codeInputPanel.gameObject.SetActive(true);
+        }
+        public void CloseCodePanel()
+        {
+            codeInputPanel.gameObject.SetActive(false);
+            joinWarnText.gameObject.SetActive(false);
+        }
+        public void OpenJoinPanel()
         {
             joinGamePanel.gameObject.SetActive(true);
             RefreshRoomList();

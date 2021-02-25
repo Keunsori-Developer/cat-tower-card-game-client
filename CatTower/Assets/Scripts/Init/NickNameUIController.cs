@@ -11,17 +11,13 @@ namespace CatTower
         [SerializeField] InputField inputField = null;
         [SerializeField] Button okButton = null;
         [SerializeField] Text warnText = null;
-        [SerializeField] GameObject nicknamePanel = null;
-        [SerializeField] Button changeNickname = null;
-        [SerializeField] Text nicknameDisplay = null;
+
 
         // Start is called before the first frame update
         void Start()
         {
             warnText.gameObject.SetActive(false);
             okButton.onClick.AddListener(OkButtonClicked);
-            changeNickname.onClick.AddListener(NicknameChangeOpen);
-            nicknameDisplay.GetComponent<Text>().text = UserData.nickName;
         }
 
         // Update is called once per frame
@@ -38,16 +34,6 @@ namespace CatTower
                 return;
             }
             controller.UpdateUserInfo(inputField.text);
-            nicknameDisplay.GetComponent<Text>().text = UserData.nickName;
-
-        }
-
-        public void NicknameChangeOpen()
-        {
-            if(nicknamePanel.activeSelf == true)
-                nicknamePanel.gameObject.SetActive(false);
-            else
-                nicknamePanel.gameObject.SetActive(true);
         }
     }
 }
