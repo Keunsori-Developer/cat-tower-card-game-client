@@ -1,28 +1,84 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-namespace CatTower {
+namespace CatTower
+{
     public class CardDB : MonoBehaviour
     {
-        public static CardDB instance;
-        public GameObject parentObject;
-        private void Awake()
-        {
-            instance = this;
-        }
-        public List<Card> cardDBs = new List<Card>();
+        private List<Card> cardDBs;
+        public GameObject layoutGroup;
+        public GameObject cardPrefab;
 
-        public GameObject MyCardPrefab;
-        public Vector2[] pos;
-        private void Start()
+        public void GetCard(List<string> list)
         {
-            for(int i = 0; i < 5; i++)
+            for (int i = 0; i < list.Count; i++)
             {
-                GameObject go = Instantiate(MyCardPrefab, pos[i], Quaternion.identity);
-                go.GetComponent<MyCard>().SetCard(cardDBs[Random.Range(0, 8)]);
-                go.transform.SetParent(parentObject.transform);
+                GameObject go = Instantiate(cardPrefab, layoutGroup.transform);
+                if(list[i] == "A")
+                {
+                    go.GetComponent<MyCard>().SetCard(cardDBs[0]);
+                }
+                else if(list[i] == "B")
+                {
+                    go.GetComponent<MyCard>().SetCard(cardDBs[1]);
+                }
+                else if (list[i] == "C")
+                {
+                    go.GetComponent<MyCard>().SetCard(cardDBs[2]);
+                }
+                else if (list[i] == "D")
+                {
+                    go.GetComponent<MyCard>().SetCard(cardDBs[3]);
+                }
+                else if (list[i] == "E")
+                {
+                    go.GetComponent<MyCard>().SetCard(cardDBs[4]);
+                }
+                else if (list[i] == "S0")
+                {
+                    go.GetComponent<MyCard>().SetCard(cardDBs[5]);
+                }
+                else if (list[i] == "S1")
+                {
+                    go.GetComponent<MyCard>().SetCard(cardDBs[6]);
+                }
+                else if (list[i] == "S2")
+                {
+                    go.GetComponent<MyCard>().SetCard(cardDBs[7]);
+                }
             }
+        }
+        public void GetCard()
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                GameObject go = Instantiate(cardPrefab, layoutGroup.transform);
+                go.GetComponent<MyCard>().SetCard(cardDBs[Random.Range(0, 7)]);
+                //go.transform.SetParent(parentObject.transform);
+            }
+        }
+        void Awake()
+        {
+            cardDBs = new List<Card>()
+            {
+                new Card(Breed.Mackerel, Resources.Load<Sprite>("Ingame/Cat/mack"), false),
+                new Card(Breed.Siamese, Resources.Load<Sprite>("Ingame/Cat/siam"), false),
+                new Card(Breed.Persian, Resources.Load<Sprite>("Ingame/Cat/persian"), false),
+                new Card(Breed.Ragdoll, Resources.Load<Sprite>("Ingame/Cat/rag"), false),
+                new Card(Breed.RussianBlue, Resources.Load<Sprite>("Ingame/Cat/russian"), false),
+                new Card(Breed.Savanna, Resources.Load<Sprite>("Ingame/Cat/savanna"), true),
+                new Card(Breed.ThreeColor, Resources.Load<Sprite>("Ingame/Cat/three"), true),
+                new Card(Breed.Odd, Resources.Load<Sprite>("Ingame/Cat/odd"), true)
+            };
+        }
+
+        void Start()
+        {
+            // TODO: 서버로부터 카드 정보 받았을 때 아래 코드 진행되도록 수정해야 함
+            if (cardPrefab == null) cardPrefab = Resources.Load("Ingame/MyCard") as GameObject;
+            GetCard();
         }
     }
 }

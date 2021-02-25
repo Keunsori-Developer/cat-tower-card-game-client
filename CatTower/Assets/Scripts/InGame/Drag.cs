@@ -8,6 +8,7 @@ namespace CatTower
 {
     public class Drag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
     {
+        private WebSocketManager webSocket;
 
         public static Vector2 defaultposition;
         public static Sprite mySprite;
@@ -18,12 +19,63 @@ namespace CatTower
         public static Breed br;
         public static bool special;
 
-        public Slot mySlot;
         public MyCard myCard;
         public GameObject gameObj;
         public GameObject checkObj;
         public bool dragAble;
 
+        public List<string> listBoard = new List<string>();
+
+        public void SetSlot()
+        {
+            gameObj.GetComponent<SlotManager>().arrSlotBreed[index] = br;
+            gameObj.GetComponent<SlotManager>().arrSlotIndex[index] = 1;
+            del = true;
+        }
+
+        public void CheckSlot()
+        {
+            checkObj.GetComponent<CheckUsable>().ResetBr();
+            checkObj.GetComponent<CheckUsable>().CheckBr();
+        }
+
+        public void SetSprite()
+        {
+            for (int i = 0; i < 57; i++)
+            {
+                if (i == index)
+                {
+                    if (gameObj.GetComponent<SlotManager>().arrSlotBreed[i] == Breed.Mackerel)
+                    {
+                        myImage.sprite = Resources.Load<Sprite>("Ingame/Cat/mack");
+                    }
+                    else if (gameObj.GetComponent<SlotManager>().arrSlotBreed[i] == Breed.Siamese)
+                    {
+                        myImage.sprite = Resources.Load<Sprite>("Ingame/Cat/siam");
+                    }
+                    else if (gameObj.GetComponent<SlotManager>().arrSlotBreed[i] == Breed.Persian)
+                    {
+                        myImage.sprite = Resources.Load<Sprite>("Ingame/Cat/persian");
+                    }
+                    else if (gameObj.GetComponent<SlotManager>().arrSlotBreed[i] == Breed.Ragdoll)
+                    {
+                        myImage.sprite = Resources.Load<Sprite>("Ingame/Cat/rag");
+                    }
+                    else if (gameObj.GetComponent<SlotManager>().arrSlotBreed[i] == Breed.RussianBlue)
+                    {
+                        myImage.sprite = Resources.Load<Sprite>("Ingame/Cat/russian");
+                    }
+                    else if (gameObj.GetComponent<SlotManager>().arrSlotBreed[i] == Breed.ThreeColor)
+                    {
+                        myImage.sprite = Resources.Load<Sprite>("Ingame/Cat/three");
+                    }
+                    else if (gameObj.GetComponent<SlotManager>().arrSlotBreed[i] == Breed.Odd)
+                    {
+                        myImage.sprite = Resources.Load<Sprite>("Ingame/Cat/odd");
+                    }
+                }
+            }
+        }
         public void DecreaseCard() //사용할때마다 카드 수 감소시킴
         {
             if (myCard.card.br == Breed.Mackerel)
@@ -56,9 +108,51 @@ namespace CatTower
             }
         }
 
+        public void SetBoard()
+        {
+            for (int i = 0; i < 57; i++)
+            {
+                if (gameObj.GetComponent<SlotManager>().arrSlotBreed[i] == Breed.none)
+                {
+                    listBoard.Add("X");
+                }
+                else if (gameObj.GetComponent<SlotManager>().arrSlotBreed[i] == Breed.Mackerel)
+                {
+                    listBoard.Add("A");
+                }
+                else if (gameObj.GetComponent<SlotManager>().arrSlotBreed[i] == Breed.Siamese)
+                {
+                    listBoard.Add("B");
+                }
+                else if (gameObj.GetComponent<SlotManager>().arrSlotBreed[i] == Breed.Persian)
+                {
+                    listBoard.Add("C");
+                }
+                else if (gameObj.GetComponent<SlotManager>().arrSlotBreed[i] == Breed.Ragdoll)
+                {
+                    listBoard.Add("D");
+                }
+                else if (gameObj.GetComponent<SlotManager>().arrSlotBreed[i] == Breed.RussianBlue)
+                {
+                    listBoard.Add("E");
+                }
+                else if (gameObj.GetComponent<SlotManager>().arrSlotBreed[i] == Breed.Savanna)
+                {
+                    listBoard.Add("S0");
+                }
+                else if (gameObj.GetComponent<SlotManager>().arrSlotBreed[i] == Breed.ThreeColor)
+                {
+                    listBoard.Add("S1");
+                }
+                else if (gameObj.GetComponent<SlotManager>().arrSlotBreed[i] == Breed.Odd)
+                {
+                    listBoard.Add("S2");
+                }
+            }
+        }
         public void OnBeginDrag(PointerEventData eventData)
         {
-            if (dragAble == false)
+            if (dragAble == false || GameController.Instance.controllAble == false)
             {
                 return;
             }
@@ -74,7 +168,7 @@ namespace CatTower
       
         public void OnDrag(PointerEventData eventData)
         {
-            if (dragAble == false)
+            if (dragAble == false || GameController.Instance.controllAble == false)
             {
                 return;
             }
@@ -85,20 +179,11 @@ namespace CatTower
             }
         }
         
-        public void SetSlot()
-        {
-            mySlot.myBr = br;
-            myImage.sprite = mySprite;
-            gameObj.GetComponent<SlotManager>().arrSlotBreed[index] = mySlot.myBr;
-            gameObj.GetComponent<SlotManager>().arrSlotIndex[index] = 1;
-            del = true;
-            checkObj.GetComponent<CheckUsable>().ResetBr();
-            checkObj.GetComponent<CheckUsable>().CheckBr();
-        }
         public void OnDrop(PointerEventData eventData)
         {
             if (br != Breed.none)
             {
+                
                 if (special == false)
                 {
                     if (dragAble == false)
@@ -108,6 +193,7 @@ namespace CatTower
                             if (gameObj.GetComponent<SlotManager>().arrSlotIndex[index] != 0)
                                 return;
                             SetSlot();
+                            SetSprite();
                         }
                         else
                         {
@@ -116,6 +202,8 @@ namespace CatTower
                                 if (gameObj.GetComponent<SlotManager>().arrSlotIndex[index] != 0)
                                     return;
                                 SetSlot();
+                                CheckSlot();
+                                SetSprite();
                             }
                             else return;
                         }
@@ -124,6 +212,7 @@ namespace CatTower
                     {
                         return;
                     }
+                    SetBoard();
                 }
                 else
                 {
@@ -136,6 +225,8 @@ namespace CatTower
                                 if (gameObj.GetComponent<SlotManager>().arrSlotIndex[index] != 0)
                                     return;
                                 SetSlot();
+                                CheckSlot();
+                                SetSprite();
                             }
                             else
                             {
@@ -144,6 +235,8 @@ namespace CatTower
                                     if (gameObj.GetComponent<SlotManager>().arrSlotIndex[index] != 0)
                                         return;
                                     SetSlot();
+                                    CheckSlot();
+                                    SetSprite();
                                 }
                                 else return;
                             }
@@ -155,6 +248,8 @@ namespace CatTower
                                 if (gameObj.GetComponent<SlotManager>().arrSlotIndex[1] == 0)
                                 {
                                     SetSlot();
+                                    CheckSlot();
+                                    SetSprite();
                                 }
                             }
                             else if (index == 7)
@@ -162,6 +257,8 @@ namespace CatTower
                                 if (gameObj.GetComponent<SlotManager>().arrSlotIndex[6] == 0)
                                 {
                                     SetSlot();
+                                    CheckSlot();
+                                    SetSprite();
                                 }
                             }
                             else if (index < 7 && index > 0)
@@ -169,6 +266,8 @@ namespace CatTower
                                 if (gameObj.GetComponent<SlotManager>().arrSlotIndex[index - 1] == 0 && gameObj.GetComponent<SlotManager>().arrSlotIndex[index + 1] == 0)
                                 {
                                     SetSlot();
+                                    CheckSlot();
+                                    SetSprite();
                                 }
                             }
                             else
@@ -178,20 +277,24 @@ namespace CatTower
                                     if (gameObj.GetComponent<SlotManager>().arrSlotIndex[index] != 0)
                                         return;
                                     SetSlot();
+                                    CheckSlot();
+                                    SetSprite();
                                 }
                             }
                         }
+                        SetBoard();
                     }
                     else
                         return;
                 }
             }
             else return;
+ 
         }
-
+        
         public void OnEndDrag(PointerEventData eventData)
         {
-            if (dragAble == false)
+            if (dragAble == false || GameController.Instance.controllAble == false)
             {
                 return;
             }
@@ -207,7 +310,14 @@ namespace CatTower
                     Destroy(gameObj);
                     del = false;
                 }
-                br = Breed.none;
+                GameController.Instance.TurnEnd();
+                br = Breed.none;               
+               /* webSocket.SendEvent<IngameStatus>("/ingame", "status",
+                new IngameStatus
+                {
+                    board = listBoard
+                });
+                */
             }                    
         }
     }

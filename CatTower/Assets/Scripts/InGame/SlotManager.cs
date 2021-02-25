@@ -14,6 +14,7 @@ namespace CatTower
             for (int i = 0; i < 58; i++)
             {
                 arrSlotIndex[i] = 0;
+                arrSlotBreed[i] = Breed.none;
             }
         }
 

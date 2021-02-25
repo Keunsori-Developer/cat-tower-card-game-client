@@ -51,7 +51,6 @@ namespace CatTower {
         void Start()
         {
             FindObj();
-            IncreaseCard(); //게임 시작 할 때 한번만
         }
 
         // Update is called once per frame

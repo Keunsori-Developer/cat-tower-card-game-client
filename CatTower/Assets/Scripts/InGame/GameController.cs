@@ -7,6 +7,9 @@ namespace CatTower
     public class GameController : MonoBehaviour
     {
         private static GameController _instance;
+        public bool controllAble;
+        public GameObject myCards;
+        public GameObject Slot;
         public static GameController Instance
         {
             get
@@ -23,12 +26,15 @@ namespace CatTower
         private int myOrder;
         private IGameState gameState;
 
+        
+
         /// <summary>
         /// Awake is called when the script instance is being loaded.
         /// </summary>
         void Awake()
         {
             currentRound = 0;
+            currentOrder = 0;
             webSocket = WebSocketManager.Instance;
             webSocket.Connect("/ingame", () =>
             {
@@ -36,6 +42,7 @@ namespace CatTower
                 webSocket.ReceiveEvent<IngameCardGive>("/ingame", "cardgive", ShowCardDeck);
                 webSocket.ReceiveEvent<IngamePlayerOrder>("/ingame", "playerorder", ShowInitialPlayersInfo);
             });
+            StateChanged();
         }
         // Start is called before the first frame update
         void Start()
@@ -66,32 +73,105 @@ namespace CatTower
 
         public void ShowCardDeck(IngameCardGive response)
         {
+            List<string> cards = new List<string>();
+            cards = response.cards;
+            GetComponent<CardDB>().GetCard(response.cards);
             //TODO: response.cards 를 이용해서 화면에 카드 보여주는거 구현
         }
 
         public void ShowInitialPlayersInfo(IngamePlayerOrder response)
         {
             playerOrder = new (Userinfo, bool)[response.playerOrder.Count];
+            for (int i = 0; i < response.playerOrder.Count; i++)
+            {
+                if (response.playerOrder[i].userInfo.mid == UserData.mid)
+                {
+                    myOrder = response.playerOrder[i].order;
+                }
+            }
+            // 위 아래는 같은 로직
             foreach (var player in response.playerOrder)
             {
-
+                if (player.userInfo.mid == UserData.mid)
+                {
+                    myOrder = player.order;
+                }
                 //TODO: response 데이터를 기반으로 화면에 유저들 정보를 보여주고, 내 순서 또한 확인해서 myOrder에 값을 넣음
             }
         }
 
-        public void UpdateBoard(IngameStatus currentStatus)
+        public void UpdateBoard(IngameStatus response)
         {
-            // TODO: currentStatus 정보를 토대로 게임판을 업데이트하고, 플레이어가 포기를 했는지 안했는지 또한 체크
+            for (int i = 0; i < 57; i++)
+            {
+                if (response.board[i] != "X" && Slot.GetComponent<SlotManager>().arrSlotIndex[i] == 0) // 확인되지 않은 것만 업데이트
+                {
+                    Slot.GetComponent<SlotManager>().arrSlotIndex[i] = 1;
+                    if (response.board[i] == "A")
+                    {
+                        Slot.GetComponent<SlotManager>().arrSlotBreed[i] = Breed.Mackerel;
+                    }
+                    else if (response.board[i] == "B")
+                    {
+                        Slot.GetComponent<SlotManager>().arrSlotBreed[i] = Breed.Siamese;
+                    }
+                    else if (response.board[i] == "C")
+                    {
+                        Slot.GetComponent<SlotManager>().arrSlotBreed[i] = Breed.Persian;
+                    }
+                    else if (response.board[i] == "D")
+                    {
+                        Slot.GetComponent<SlotManager>().arrSlotBreed[i] = Breed.Ragdoll;
+                    }
+                    else if (response.board[i] == "E")
+                    {
+                        Slot.GetComponent<SlotManager>().arrSlotBreed[i] = Breed.RussianBlue;
+                    }
+                    else if (response.board[i] == "S1")
+                    {
+                        Slot.GetComponent<SlotManager>().arrSlotBreed[i] = Breed.ThreeColor;
+                    }
+                    else if (response.board[i] == "S2")
+                    {
+                        Slot.GetComponent<SlotManager>().arrSlotBreed[i] = Breed.Odd;
+                    }
+                    Slot.GetComponent<Drag>().SetSprite();
+                    Slot.GetComponent<Drag>().CheckSlot();
+                }
+            }
+            if (response.order == myOrder) // 이제 내 순서인거 , 누군가의 차례가 끝났을 때
+            {
+                webSocket.SendEvent<IngameStatus>("/ingame", "status",
+                new IngameStatus
+                {
+                    order = (myOrder + 1) % playerOrder.Length
+                });
+            }
+            // TODO: response 정보를 토대로 게임판을 업데이트하고, 플레이어가 포기를 했는지 안했는지 또한 체크
+            foreach (var player in response.player)
+            {
+
+            }
         }
 
         public void StateChanged()
         {
             currentOrder = (currentOrder + 1) % playerOrder.Length;
-            if (currentOrder == 0) currentRound++;
-            // TODO: currentRound 값을 확인해서 게임이 아예 종료되었는지를 판단해야 함
-
+            if (myOrder == currentOrder)
+            {
+                gameState = new PlayingGameState();
+            }
+            else
+            {
+                gameState = new WaitGameState();
+            }
             // TODO: 내 순서이면 gameState = new PlayingGameState() , 내 순서 아니면 gameState = new WaitGameState().
             gameState.InStart();
+        }
+
+        public void TurnEnd()
+        {
+            gameState.InFinish();
         }
     }
 }
