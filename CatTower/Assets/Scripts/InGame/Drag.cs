@@ -6,13 +6,13 @@ using UnityEngine.UI;
 
 namespace CatTower
 {
-    public class Drag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
+    public class Drag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
     {
         private WebSocketManager webSocket;
 
         public static Vector2 defaultposition;
         public static Sprite mySprite;
-        public static bool del = false;
+        public static bool del = true;
 
         public Image myImage;
         public int index;
@@ -121,7 +121,6 @@ namespace CatTower
             }
         }
 
-      
         public void OnDrag(PointerEventData eventData)
         {
             if (dragAble == false || GameController.Instance.controllAble == false)
@@ -134,103 +133,6 @@ namespace CatTower
                 this.transform.position = currentPos;
             }
         }
-        
-        public void OnDrop(PointerEventData eventData)
-        {
-            if (br != Breed.none)
-            {
-                
-                if (special == false)
-                {
-                    if (dragAble == false)
-                    {
-                        if (index < 8)
-                        {
-                            if (gameObj.GetComponent<SlotManager>().arrSlotIndex[index] != 0)
-                                return;
-                            SetSlot();
-                        }
-                        else
-                        {
-                            if (gameObj.GetComponent<SlotManager>().arrSlotIndex[index - 8] == 1 && gameObj.GetComponent<SlotManager>().arrSlotIndex[index - 7] == 1 && (gameObj.GetComponent<SlotManager>().arrSlotBreed[index - 8] == br || gameObj.GetComponent<SlotManager>().arrSlotBreed[index - 7] == br))
-                            {
-                                if (gameObj.GetComponent<SlotManager>().arrSlotIndex[index] != 0)
-                                    return;
-                                SetSlot();
-                            }
-                            else return;
-                        }
-                    }
-                    else
-                    {
-                        return;
-                    }
-                }
-                else
-                {
-                    if (dragAble == false)
-                    {
-                        if (br == Breed.ThreeColor)
-                        {
-                            if (index < 8)
-                            {
-                                if (gameObj.GetComponent<SlotManager>().arrSlotIndex[index] != 0)
-                                    return;
-                                SetSlot();
-                            }
-                            else
-                            {
-                                if (gameObj.GetComponent<SlotManager>().arrSlotIndex[index - 8] == 1 && gameObj.GetComponent<SlotManager>().arrSlotIndex[index - 7] == 1)
-                                {
-                                    if (gameObj.GetComponent<SlotManager>().arrSlotIndex[index] != 0)
-                                        return;
-                                    SetSlot();
-                                }
-                                else return;
-                            }
-                        }
-                        else if (br == Breed.Odd)
-                        {
-                            if (index == 0)
-                            {
-                                if (gameObj.GetComponent<SlotManager>().arrSlotIndex[1] == 0)
-                                {
-                                    SetSlot();
-                                }
-                            }
-                            else if (index == 7)
-                            {
-                                if (gameObj.GetComponent<SlotManager>().arrSlotIndex[6] == 0)
-                                {
-                                    SetSlot();
-                                }
-                            }
-                            else if (index < 7 && index > 0)
-                            {
-                                if (gameObj.GetComponent<SlotManager>().arrSlotIndex[index - 1] == 0 && gameObj.GetComponent<SlotManager>().arrSlotIndex[index + 1] == 0)
-                                {
-                                    SetSlot();
-                                }
-                            }
-                            else
-                            {
-                                if (gameObj.GetComponent<SlotManager>().arrSlotIndex[index - 8] == 1 && gameObj.GetComponent<SlotManager>().arrSlotIndex[index - 7] == 1 && gameObj.GetComponent<SlotManager>().arrSlotIndex[index - 1] == 0 && gameObj.GetComponent<SlotManager>().arrSlotIndex[index + 1] == 0)
-                                {
-                                    if (gameObj.GetComponent<SlotManager>().arrSlotIndex[index] != 0)
-                                        return;
-                                    SetSlot();
-                                }
-                            }
-                        }
-                    }
-                    else
-                        return;
-                }
-            }
-            else return;
- 
-        }
-        
         public void OnEndDrag(PointerEventData eventData)
         {
             if (dragAble == false || GameController.Instance.controllAble == false)
@@ -238,16 +140,41 @@ namespace CatTower
                 return;
             }
             else
-            {   
-                this.transform.position = defaultposition;
+            {
+                var gr = GameObject.Find("CardSlotCanvas").GetComponent<GraphicRaycaster>();
+                var ped = new PointerEventData(null);
+                ped.position = Input.mousePosition;
+                List<RaycastResult> results = new List<RaycastResult>();
+                gr.Raycast(ped, results);
+                GameObject slotObject = null;
+                foreach (var h in results)
+                {
+                    Debug.Log(h.gameObject.name);
+                    slotObject = h.gameObject;
+                    break;
+                }
+                Slot slot;
+                if (slotObject == null || !slotObject.TryGetComponent<Slot>(out slot))
+                {
+                    this.transform.position = defaultposition;
+                    return;
+                }
+                if (!slot.CheckSlot(this.gameObject.GetComponent<MyCard>().card))
+                {
+                    Debug.Log("여기엔 둘 수 없음");
+                    del = false;
+                    this.transform.position = defaultposition;
+                    return;
+                }
+                
                 if (del == true)
                 {
                     checkObj = GameObject.Find("MyCards");
                     DecreaseCard();
                     checkObj.GetComponent<CheckUsable>().CheckCard();
                     checkObj.GetComponent<CheckUsable>().SumScore();
-                    Destroy(gameObj);
-                    del = false;
+                    Destroy(this.gameObject);
+                    //del = false;
                 }
                 GameController.Instance.throwInfo(brS, index);
                 GameController.Instance.MyTurnEnd();

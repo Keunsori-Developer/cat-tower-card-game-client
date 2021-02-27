@@ -4,20 +4,11 @@ using UnityEngine;
 
 namespace CatTower
 {
-    public class GameController : MonoBehaviour
+    public class GameController : SingletonGameObject<GameController>
     {
-        private static GameController _instance;
         public bool controllAble;
         public GameObject myCards;
         public GameObject Slot;
-        public static GameController Instance
-        {
-            get
-            {
-                if (_instance == null) _instance = new GameController();
-                return _instance;
-            }
-        }
 
         private WebSocketManager webSocket;
         private int currentRound; // 현재 진행되고 있는 라운드 수
@@ -53,7 +44,17 @@ namespace CatTower
         // Update is called once per frame
         void Update()
         {
+if (Input.GetMouseButtonDown(0))
+        {
+            Vector2 wp = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Ray2D ray = new Ray2D(wp, Vector2.zero);
+            RaycastHit2D[] hits = Physics2D.RaycastAll(ray.origin, ray.direction);
 
+            foreach(var h in hits)
+            {
+                Debug.Log(h.collider.name);
+            }
+        }
         }
 
         public void throwInfo(string s, int i)
@@ -189,6 +190,7 @@ namespace CatTower
 
         public void StateChanged()
         {
+            return; //TODO: 추후 지울 것!
             currentOrder = (currentOrder + 1) % playerOrder.Length;
             //모든유저 giveup -> 라운드 종료
             if (myOrder == currentOrder)
