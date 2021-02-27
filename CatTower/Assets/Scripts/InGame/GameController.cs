@@ -42,7 +42,7 @@ namespace CatTower
                 webSocket.ReceiveEvent<IngameCardGive>("/ingame", "cardgive", ShowCardDeck);
                 webSocket.ReceiveEvent<IngamePlayerOrder>("/ingame", "playerorder", ShowInitialPlayersInfo);
             });
-            StateChanged();
+            StateChanged();//시작?
         }
         // Start is called before the first frame update
         void Start()
@@ -61,14 +61,19 @@ namespace CatTower
             CardInfo myCardinfo = new CardInfo();
             myCardinfo.breed = s;
             myCardinfo.index = i;
-            webSocket.SendEvent<IngameThrow>("/ingame", "throw",
-                new IngameThrow
+            foreach (var player in playerOrder)
+            {
+                if (player.Item1.mid == UserData.mid)
                 {
-                    //RKH6E {"mid" : "GWCSE1622", "nickname" : "김창렬"}
-                    roomId = "RKH6E", // TODO: 추후 민호가 구현한거에서 받아와야함
-                    user = playerOrder[0].Item1,
-                    card = myCardinfo                   
-                });
+                    webSocket.SendEvent<IngameThrow>("/ingame", "throw",
+                    new IngameThrow
+                    {
+                        roomId = "RKH6E", // TODO: 추후 민호가 구현한거에서 받아와야함
+                        user = player.Item1,
+                        card = myCardinfo
+                    });
+                }
+            }
         }
 
         public void AlertRoundStart()
@@ -91,7 +96,6 @@ namespace CatTower
         public void ShowCardDeck(IngameCardGive response)
         {
             Debug.Log(response.cards);
-            Debug.Log("Asfasf");
             List<string> cards = new List<string>();
             cards = response.cards;
             GetComponent<CardDB>().GetCard(response.cards);
@@ -115,6 +119,7 @@ namespace CatTower
                 {
                     myOrder = player.order;
                 }
+                
                 //TODO: response 데이터를 기반으로 화면에 유저들 정보를 보여주고, 내 순서 또한 확인해서 myOrder에 값을 넣음
             }
         }
@@ -155,19 +160,30 @@ namespace CatTower
                         Slot.GetComponent<SlotManager>().arrSlotBreed[i] = Breed.Odd;
                     }
                 }
+                GetComponent<Drag>().SetSprite();
             }
-            if (response.order == myOrder) // 이제 내 순서인거 , 누군가의 차례가 끝났을 때
+            if (response.order == myOrder) 
             {
-                webSocket.SendEvent<IngameStatus>("/ingame", "status",
-                new IngameStatus
-                {
-                    order = (myOrder + 1) % playerOrder.Length
-                });
+
             }
             // TODO: response 정보를 토대로 게임판을 업데이트하고, 플레이어가 포기를 했는지 안했는지 또한 체크
             foreach (var player in response.player)
             {
-
+                if (player.userInfo.mid != UserData.mid)
+                {
+                    if (player.giveup == true)
+                    {
+                        //TODO: 닉네임 옆에 포기! 가 뜨게 구현
+                    }
+                }
+            }
+            foreach (var player in response.player)
+            {
+                if (player.userInfo.mid == UserData.mid)
+                {
+                    if (player.giveup == false)
+                        StateChanged(); //본인이 포기상태가 아닐 시 계속 진행 (아직 모르겠음)
+                }
             }
         }
 
@@ -183,18 +199,29 @@ namespace CatTower
                 }
                 else
                 {
-                    //give 정보를 보냄
+                    foreach (var player in playerOrder) // 사용할 수 있는 카드가 없을 때 giveup
+                    {
+                        if (player.Item1.mid == UserData.mid)
+                        {
+                            webSocket.SendEvent<IngameGiveUp>("/ingame", "giveup",
+                            new IngameGiveUp
+                            {
+                                userInfo = player.Item1,
+                                roomId = "RKH6E"
+                            });
+                            break;
+                        }
+                    }
                 }
             }
             else
             {
                 gameState = new WaitGameState();
             }
-            // TODO: 내 순서이면 gameState = new PlayingGameState() , 내 순서 아니면 gameState = new WaitGameState().
             gameState.InStart();
         }
 
-        public void TurnEnd()
+        public void MyTurnEnd()
         {
             gameState.InFinish();
         }

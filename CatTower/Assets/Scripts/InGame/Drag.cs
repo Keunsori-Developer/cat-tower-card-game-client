@@ -25,8 +25,6 @@ namespace CatTower
         public GameObject checkObj;
         public bool dragAble;
 
-        public List<string> listBoard = new List<string>();
-
         public void SetSlot()
         {
             myImage.sprite = mySprite;
@@ -36,19 +34,7 @@ namespace CatTower
             checkObj.GetComponent<CheckUsable>().ResetBr();
             checkObj.GetComponent<CheckUsable>().CheckBr();
         }
-        /*public void SetSlot()
-        {
-            gameObj.GetComponent<SlotManager>().arrSlotBreed[index] = br;
-            gameObj.GetComponent<SlotManager>().arrSlotIndex[index] = 1;
-            del = true;
-        }
-
-        public void CheckSlot()
-        {
-            checkObj.GetComponent<CheckUsable>().ResetBr();
-            checkObj.GetComponent<CheckUsable>().CheckBr();
-        }
-
+  
         public void SetSprite()
         {
             for (int i = 0; i < 57; i++)
@@ -85,7 +71,8 @@ namespace CatTower
                     }
                 }
             }
-        }*/
+        }
+
         public void DecreaseCard() //사용할때마다 카드 수 감소시킴
         {
             if (myCard.card.br == Breed.Mackerel)
@@ -118,48 +105,6 @@ namespace CatTower
             }
         }
 
-        public void SetBoard()
-        {
-            for (int i = 0; i < 57; i++)
-            {
-                if (gameObj.GetComponent<SlotManager>().arrSlotBreed[i] == Breed.none)
-                {
-                    listBoard.Add("X");
-                }
-                else if (gameObj.GetComponent<SlotManager>().arrSlotBreed[i] == Breed.Mackerel)
-                {
-                    listBoard.Add("A");
-                }
-                else if (gameObj.GetComponent<SlotManager>().arrSlotBreed[i] == Breed.Siamese)
-                {
-                    listBoard.Add("B");
-                }
-                else if (gameObj.GetComponent<SlotManager>().arrSlotBreed[i] == Breed.Persian)
-                {
-                    listBoard.Add("C");
-                }
-                else if (gameObj.GetComponent<SlotManager>().arrSlotBreed[i] == Breed.Ragdoll)
-                {
-                    listBoard.Add("D");
-                }
-                else if (gameObj.GetComponent<SlotManager>().arrSlotBreed[i] == Breed.RussianBlue)
-                {
-                    listBoard.Add("E");
-                }
-                else if (gameObj.GetComponent<SlotManager>().arrSlotBreed[i] == Breed.Savanna)
-                {
-                    listBoard.Add("S0");
-                }
-                else if (gameObj.GetComponent<SlotManager>().arrSlotBreed[i] == Breed.ThreeColor)
-                {
-                    listBoard.Add("S1");
-                }
-                else if (gameObj.GetComponent<SlotManager>().arrSlotBreed[i] == Breed.Odd)
-                {
-                    listBoard.Add("S2");
-                }
-            }
-        }
         public void OnBeginDrag(PointerEventData eventData)
         {
             if (dragAble == false || GameController.Instance.controllAble == false)
@@ -220,7 +165,6 @@ namespace CatTower
                     {
                         return;
                     }
-                    SetBoard();
                 }
                 else
                 {
@@ -278,7 +222,6 @@ namespace CatTower
                                 }
                             }
                         }
-                        SetBoard();
                     }
                     else
                         return;
@@ -307,7 +250,7 @@ namespace CatTower
                     del = false;
                 }
                 GameController.Instance.throwInfo(brS, index);
-                GameController.Instance.TurnEnd();
+                GameController.Instance.MyTurnEnd();
                 br = Breed.none;                              
             }                    
         }
