@@ -13,6 +13,7 @@ namespace CatTower
 
         public void GetCard(List<string> list)
         {
+            Debug.Log("zzz");
             for (int i = 0; i < list.Count; i++)
             {
                 GameObject go = Instantiate(cardPrefab, layoutGroup.transform);
@@ -63,14 +64,14 @@ namespace CatTower
         {
             cardDBs = new List<Card>()
             {
-                new Card(Breed.Mackerel, Resources.Load<Sprite>("Ingame/Cat/mack"), false),
-                new Card(Breed.Siamese, Resources.Load<Sprite>("Ingame/Cat/siam"), false),
-                new Card(Breed.Persian, Resources.Load<Sprite>("Ingame/Cat/persian"), false),
-                new Card(Breed.Ragdoll, Resources.Load<Sprite>("Ingame/Cat/rag"), false),
-                new Card(Breed.RussianBlue, Resources.Load<Sprite>("Ingame/Cat/russian"), false),
-                new Card(Breed.Savanna, Resources.Load<Sprite>("Ingame/Cat/savanna"), true),
-                new Card(Breed.ThreeColor, Resources.Load<Sprite>("Ingame/Cat/three"), true),
-                new Card(Breed.Odd, Resources.Load<Sprite>("Ingame/Cat/odd"), true)
+                new Card(Breed.Mackerel, Resources.Load<Sprite>("Ingame/Cat/mack"), "A", false),
+                new Card(Breed.Siamese, Resources.Load<Sprite>("Ingame/Cat/siam"), "B" , false),
+                new Card(Breed.Persian, Resources.Load<Sprite>("Ingame/Cat/persian"), "C",  false),
+                new Card(Breed.Ragdoll, Resources.Load<Sprite>("Ingame/Cat/rag"), "D", false),
+                new Card(Breed.RussianBlue, Resources.Load<Sprite>("Ingame/Cat/russian"), "E", false),
+                new Card(Breed.Savanna, Resources.Load<Sprite>("Ingame/Cat/savanna"), "S0", true),
+                new Card(Breed.ThreeColor, Resources.Load<Sprite>("Ingame/Cat/three"), "S1", true),
+                new Card(Breed.Odd, Resources.Load<Sprite>("Ingame/Cat/odd"), "S2", true)
             };
         }
 
@@ -78,7 +79,7 @@ namespace CatTower
         {
             // TODO: 서버로부터 카드 정보 받았을 때 아래 코드 진행되도록 수정해야 함
             if (cardPrefab == null) cardPrefab = Resources.Load("Ingame/MyCard") as GameObject;
-            GetCard();
+            //GetCard();
         }
     }
 }

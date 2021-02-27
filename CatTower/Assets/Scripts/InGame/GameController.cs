@@ -26,7 +26,7 @@ namespace CatTower
         private int myOrder;
         private IGameState gameState;
 
-        
+
 
         /// <summary>
         /// Awake is called when the script instance is being loaded.
@@ -34,7 +34,7 @@ namespace CatTower
         void Awake()
         {
             currentRound = 0;
-            currentOrder = 0;
+            currentOrder = -1;
             webSocket = WebSocketManager.Instance;
             webSocket.Connect("/ingame", () =>
             {
@@ -56,23 +56,42 @@ namespace CatTower
 
         }
 
+        public void throwInfo(string s, int i)
+        {
+            CardInfo myCardinfo = new CardInfo();
+            myCardinfo.breed = s;
+            myCardinfo.index = i;
+            webSocket.SendEvent<IngameThrow>("/ingame", "throw",
+                new IngameThrow
+                {
+                    //RKH6E {"mid" : "GWCSE1622", "nickname" : "김창렬"}
+                    roomId = "RKH6E", // TODO: 추후 민호가 구현한거에서 받아와야함
+                    user = playerOrder[0].Item1,
+                    card = myCardinfo                   
+                });
+        }
+
         public void AlertRoundStart()
         {
             webSocket.SendEvent<IngameStart>("/ingame", "start",
                 new IngameStart
                 {
-                    roomId = "", // TODO: 추후 민호가 구현한거에서 받아와야함
+                    //RKH6E {"mid" : "GWCSE1622", "nickname" : "김창렬"}
+                    roomId = "RKH6E", // TODO: 추후 민호가 구현한거에서 받아와야함
                     round = currentRound,
                     user = new Userinfo
                     {
-                        mid = UserData.mid,
-                        nickname = UserData.nickName
+                        mid = "GWCSE1622",
+                        nickname = "김창렬"
                     }
+
                 });
         }
 
         public void ShowCardDeck(IngameCardGive response)
         {
+            Debug.Log(response.cards);
+            Debug.Log("Asfasf");
             List<string> cards = new List<string>();
             cards = response.cards;
             GetComponent<CardDB>().GetCard(response.cards);
@@ -82,13 +101,13 @@ namespace CatTower
         public void ShowInitialPlayersInfo(IngamePlayerOrder response)
         {
             playerOrder = new (Userinfo, bool)[response.playerOrder.Count];
-            for (int i = 0; i < response.playerOrder.Count; i++)
+            /*for (int i = 0; i < response.playerOrder.Count; i++)
             {
                 if (response.playerOrder[i].userInfo.mid == UserData.mid)
                 {
                     myOrder = response.playerOrder[i].order;
                 }
-            }
+            }*/
             // 위 아래는 같은 로직
             foreach (var player in response.playerOrder)
             {
@@ -135,8 +154,6 @@ namespace CatTower
                     {
                         Slot.GetComponent<SlotManager>().arrSlotBreed[i] = Breed.Odd;
                     }
-                    Slot.GetComponent<Drag>().SetSprite();
-                    Slot.GetComponent<Drag>().CheckSlot();
                 }
             }
             if (response.order == myOrder) // 이제 내 순서인거 , 누군가의 차례가 끝났을 때
@@ -157,9 +174,17 @@ namespace CatTower
         public void StateChanged()
         {
             currentOrder = (currentOrder + 1) % playerOrder.Length;
+            //모든유저 giveup -> 라운드 종료
             if (myOrder == currentOrder)
             {
-                gameState = new PlayingGameState();
+                if(GetComponent<CheckUsable>().usableCard == true)
+                {
+                    gameState = new PlayingGameState();
+                }
+                else
+                {
+                    //give 정보를 보냄
+                }
             }
             else
             {

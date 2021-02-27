@@ -21,12 +21,14 @@ namespace CatTower
     public class Card
     {
         public Breed br;
+        public string brS;
         public Sprite catImage;
         public bool special;
 
-        public Card(Breed breed, Sprite image, bool isSpecial)
+        public Card(Breed breed, Sprite image, string breedString, bool isSpecial)
         {
             this.br = breed;
+            this.brS = breedString;
             this.catImage = image;
             this.special = isSpecial;
         }

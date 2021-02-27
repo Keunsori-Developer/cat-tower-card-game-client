@@ -17,6 +17,7 @@ namespace CatTower
         public Image myImage;
         public int index;
         public static Breed br;
+        public static string brS;
         public static bool special;
 
         public MyCard myCard;
@@ -27,6 +28,15 @@ namespace CatTower
         public List<string> listBoard = new List<string>();
 
         public void SetSlot()
+        {
+            myImage.sprite = mySprite;
+            gameObj.GetComponent<SlotManager>().arrSlotBreed[index] = br;
+            gameObj.GetComponent<SlotManager>().arrSlotIndex[index] = 1;
+            del = true;
+            checkObj.GetComponent<CheckUsable>().ResetBr();
+            checkObj.GetComponent<CheckUsable>().CheckBr();
+        }
+        /*public void SetSlot()
         {
             gameObj.GetComponent<SlotManager>().arrSlotBreed[index] = br;
             gameObj.GetComponent<SlotManager>().arrSlotIndex[index] = 1;
@@ -75,7 +85,7 @@ namespace CatTower
                     }
                 }
             }
-        }
+        }*/
         public void DecreaseCard() //사용할때마다 카드 수 감소시킴
         {
             if (myCard.card.br == Breed.Mackerel)
@@ -161,6 +171,7 @@ namespace CatTower
                 defaultposition = this.transform.position;
                 mySprite = this.GetComponent<MyCard>().card.catImage;
                 br = this.GetComponent<MyCard>().card.br;
+                brS = this.GetComponent<MyCard>().card.brS;
                 special = this.GetComponent<MyCard>().card.special;
             }
         }
@@ -193,7 +204,6 @@ namespace CatTower
                             if (gameObj.GetComponent<SlotManager>().arrSlotIndex[index] != 0)
                                 return;
                             SetSlot();
-                            SetSprite();
                         }
                         else
                         {
@@ -202,8 +212,6 @@ namespace CatTower
                                 if (gameObj.GetComponent<SlotManager>().arrSlotIndex[index] != 0)
                                     return;
                                 SetSlot();
-                                CheckSlot();
-                                SetSprite();
                             }
                             else return;
                         }
@@ -225,8 +233,6 @@ namespace CatTower
                                 if (gameObj.GetComponent<SlotManager>().arrSlotIndex[index] != 0)
                                     return;
                                 SetSlot();
-                                CheckSlot();
-                                SetSprite();
                             }
                             else
                             {
@@ -235,8 +241,6 @@ namespace CatTower
                                     if (gameObj.GetComponent<SlotManager>().arrSlotIndex[index] != 0)
                                         return;
                                     SetSlot();
-                                    CheckSlot();
-                                    SetSprite();
                                 }
                                 else return;
                             }
@@ -248,8 +252,6 @@ namespace CatTower
                                 if (gameObj.GetComponent<SlotManager>().arrSlotIndex[1] == 0)
                                 {
                                     SetSlot();
-                                    CheckSlot();
-                                    SetSprite();
                                 }
                             }
                             else if (index == 7)
@@ -257,8 +259,6 @@ namespace CatTower
                                 if (gameObj.GetComponent<SlotManager>().arrSlotIndex[6] == 0)
                                 {
                                     SetSlot();
-                                    CheckSlot();
-                                    SetSprite();
                                 }
                             }
                             else if (index < 7 && index > 0)
@@ -266,8 +266,6 @@ namespace CatTower
                                 if (gameObj.GetComponent<SlotManager>().arrSlotIndex[index - 1] == 0 && gameObj.GetComponent<SlotManager>().arrSlotIndex[index + 1] == 0)
                                 {
                                     SetSlot();
-                                    CheckSlot();
-                                    SetSprite();
                                 }
                             }
                             else
@@ -277,8 +275,6 @@ namespace CatTower
                                     if (gameObj.GetComponent<SlotManager>().arrSlotIndex[index] != 0)
                                         return;
                                     SetSlot();
-                                    CheckSlot();
-                                    SetSprite();
                                 }
                             }
                         }
@@ -310,14 +306,9 @@ namespace CatTower
                     Destroy(gameObj);
                     del = false;
                 }
+                GameController.Instance.throwInfo(brS, index);
                 GameController.Instance.TurnEnd();
-                br = Breed.none;               
-               /* webSocket.SendEvent<IngameStatus>("/ingame", "status",
-                new IngameStatus
-                {
-                    board = listBoard
-                });
-                */
+                br = Breed.none;                              
             }                    
         }
     }
