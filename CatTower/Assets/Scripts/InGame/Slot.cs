@@ -122,50 +122,5 @@ namespace CatTower
             myCards.GetComponent<CheckUsable>().CheckBr();
             canUse = false;
         }
-
-        public void SetBoard()
-        {
-            // TODO: 정체 확인 필요
-
-            // for (int i = 0; i < 57; i++)
-            // {
-            //     if (parentSlot.GetComponent<SlotManager>().arrSlotBreed[i] == Breed.none)
-            //     {
-            //         listBoard.Add("X");
-            //     }
-            //     else if (parentSlot.GetComponent<SlotManager>().arrSlotBreed[i] == Breed.Mackerel)
-            //     {
-            //         listBoard.Add("A");
-            //     }
-            //     else if (parentSlot.GetComponent<SlotManager>().arrSlotBreed[i] == Breed.Siamese)
-            //     {
-            //         listBoard.Add("B");
-            //     }
-            //     else if (parentSlot.GetComponent<SlotManager>().arrSlotBreed[i] == Breed.Persian)
-            //     {
-            //         listBoard.Add("C");
-            //     }
-            //     else if (parentSlot.GetComponent<SlotManager>().arrSlotBreed[i] == Breed.Ragdoll)
-            //     {
-            //         listBoard.Add("D");
-            //     }
-            //     else if (parentSlot.GetComponent<SlotManager>().arrSlotBreed[i] == Breed.RussianBlue)
-            //     {
-            //         listBoard.Add("E");
-            //     }
-            //     else if (parentSlot.GetComponent<SlotManager>().arrSlotBreed[i] == Breed.Savanna)
-            //     {
-            //         listBoard.Add("S0");
-            //     }
-            //     else if (parentSlot.GetComponent<SlotManager>().arrSlotBreed[i] == Breed.ThreeColor)
-            //     {
-            //         listBoard.Add("S1");
-            //     }
-            //     else if (parentSlot.GetComponent<SlotManager>().arrSlotBreed[i] == Breed.Odd)
-            //     {
-            //         listBoard.Add("S2");
-            //     }
-            // }
-        }
     }
 }
