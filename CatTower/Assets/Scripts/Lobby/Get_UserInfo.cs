@@ -8,7 +8,7 @@ namespace CatTower
 {
     public class Get_UserInfo : MonoBehaviour
     {
-        List<Userinfo> userList = new List<Userinfo>();
+        List<UserInfo> userList = new List<UserInfo>();
         public Text printRoomName;
         public Text printUser0;
         public Text printUser1;
@@ -76,15 +76,15 @@ namespace CatTower
             //0번째 인덱스 멤버는 방장
 
             int i = 0;
-            foreach (Userinfo user in temp.user)
+            foreach (UserInfo user in temp.user)
             {
                 if (i == 0)
                 {
-                    userList.Add(new Userinfo() { mid = temp.host.mid, nickname = temp.host.nickname, });
+                    userList.Add(new UserInfo() { mid = temp.host.mid, nickname = temp.host.nickname, });
                 }
                 else
                 {
-                    userList.Add(new Userinfo() { mid = temp.user[i].mid, nickname = temp.user[i].nickname, });
+                    userList.Add(new UserInfo() { mid = temp.user[i].mid, nickname = temp.user[i].nickname, });
                 }//userList1~5번 인덱스에 참가자 정보 넣음
                 i++;
             }
@@ -124,19 +124,19 @@ namespace CatTower
 
         public class UserListResponse
         {
-            public List<Userinfo> user;
+            public List<UserInfo> user;
             public string roomid;
-            public Userinfo host;
+            public UserInfo host;
         }
         public class ExitUserResponse
         {
-            public Userinfo user;
+            public UserInfo user;
             public string roomid;
 
         }
         public class StartUserResponse
         {
-            public Userinfo user;
+            public UserInfo user;
             public string roomid;
 
         }

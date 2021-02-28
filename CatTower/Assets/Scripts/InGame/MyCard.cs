@@ -11,7 +11,7 @@ namespace CatTower
         
         public void SetCard(Card _card)
         {
-            card = new Card(_card.br, _card.catImage, _card.special);
+            card = new Card(_card.br, _card.catImage, _card.brS, _card.special);
             this.gameObject.GetComponent<Image>().sprite = card.catImage;
             IncreaseCard();
         }

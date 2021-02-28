@@ -45,8 +45,6 @@ namespace CatTower
                         }
                         else return false;
                     }
-
-                    SetBoard();
                 }
                 else
                 {
@@ -103,7 +101,6 @@ namespace CatTower
                             }
                         }
                     }
-                    SetBoard();
 
 
                 }
