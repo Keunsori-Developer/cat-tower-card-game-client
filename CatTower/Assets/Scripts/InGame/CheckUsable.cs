@@ -51,21 +51,6 @@ namespace CatTower
                 myScore = myScore - roundScore;            
         }
 
-        public void RoundOff()
-        {
-            //한명의
-        }
-        public void Turn() //턴 시작할 때 호출
-        {
-            if(usableCard == false)
-            {
-                //탈락처리, 턴이 시작되지 않음
-            }
-            else
-            {
-                //턴시작
-            }
-        }
         public void SetBreedBool(int i)
         {
             if (gameObj.GetComponent<SlotManager>().arrSlotIndex[i] == 0)

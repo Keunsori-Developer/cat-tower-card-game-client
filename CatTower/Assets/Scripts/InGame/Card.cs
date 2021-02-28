@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -21,6 +21,7 @@ namespace CatTower
     public class Card
     {
         public Breed br;
+        public string brS;
         public Sprite catImage;
         public bool special;
 
