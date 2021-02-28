@@ -92,7 +92,8 @@ namespace CatTower
             {
                 if (k == 0)
                 {
-                    printUser0.text = userList[k].nickname;//리스트 첫번째 멤버는 방장이 들어옴.
+                    //printUser0.text = userList[k].nickname;//리스트 첫번째 멤버는 방장이 들어옴.
+                    printUser0.text = "heello";
                 }
                 if (k == 1)
                 {
