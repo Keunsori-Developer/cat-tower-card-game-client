@@ -44,17 +44,17 @@ namespace CatTower
         // Update is called once per frame
         void Update()
         {
-if (Input.GetMouseButtonDown(0))
-        {
-            Vector2 wp = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Ray2D ray = new Ray2D(wp, Vector2.zero);
-            RaycastHit2D[] hits = Physics2D.RaycastAll(ray.origin, ray.direction);
-
-            foreach(var h in hits)
+            if (Input.GetMouseButtonDown(0))
             {
-                Debug.Log(h.collider.name);
+                Vector2 wp = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                Ray2D ray = new Ray2D(wp, Vector2.zero);
+                RaycastHit2D[] hits = Physics2D.RaycastAll(ray.origin, ray.direction);
+
+                foreach(var h in hits)
+                {
+                    Debug.Log(h.collider.name);
+                }
             }
-        }
         }
 
         public void throwInfo(string s, int i)
@@ -106,13 +106,13 @@ if (Input.GetMouseButtonDown(0))
         public void ShowInitialPlayersInfo(IngamePlayerOrder response)
         {
             playerOrder = new (UserInfo, bool)[response.playerOrder.Count];
-            for (int i = 0; i < response.playerOrder.Count; i++)
+            /*for (int i = 0; i < response.playerOrder.Count; i++)
             {
                 if (response.playerOrder[i].userInfo.mid == UserData.mid)
                 {
                     myOrder = response.playerOrder[i].order;
                 }
-            }
+            }*/
             // 위 아래는 같은 로직
             foreach (var player in response.playerOrder)
             {
@@ -120,17 +120,71 @@ if (Input.GetMouseButtonDown(0))
                 {
                     myOrder = player.order;
                 }
+                
                 //TODO: response 데이터를 기반으로 화면에 유저들 정보를 보여주고, 내 순서 또한 확인해서 myOrder에 값을 넣음
             }
         }
 
         public void UpdateBoard(IngameStatus response)
         {
-            if(response.order == myOrder) // 이제 내 순서인거 
+            for (int i = 0; i < 57; i++)
+            {
+                if (response.board[i] != "X" && Slot.GetComponent<SlotManager>().arrSlotIndex[i] == 0) // 확인되지 않은 것만 업데이트
+                {
+                    Slot.GetComponent<SlotManager>().arrSlotIndex[i] = 1;
+                    if (response.board[i] == "A")
+                    {
+                        Slot.GetComponent<SlotManager>().arrSlotBreed[i] = Breed.Mackerel;
+                    }
+                    else if (response.board[i] == "B")
+                    {
+                        Slot.GetComponent<SlotManager>().arrSlotBreed[i] = Breed.Siamese;
+                    }
+                    else if (response.board[i] == "C")
+                    {
+                        Slot.GetComponent<SlotManager>().arrSlotBreed[i] = Breed.Persian;
+                    }
+                    else if (response.board[i] == "D")
+                    {
+                        Slot.GetComponent<SlotManager>().arrSlotBreed[i] = Breed.Ragdoll;
+                    }
+                    else if (response.board[i] == "E")
+                    {
+                        Slot.GetComponent<SlotManager>().arrSlotBreed[i] = Breed.RussianBlue;
+                    }
+                    else if (response.board[i] == "S1")
+                    {
+                        Slot.GetComponent<SlotManager>().arrSlotBreed[i] = Breed.ThreeColor;
+                    }
+                    else if (response.board[i] == "S2")
+                    {
+                        Slot.GetComponent<SlotManager>().arrSlotBreed[i] = Breed.Odd;
+                    }
+                }
+                GetComponent<Drag>().SetSprite();
+            }
+            if (response.order == myOrder) 
+            {
+
+            }
             // TODO: response 정보를 토대로 게임판을 업데이트하고, 플레이어가 포기를 했는지 안했는지 또한 체크
             foreach (var player in response.player)
             {
-
+                if (player.userInfo.mid != UserData.mid)
+                {
+                    if (player.giveup == true)
+                    {
+                        //TODO: 닉네임 옆에 포기! 가 뜨게 구현
+                    }
+                }
+            }
+            foreach (var player in response.player)
+            {
+                if (player.userInfo.mid == UserData.mid)
+                {
+                    if (player.giveup == false)
+                        StateChanged(); //본인이 포기상태가 아닐 시 계속 진행 (아직 모르겠음)
+                }
             }
         }
 
@@ -138,8 +192,34 @@ if (Input.GetMouseButtonDown(0))
         {
             return; //TODO: 추후 지울 것!
             currentOrder = (currentOrder + 1) % playerOrder.Length;
-
-            // TODO: 내 순서이면 gameState = new PlayingGameState() , 내 순서 아니면 gameState = new WaitGameState().
+            //모든유저 giveup -> 라운드 종료
+            if (myOrder == currentOrder)
+            {
+                if(GetComponent<CheckUsable>().usableCard == true)
+                {
+                    gameState = new PlayingGameState();
+                }
+                else
+                {
+                    foreach (var player in playerOrder) // 사용할 수 있는 카드가 없을 때 giveup
+                    {
+                        if (player.Item1.mid == UserData.mid)
+                        {
+                            webSocket.SendEvent<IngameGiveUp>("/ingame", "giveup",
+                            new IngameGiveUp
+                            {
+                                userInfo = player.Item1,
+                                roomId = "RKH6E"
+                            });
+                            break;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                gameState = new WaitGameState();
+            }
             gameState.InStart();
         }
 
