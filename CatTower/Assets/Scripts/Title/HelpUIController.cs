@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 namespace CatTower
 {
+
     public class HelpUIController : MonoBehaviour
     {
         [SerializeField] GameObject helpPanel = null;
@@ -13,11 +15,21 @@ namespace CatTower
         [SerializeField] GameObject helpPage1 = null;
         [SerializeField] GameObject helpPage2 = null;
         [SerializeField] GameObject helpPage3 = null;
+        [SerializeField] Button openPanel = null;
+        [SerializeField] Button closePanel = null;
+        [SerializeField] Button goLeft = null;
+        [SerializeField] Button goRight = null;
         // Start is called before the first frame update
         int page;
+        int firstPage = 0;
+        int lastPage = 2;
         void Start()
         {
             helpPanel.gameObject.SetActive(false);
+            openPanel.onClick.AddListener(OpenHelpPage);
+            goLeft.onClick.AddListener(PreviousPage);
+            goRight.onClick.AddListener(NextPage);
+            closePanel.onClick.AddListener(CloseHelpPage);
         }
 
         // Update is called once per frame
@@ -35,15 +47,20 @@ namespace CatTower
             page--;
             HelpPageControl();
         }
+        public void CloseHelpPage()
+        {
+            helpPanel.gameObject.SetActive(false);
+        }
         public void OpenHelpPage()
         {
-            page = 1;
+            page = 0;
             helpPanel.gameObject.SetActive(true);
             HelpPageControl();
         }
         public void HelpPageControl()
         {
-            if (page == 1)
+            
+            if (page == firstPage)
             {
                 helpPage1.gameObject.SetActive(true);
                 helpPage2.gameObject.SetActive(false);
@@ -52,21 +69,21 @@ namespace CatTower
                 nextPage.gameObject.SetActive(true);
 
             }
-            if (page == 2)
-            {
-                helpPage1.gameObject.SetActive(false);
-                helpPage2.gameObject.SetActive(true);
-                helpPage3.gameObject.SetActive(false);
-                previousPage.gameObject.SetActive(true);
-                nextPage.gameObject.SetActive(true);
-            }
-            if (page == 3)
+            else if (page == lastPage)
             {
                 helpPage1.gameObject.SetActive(false);
                 helpPage2.gameObject.SetActive(false);
                 helpPage3.gameObject.SetActive(true);
                 previousPage.gameObject.SetActive(true);
                 nextPage.gameObject.SetActive(false);
+            }
+            else
+            {
+                helpPage1.gameObject.SetActive(false);
+                helpPage2.gameObject.SetActive(true);
+                helpPage3.gameObject.SetActive(false);
+                previousPage.gameObject.SetActive(true);
+                nextPage.gameObject.SetActive(true);
             }
         }
     }

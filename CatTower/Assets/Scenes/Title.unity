@@ -1462,18 +1462,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 377023958}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1232474910}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &377023958
@@ -1674,18 +1663,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 473624600}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1097601238}
-        m_MethodName: JoinRoomByCode
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &473624600
@@ -2039,18 +2017,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 559223923}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1097601238}
-        m_MethodName: RefreshRoomList
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &559223923
@@ -2449,7 +2416,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uBAA8\uB4DC (?)"
+  m_Text: "\uB77C\uC6B4\uB4DC \uC218(1 or 3)"
 --- !u!222 &620592360
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2539,18 +2506,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 636215811}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 791180896}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &636215811
@@ -3084,7 +3040,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 332}
+  m_AnchoredPosition: {x: 0, y: 270}
   m_SizeDelta: {x: 750, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &763442158
@@ -3129,18 +3085,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 763442159}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1097601238}
-        m_MethodName: OpenJoinPage
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &763442159
@@ -3442,18 +3387,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 795333229}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1097601240}
-        m_MethodName: PreviousPage
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &795333229
@@ -4322,18 +4256,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 955466572}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1097601239}
-        m_MethodName: CreateRoom
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &955466572
@@ -4597,7 +4520,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -143}
   m_SizeDelta: {x: 750, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1033930777
@@ -4642,18 +4565,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1033930778}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1097601239}
-        m_MethodName: OpenHostPage
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1033930778
@@ -4774,8 +4686,8 @@ GameObject:
   - component: {fileID: 1097601239}
   - component: {fileID: 1097601238}
   - component: {fileID: 1097601237}
-  - component: {fileID: 1097601244}
   - component: {fileID: 1097601243}
+  - component: {fileID: 1097601244}
   m_Layer: 0
   m_Name: TitleController
   m_TagString: Untagged
@@ -4790,7 +4702,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1097601236}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5508848dc2e355849a546f5a9c20f078, type: 3}
   m_Name: 
@@ -4814,6 +4726,13 @@ MonoBehaviour:
   prefapParents: {fileID: 672798357}
   roomCode: {fileID: 234133468}
   joinWarnText: {fileID: 898145631}
+  openButton: {fileID: 763442158}
+  refreshButton: {fileID: 559223922}
+  exitButton: {fileID: 1703659880}
+  codePanelButton: {fileID: 377023957}
+  codeJoinButton: {fileID: 473624599}
+  exitCodeButton: {fileID: 1546053657}
+  codeInputPanel: {fileID: 1232474910}
 --- !u!114 &1097601239
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4830,7 +4749,11 @@ MonoBehaviour:
   roomName: {fileID: 140637180}
   capacity: {fileID: 1380659643}
   mode: {fileID: 750314297}
+  modeError: {fileID: 2078287181}
   capacityError: {fileID: 136837630}
+  openButton: {fileID: 1033930777}
+  exitButton: {fileID: 636215810}
+  makeButton: {fileID: 955466571}
 --- !u!114 &1097601240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4849,6 +4772,10 @@ MonoBehaviour:
   helpPage1: {fileID: 35358877}
   helpPage2: {fileID: 476595422}
   helpPage3: {fileID: 1205822032}
+  openPanel: {fileID: 1137596421}
+  closePanel: {fileID: 2081560626}
+  goLeft: {fileID: 795333228}
+  goRight: {fileID: 1504934403}
 --- !u!114 &1097601241
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4897,14 +4824,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1097601236}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6c48a6a2c2c0ec46a231c93365ab806, type: 3}
+  m_Script: {fileID: 11500000, guid: c402f614eaddda14c808f981a1728974, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 1097601243}
-  inputField: {fileID: 322722448907748856}
-  okButton: {fileID: 322722450565356845}
-  warnText: {fileID: 322722450740696962}
   nicknamePanel: {fileID: 322722450566387160}
+  okButton: {fileID: 322722450565356845}
+  inputField: {fileID: 322722448907748856}
+  warnText: {fileID: 322722450740696962}
   changeNickname: {fileID: 1963904985}
   nicknameDisplay: {fileID: 683306938}
 --- !u!1 &1106266768
@@ -5178,7 +5105,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -1328, y: 0}
   m_SizeDelta: {x: 1000, y: 1500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1110819403
@@ -5256,7 +5183,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -675}
+  m_AnchoredPosition: {x: 0, y: -539}
   m_SizeDelta: {x: 750, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!132 &1137596420
@@ -6310,7 +6237,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1473434372
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6328,7 +6255,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -331}
+  m_AnchoredPosition: {x: -1453, y: -34}
   m_SizeDelta: {x: 750, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1473434373
@@ -6506,18 +6433,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1504934404}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1097601240}
-        m_MethodName: NextPage
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1504934404
@@ -6639,29 +6555,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1546053658}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1232474910}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 898145631}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1546053658
@@ -6714,7 +6608,7 @@ GameObject:
   - component: {fileID: 1669802746}
   - component: {fileID: 1669802745}
   m_Layer: 5
-  m_Name: NicknamePanel
+  m_Name: NicknameView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7011,18 +6905,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1703659881}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 532145343}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1703659881
@@ -8211,18 +8094,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2081560627}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1829553648}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &2081560627
