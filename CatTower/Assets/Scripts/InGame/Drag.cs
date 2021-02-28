@@ -8,8 +8,6 @@ namespace CatTower
 {
     public class Drag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
     {
-        private WebSocketManager webSocket;
-
         public static Vector2 defaultposition;
         public static Sprite mySprite;
         public static bool del = true;
@@ -25,7 +23,7 @@ namespace CatTower
         public GameObject checkObj;
         public bool dragAble;
 
-        public void SetSlot()
+        public void SetSlot()//필요??
         {
             myImage.sprite = mySprite;
             gameObj.GetComponent<SlotManager>().arrSlotBreed[index] = br;
@@ -102,6 +100,10 @@ namespace CatTower
             if (myCard.card.br == Breed.ThreeColor)
             {
                 checkObj.GetComponent<CheckUsable>().thrNum--;
+            }
+            if (myCard.card.br == Breed.Savanna)
+            {
+                checkObj.GetComponent<CheckUsable>().savaNum--;
             }
         }
 

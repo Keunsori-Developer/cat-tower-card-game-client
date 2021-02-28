@@ -106,14 +106,6 @@ namespace CatTower
         public void ShowInitialPlayersInfo(IngamePlayerOrder response)
         {
             playerOrder = new (UserInfo, bool)[response.playerOrder.Count];
-            /*for (int i = 0; i < response.playerOrder.Count; i++)
-            {
-                if (response.playerOrder[i].userInfo.mid == UserData.mid)
-                {
-                    myOrder = response.playerOrder[i].order;
-                }
-            }*/
-            // 위 아래는 같은 로직
             foreach (var player in response.playerOrder)
             {
                 if (player.userInfo.mid == UserData.mid)
@@ -213,6 +205,11 @@ namespace CatTower
                             });
                             break;
                         }
+                        /*ex) WebSocketManager.ReceiveEvent<InGameEndRound>("/ingame", "endround", (response) =>
+                        {
+                            FinishRound(response)
+                        });
+                        */
                     }
                 }
             }
@@ -223,6 +220,24 @@ namespace CatTower
             gameState.InStart();
         }
 
+        /*public void FinishRound(ingameEndRound response){
+            foreach (var player in playerOrder)
+            {
+                if (player.Item1.mid == UserData.mid)
+                {
+                    webSocket.SendEvent<IngameFinish>("/ingame", "finish",
+                    new IngameFinish
+                    {
+                        roomId = "RKH6E",
+                        user = player.Item1,
+                        round = currentRound,
+                        leftCard = GetComponent<CheckUsable>().myScore
+                    });
+                }
+            }
+            currentRound++;
+        }*/
+         
         public void MyTurnEnd()
         {
             gameState.InFinish();

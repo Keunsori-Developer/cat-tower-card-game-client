@@ -13,7 +13,6 @@ namespace CatTower
 
         public void GetCard(List<string> list)
         {
-            Debug.Log("zzz");
             for (int i = 0; i < list.Count; i++)
             {
                 GameObject go = Instantiate(cardPrefab, layoutGroup.transform);
