@@ -45,12 +45,9 @@ namespace CatTower
                         }
                         else return false;
                     }
-
-                    SetBoard();
                 }
                 else
                 {
-
                     if (target.br == Breed.ThreeColor)
                     {
                         if (index < 8)
@@ -103,9 +100,31 @@ namespace CatTower
                             }
                         }
                     }
-                    SetBoard();
-
-
+                    else
+                    {
+                        if(GetComponent<CheckUsable>().savaBool == true)
+                        {
+                            if (index < 8)
+                            {
+                                if (parentSlot.GetComponent<SlotManager>().arrSlotIndex[index] != 0)
+                                    return false;
+                                GetComponent<CheckUsable>().myScore -= 5;
+                                SetSlot(target);
+                            }
+                            
+                        }
+                        else
+                        {
+                            if (parentSlot.GetComponent<SlotManager>().arrSlotIndex[index - 8] == 1 && parentSlot.GetComponent<SlotManager>().arrSlotIndex[index - 7] == 1)
+                            {
+                                if (parentSlot.GetComponent<SlotManager>().arrSlotIndex[index] != 0)
+                                    return false;
+                                GetComponent<CheckUsable>().myScore -= 5;
+                                SetSlot(target);
+                            }
+                            else return false;
+                        }
+                    }
                 }
                 return true;
             }

@@ -13,7 +13,7 @@ namespace CatTower
         private WebSocketManager webSocket;
         private int currentRound; // 현재 진행되고 있는 라운드 수
         private int currentOrder; // 현재 라운드 내에서 진행되고 있는 순서
-        private (Userinfo, bool)[] playerOrder; // Tuple 형식으로 첫번째에는 유저 정보를, 두번째에는 유저의 포기 여부를 저장
+        private (UserInfo, bool)[] playerOrder; // Tuple 형식으로 첫번째에는 유저 정보를, 두번째에는 유저의 포기 여부를 저장
         private int myOrder;
         private IGameState gameState;
 
@@ -44,17 +44,17 @@ namespace CatTower
         // Update is called once per frame
         void Update()
         {
-if (Input.GetMouseButtonDown(0))
-        {
-            Vector2 wp = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Ray2D ray = new Ray2D(wp, Vector2.zero);
-            RaycastHit2D[] hits = Physics2D.RaycastAll(ray.origin, ray.direction);
-
-            foreach(var h in hits)
+            if (Input.GetMouseButtonDown(0))
             {
-                Debug.Log(h.collider.name);
+                Vector2 wp = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                Ray2D ray = new Ray2D(wp, Vector2.zero);
+                RaycastHit2D[] hits = Physics2D.RaycastAll(ray.origin, ray.direction);
+
+                foreach(var h in hits)
+                {
+                    Debug.Log(h.collider.name);
+                }
             }
-        }
         }
 
         public void throwInfo(string s, int i)
@@ -85,7 +85,7 @@ if (Input.GetMouseButtonDown(0))
                     //RKH6E {"mid" : "GWCSE1622", "nickname" : "김창렬"}
                     roomId = "RKH6E", // TODO: 추후 민호가 구현한거에서 받아와야함
                     round = currentRound,
-                    user = new Userinfo
+                    user = new UserInfo
                     {
                         mid = "GWCSE1622",
                         nickname = "김창렬"
@@ -105,15 +105,7 @@ if (Input.GetMouseButtonDown(0))
 
         public void ShowInitialPlayersInfo(IngamePlayerOrder response)
         {
-            playerOrder = new (Userinfo, bool)[response.playerOrder.Count];
-            /*for (int i = 0; i < response.playerOrder.Count; i++)
-            {
-                if (response.playerOrder[i].userInfo.mid == UserData.mid)
-                {
-                    myOrder = response.playerOrder[i].order;
-                }
-            }*/
-            // 위 아래는 같은 로직
+            playerOrder = new (UserInfo, bool)[response.playerOrder.Count];
             foreach (var player in response.playerOrder)
             {
                 if (player.userInfo.mid == UserData.mid)
@@ -213,6 +205,11 @@ if (Input.GetMouseButtonDown(0))
                             });
                             break;
                         }
+                        /*ex) WebSocketManager.ReceiveEvent<InGameEndRound>("/ingame", "endround", (response) =>
+                        {
+                            FinishRound(response)
+                        });
+                        */
                     }
                 }
             }
@@ -223,6 +220,24 @@ if (Input.GetMouseButtonDown(0))
             gameState.InStart();
         }
 
+        /*public void FinishRound(ingameEndRound response){
+            foreach (var player in playerOrder)
+            {
+                if (player.Item1.mid == UserData.mid)
+                {
+                    webSocket.SendEvent<IngameFinish>("/ingame", "finish",
+                    new IngameFinish
+                    {
+                        roomId = "RKH6E",
+                        user = player.Item1,
+                        round = currentRound,
+                        leftCard = GetComponent<CheckUsable>().myScore
+                    });
+                }
+            }
+            currentRound++;
+        }*/
+         
         public void MyTurnEnd()
         {
             gameState.InFinish();

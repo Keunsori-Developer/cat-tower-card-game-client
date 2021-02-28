@@ -15,6 +15,7 @@ namespace CatTower
         public bool ragBool = false;
         public bool thrBool = false;
         public bool oddBool = false;
+        public bool savaBool = false;
         public int siamNum = 0;
         public int russiaNum = 0;
         public int mackNum = 0;
@@ -24,31 +25,14 @@ namespace CatTower
         public int oddNum = 0;
         public int savaNum = 0;
         public int myScore = 0;
-        public int roundScore;
+        public int roundScore; //확인 후 수정
         public void CheckCard() //사용가능 카드를 확인
         {
-            if (!((siamBool == true && siamNum > 0) || (russianBool == true && russiaNum > 0) || (mackBool == true && mackNum > 0) || (persBool == true && persNum > 0) || (ragBool == true && ragNum > 0) || (thrBool == true && thrNum > 0) || (oddBool == true && oddNum > 0)))
+            if (!((siamBool == true && siamNum > 0) || (russianBool == true && russiaNum > 0) || (mackBool == true && mackNum > 0) || (persBool == true && persNum > 0) || (ragBool == true && ragNum > 0) || (thrBool == true && thrNum > 0) || (oddBool == true && oddNum > 0) || (savaBool == true && savaNum > 0)))
             {
                 usableCard = false;
             }
             else usableCard = true;
-        }
-
-        public void score() // 라운가 종료 됐을 때 호출
-        { 
-            if(savaNum == 1)
-            {
-                //roundScore가 0인 사람에게 내 roundScore를 넘겨줌
-            }
-            if(roundScore == 0)
-            {
-                if(myScore < 0)
-                {
-                    myScore += 2;
-                }
-            }
-            else
-                myScore = myScore - roundScore;            
         }
 
         public void SetBreedBool(int i)
@@ -93,6 +77,10 @@ namespace CatTower
         }
         public void CheckBr() //누군가 카드를 놓을때 호출, 사용가능한 고양이를 true로 바꿔줌
         {
+            if(myScore == 1 && savaNum == 1)
+            {
+                savaBool = true;
+            }
             for (int i = 0; i < 9; i++)
             {
                 if (gameObj.GetComponent<SlotManager>().arrSlotIndex[i] == 0)
@@ -170,7 +158,7 @@ namespace CatTower
 
         public void SumScore()
         {
-            roundScore = siamNum + russiaNum + mackNum + ragNum + persNum + thrNum + oddNum + savaNum;
+            myScore = siamNum + russiaNum + mackNum + ragNum + persNum + thrNum + oddNum + savaNum;
         }
                 
         public void ResetBr()
