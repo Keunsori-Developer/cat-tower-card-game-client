@@ -27,7 +27,7 @@ namespace CatTower
             WebSocketManager.Instance.ReceiveEvent<UserListResponse>("/rooms", "userlist", ReadUserList);
             //});
             //StartCoroutine(Wait_second());
-          
+
 
         }
         /*IEnumerator Wait_second()
@@ -74,7 +74,7 @@ namespace CatTower
         public void ReadUserList(UserListResponse temp)
         {
             //0번째 인덱스 멤버는 방장
-            
+
             int i = 0;
             foreach (Userinfo user in temp.user)
             {
@@ -86,7 +86,7 @@ namespace CatTower
                 {
                     userList.Add(new Userinfo() { mid = temp.user[i].mid, nickname = temp.user[i].nickname, });
                 }//userList1~5번 인덱스에 참가자 정보 넣음
-               i++;
+                i++;
             }
             for (int k = 0; k < userList.Count; k++)
             {
@@ -120,7 +120,7 @@ namespace CatTower
             }
 
         }
-       
+
 
         public class UserListResponse
         {
@@ -132,20 +132,45 @@ namespace CatTower
         {
             public Userinfo user;
             public string roomid;
-            
+
+        }
+        public class StartUserResponse
+        {
+            public Userinfo user;
+            public string roomid;
+
         }
         public void Yes()
         {
-            //WebSocketManager.Instance.Connect("/rooms", () =>
-            //{
-              //  WebSocketManager.Instance.SendEvent<UserListResponse>("/rooms", "exit", ExitUserResponse );//Request parameters 전달해야됨.
-            //});
-            SceneManager.LoadScene("Title");
+            // WebSocketManager.Instance.Connect("/rooms", () =>
+            {
+                //   WebSocketManager.Instance.SendEvent<ExitUserResponse>("/rooms", "exit",
+
+                //     new ExitUserResponse
+                //   {
+                //     user = 
+                //});//Request parameters 전달해야됨.
+                
+                SceneManager.LoadScene("Title");
+            }
+
+
+
         }
-        
+        public void ChangeIngame()
+        {
+           // WebSocketManager.Instance.SendEvent<StartUserResponse>("/rooms", "exit",
+
+                // new StartUserResponse
+                 //{
+                   
+                   //   user = ;
+                 //});//Request parameters 전달해야됨.
+           
+            SceneManager.LoadScene("Ingame");
+        }
 
 
     }
-   
-
 }
+
