@@ -9,7 +9,7 @@ namespace CatTower
     {
         public string roomId;
         public int round;
-        public Userinfo user;
+        public UserInfo user;
     }
 
     [Serializable]
@@ -27,7 +27,7 @@ namespace CatTower
     [Serializable]
     public class PlayerOrder
     {
-        public Userinfo userInfo;
+        public UserInfo userInfo;
         public int order;
         public int score;
         public bool giveup;
@@ -36,7 +36,7 @@ namespace CatTower
     [Serializable]
     public class IngameThrow
     {
-        public Userinfo user;
+        public UserInfo user;
         public CardInfo card;
         public string roomId;
     }
@@ -51,14 +51,14 @@ namespace CatTower
     [Serializable]
     public class IngameGiveUp
     {
-        public Userinfo userInfo;
+        public UserInfo userInfo;
         public string roomId;
     }
 
     [Serializable]
     public class IngameStatus
     {
-        public Userinfo user;
+        public UserInfo user;
         public List<string> board; //TODO: string 이 맞는지 확인 필요
         public int order;
         public List<PlayerOrder> player;
@@ -68,7 +68,7 @@ namespace CatTower
     public class IngameFinish
     {
         public string roomId;
-        public Userinfo user;
+        public UserInfo user;
         public int round;
         public int leftCard;
     }

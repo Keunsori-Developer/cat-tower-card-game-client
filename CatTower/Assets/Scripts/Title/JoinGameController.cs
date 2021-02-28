@@ -14,6 +14,13 @@ namespace CatTower
         [SerializeField] GameObject prefapParents = null;
         [SerializeField] Text roomCode = null;
         [SerializeField] GameObject joinWarnText = null;
+        [SerializeField] Button openButton = null;
+        [SerializeField] Button refreshButton = null;
+        [SerializeField] Button exitButton = null;
+        [SerializeField] Button codePanelButton = null;
+        [SerializeField] Button codeJoinButton = null;
+        [SerializeField] Button exitCodeButton = null;
+        [SerializeField] GameObject codeInputPanel = null;
         List<RoomInfo> roomList = new List<RoomInfo>();
 
         // RoomListResponse roomList = new RoomListResponse();
@@ -22,6 +29,14 @@ namespace CatTower
         // Start is called before the first frame update
         void Start()
         {
+            joinWarnText.gameObject.SetActive(false);
+            openButton.onClick.AddListener(OpenJoinPanel);
+            openButton.onClick.AddListener(RefreshRoomList);
+            refreshButton.onClick.AddListener(RefreshRoomList);
+            exitButton.onClick.AddListener(CloseJoinPanel);
+            codePanelButton.onClick.AddListener(OpenCodePanel);
+            codeJoinButton.onClick.AddListener(JoinRoomByCode);
+            exitCodeButton.onClick.AddListener(CloseCodePanel);
             
         }
 
@@ -30,7 +45,21 @@ namespace CatTower
         {
 
         }
-        public void OpenJoinPage()
+        public void CloseJoinPanel()
+        {
+            joinGamePanel.gameObject.SetActive(false);
+            joinWarnText.gameObject.SetActive(false);
+        }
+        public void OpenCodePanel()
+        {
+            codeInputPanel.gameObject.SetActive(true);
+        }
+        public void CloseCodePanel()
+        {
+            codeInputPanel.gameObject.SetActive(false);
+            joinWarnText.gameObject.SetActive(false);
+        }
+        public void OpenJoinPanel()
         {
             joinGamePanel.gameObject.SetActive(true);
             RefreshRoomList();
@@ -59,8 +88,9 @@ namespace CatTower
                     Destroy(_previousChild.gameObject);
                 }
             }//기존에 생성된 프리팹들 삭제
-
-            HttpManager.Instance.Get<RoomListResponse>("/rooms/active", ReadRoomList);// 방정보 Get후 생성 (코루틴으로 불러오는거라 저 함수서 처리못하면 생성이안됨)
+            WebSocketManager.Instance.ReceiveEvent<RoomListResponse>("/rooms", "active", ReadRoomList);//잠시오픈
+            //HttpManager.Instance.Get<RoomListResponse>("/rooms/active", ReadRoomList);// 방정보 Get후 생성 (코루틴으로 불러오는거라 저 함수서 처리못하면 생성이안됨)
+            WebSocketManager.Instance.SendEvent<RoomListRequest>("/rooms", "roomlist",(null));//요청
         }
         public void Makedummy()
         {
@@ -73,36 +103,52 @@ namespace CatTower
             int i = 0;
             foreach(RoomInfo room in temp.rooms)
             {
-                roomList.Add(new RoomInfo() { capacity = temp.rooms[i].capacity, id = temp.rooms[i].id, joined = temp.rooms[i].joined, name = temp.rooms[i].name });
-                //Debug.Log("RoomListAdded");
+                roomList.Add(new RoomInfo() { capacity = temp.rooms[i].capacity, mode = temp.rooms[i].mode, id = temp.rooms[i].id, joined = temp.rooms[i].joined, name = temp.rooms[i].name });
+                Debug.Log("RoomListAdded");
                 i++;
             }
             for (i = 0; i < roomList.Count; i++)
             {
                 CreateRoomList(roomList[i]);
-                //Debug.Log("ID : " + roomList[i].id + " 이름 : " + roomList[i].name + " " + roomList[i].joined + "/" + roomList[i].capacity);
+                Debug.Log("ID : " + roomList[i].id + " 이름 : " + roomList[i].name + " " + roomList[i].joined + "/" + roomList[i].capacity);
             }//리스트 만드는거
-        }// Get으로 가져온거 그대로 복사하는 함수
+            WebSocketManager.Instance.CancelToReceiveEvent("/rooms", "active");//다 받고 종료
+        }
 
         public void JoinRoomByClick(GameObject room)
         {
             Debug.Log("클릭join요청 , roomid " + room.transform.Find("RoomId").GetComponentInChildren<Text>().text + " userinfo " + UserData.nickName + " id " + UserData.mid);
-            HttpManager.Instance.Post<JoinRequest, JoinResponse>("/rooms/join",
+            /* HttpManager.Instance.Post<JoinRequest, JoinResponse>("/rooms/join",
             new JoinRequest
             {
                 roomId = room.transform.Find("RoomId").GetComponentInChildren<Text>().text,
                 userInfo = { nickname = UserData.nickName, mid = UserData.mid }
             }, JoinRoom) ;
+            */
+            WebSocketManager.Instance.ReceiveEvent<JoinResponse>("/rooms","userlist",JoinRoom);
+            WebSocketManager.Instance.SendEvent<JoinRequest>("/rooms", "join",
+                new JoinRequest
+                {
+                    roomId = room.transform.Find("RoomId").GetComponentInChildren<Text>().text,
+                    userInfo = { nickname = UserData.nickName, mid = UserData.mid }
+                });
         }//버튼클릭으로 입장
         public void JoinRoomByCode()
         {
             Debug.Log("코드join요청 , roomid " + roomCode.text + " Userinfo " + UserData.nickName + " id " + UserData.mid);
-            HttpManager.Instance.Post<JoinRequest, JoinResponse>("/rooms/join",
+            /*HttpManager.Instance.Post<JoinRequest, JoinResponse>("/rooms/join",
             new JoinRequest
             {
                 roomId = roomCode.text.ToUpper(),
                 userInfo = { nickname = UserData.nickName, mid = UserData.mid }
             }, JoinRoom); ;
+            */
+            WebSocketManager.Instance.SendEvent<JoinRequest>("/rooms", "join",
+                new JoinRequest
+                {
+                    roomId = roomCode.text.ToUpper(),
+                    userInfo = { nickname = UserData.nickName, mid = UserData.mid }
+                });
         }//방 코드입력으로 입장
         public void JoinRoom(JoinResponse room)
         {
@@ -110,6 +156,7 @@ namespace CatTower
             {
                 JoinedRoom.roomId = room.roomId;
                 Debug.Log(room.roomId + " 입장");
+                //WebSocketManager.Instance.CancelToReceiveEvent("/rooms", "userlist");
                 SceneManager.LoadScene("Lobby");
             }
             else
