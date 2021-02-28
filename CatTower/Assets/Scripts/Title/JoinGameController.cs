@@ -67,8 +67,7 @@ namespace CatTower
         public void CreateRoomList(RoomInfo RL)
         {
 
-            GameObject clone = Instantiate(roomPrefap, Vector3.zero, Quaternion.identity) as GameObject;//대충 새로만들고 복사한다는내용
-            clone.transform.SetParent(prefapParents.transform);
+            GameObject clone = Instantiate(roomPrefap, prefapParents.transform) as GameObject;//대충 새로만들고 복사한다는내용
             clone.name = RL.name;
             clone.transform.Find("RoomName").GetComponentInChildren<Text>().text = RL.name;
             clone.transform.Find("RoomId").GetComponentInChildren<Text>().text = RL.id;
