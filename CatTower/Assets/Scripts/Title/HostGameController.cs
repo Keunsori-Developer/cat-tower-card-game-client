@@ -81,22 +81,39 @@ namespace CatTower
                 _mode = 1;// 3판
             }
 
-            HttpManager.Instance.Post<RoomInfoRequest, RoomInfoResponse>("/rooms/create",
+            /*HttpManager.Instance.Post<RoomInfoRequest, RoomInfoResponse>("/rooms/create",
             new RoomInfoRequest
             {
                 hostInfo = { mid = UserData.mid, nickname = UserData.nickName },
                 name = roomName.text,
                 capacity = int.Parse(capacity.text),
                 mode = _mode//여기서 앞모드는 클래스의 mode 뒤의 모드는 입력받는 mode
-                }, JoinRoom); 
+                }, JoinRoom);
+                http통신부분
+             */
+            WebSocketManager.Instance.ReceiveEvent<JoinResponse>("/rooms", "userlist", JoinRoom);
+            WebSocketManager.Instance.SendEvent<RoomInfoRequest>("/rooms", "create",
+                new RoomInfoRequest
+                {
+                    hostInfo = new UserInfo
+                    {
+                        mid = UserData.mid,
+                        nickname = UserData.nickName
+                    },
+                    name = roomName.text,
+                    capacity = int.Parse(capacity.text),
+                    mode = _mode//여기서 앞모드는 클래스의 mode 뒤의 모드는 입력받는 mode
+                });
+            //요청은 잘보내지는데 서버가팅김
             Debug.Log("요청성공. 호스트 : " + UserData.mid +" 방이름 : " + roomName.text + " 인원 : "  + int.Parse(capacity.text) + " 모드 : " + int.Parse(mode.text));//확인용
         }
-        public void JoinRoom(RoomInfoResponse room)
+        public void JoinRoom(JoinResponse room)
         {
             if (room.code == 20000)
             {
                 JoinedRoom.roomId = room.roomId;
                 Debug.Log(room.roomId + " 입장");
+                //WebSocketManager.Instance.CancelToReceiveEvent("/rooms", "userlist");
                 SceneManager.LoadScene("Lobby");
             }
             else
