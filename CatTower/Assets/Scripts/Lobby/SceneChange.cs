@@ -13,6 +13,7 @@ namespace CatTower {
         }
         public void ChangeIngame()
         {
+
             SceneManager.LoadScene("Ingame");
         }
         public void ChangeRoomSelect()
