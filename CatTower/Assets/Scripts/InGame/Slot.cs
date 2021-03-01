@@ -104,26 +104,14 @@ namespace CatTower
                     {
                         if(GetComponent<CheckUsable>().savaBool == true)
                         {
-                            if (index < 8)
-                            {
-                                if (parentSlot.GetComponent<SlotManager>().arrSlotIndex[index] != 0)
-                                    return false;
-                                GetComponent<CheckUsable>().myScore -= 5;
-                                SetSlot(target);
-                            }
-                            
+
+                            if (parentSlot.GetComponent<SlotManager>().arrSlotIndex[index] != 0)
+                                return false;
+                            GetComponent<CheckUsable>().myScore -= 5;
+                            SetSlot(target);
+
                         }
-                        else
-                        {
-                            if (parentSlot.GetComponent<SlotManager>().arrSlotIndex[index - 8] == 1 && parentSlot.GetComponent<SlotManager>().arrSlotIndex[index - 7] == 1)
-                            {
-                                if (parentSlot.GetComponent<SlotManager>().arrSlotIndex[index] != 0)
-                                    return false;
-                                GetComponent<CheckUsable>().myScore -= 5;
-                                SetSlot(target);
-                            }
-                            else return false;
-                        }
+                        else return false;
                     }
                 }
                 return true;
@@ -136,7 +124,7 @@ namespace CatTower
             this.gameObject.GetComponent<Image>().sprite = card.catImage;
             parentSlot.GetComponent<SlotManager>().arrSlotBreed[index] = card.br;
             parentSlot.GetComponent<SlotManager>().arrSlotIndex[index] = 1;
-            //del = true;
+            Drag.del = true;
             myCards.GetComponent<CheckUsable>().ResetBr();
             myCards.GetComponent<CheckUsable>().CheckBr();
             canUse = false;
