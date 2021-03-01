@@ -8,7 +8,7 @@ namespace CatTower
 {
     public class WebSocketManager : SingletonGameObject<WebSocketManager>
     {
-        private string _url = "http://localhost:8005";
+        private string _url = "http://172.20.10.6:8005";
         //private Socket socket;
         private Dictionary<string, Socket> socketList = new Dictionary<string, Socket>();
 

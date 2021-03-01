@@ -25,15 +25,22 @@ namespace CatTower
         void Awake()
         {
             currentRound = 0;
-            currentOrder = -1;
+            currentOrder = 0;
             webSocket = WebSocketManager.Instance;
             webSocket.Connect("/ingame", () =>
             {
                 AlertRoundStart();
+                webSocket.ReceiveEvent<IngameStatus>("/ingame", "status", (response) =>
+                {
+                    gameState.InFinish(response);
+                });
                 webSocket.ReceiveEvent<IngameCardGive>("/ingame", "cardgive", ShowCardDeck);
                 webSocket.ReceiveEvent<IngamePlayerOrder>("/ingame", "playerorder", ShowInitialPlayersInfo);
+                /*WebSocketManager.ReceiveEvent<InGameEndRound>("/ingame", "endround", (response) =>
+                {
+                    FinishRound(response)
+                });*/
             });
-            StateChanged();//시작?
         }
         // Start is called before the first frame update
         void Start()
@@ -50,7 +57,7 @@ namespace CatTower
                 Ray2D ray = new Ray2D(wp, Vector2.zero);
                 RaycastHit2D[] hits = Physics2D.RaycastAll(ray.origin, ray.direction);
 
-                foreach(var h in hits)
+                foreach (var h in hits)
                 {
                     Debug.Log(h.collider.name);
                 }
@@ -100,7 +107,7 @@ namespace CatTower
             List<string> cards = new List<string>();
             cards = response.cards;
             GetComponent<CardDB>().GetCard(response.cards);
-            //TODO: response.cards 를 이용해서 화면에 카드 보여주는거 구현
+            //TODO: 초기화 함수(보드판, 본인카드, 본인카드 수)
         }
 
         public void ShowInitialPlayersInfo(IngamePlayerOrder response)
@@ -112,13 +119,15 @@ namespace CatTower
                 {
                     myOrder = player.order;
                 }
-                
                 //TODO: response 데이터를 기반으로 화면에 유저들 정보를 보여주고, 내 순서 또한 확인해서 myOrder에 값을 넣음
             }
+            StateChanged();
         }
 
         public void UpdateBoard(IngameStatus response)
         {
+            currentOrder = response.order;
+
             for (int i = 0; i < 57; i++)
             {
                 if (response.board[i] != "X" && Slot.GetComponent<SlotManager>().arrSlotIndex[i] == 0) // 확인되지 않은 것만 업데이트
@@ -155,10 +164,7 @@ namespace CatTower
                 }
                 GetComponent<Drag>().SetSprite();
             }
-            if (response.order == myOrder) 
-            {
 
-            }
             // TODO: response 정보를 토대로 게임판을 업데이트하고, 플레이어가 포기를 했는지 안했는지 또한 체크
             foreach (var player in response.player)
             {
@@ -170,54 +176,38 @@ namespace CatTower
                     }
                 }
             }
-            foreach (var player in response.player)
-            {
-                if (player.userInfo.mid == UserData.mid)
-                {
-                    if (player.giveup == false)
-                        StateChanged(); //본인이 포기상태가 아닐 시 계속 진행 (아직 모르겠음)
-                }
-            }
         }
 
         public void StateChanged()
         {
             return; //TODO: 추후 지울 것!
-            currentOrder = (currentOrder + 1) % playerOrder.Length;
             //모든유저 giveup -> 라운드 종료
             if (myOrder == currentOrder)
             {
-                if(GetComponent<CheckUsable>().usableCard == true)
-                {
-                    gameState = new PlayingGameState();
-                }
-                else
-                {
-                    foreach (var player in playerOrder) // 사용할 수 있는 카드가 없을 때 giveup
-                    {
-                        if (player.Item1.mid == UserData.mid)
-                        {
-                            webSocket.SendEvent<IngameGiveUp>("/ingame", "giveup",
-                            new IngameGiveUp
-                            {
-                                userInfo = player.Item1,
-                                roomId = "RKH6E"
-                            });
-                            break;
-                        }
-                        /*ex) WebSocketManager.ReceiveEvent<InGameEndRound>("/ingame", "endround", (response) =>
-                        {
-                            FinishRound(response)
-                        });
-                        */
-                    }
-                }
+                gameState = new PlayingGameState();
             }
             else
             {
                 gameState = new WaitGameState();
             }
             gameState.InStart();
+        }
+
+        public void FindMyGiveUp()
+        {
+            foreach (var player in playerOrder) // 사용할 수 있는 카드가 없을 때 giveup
+            {
+                if (player.Item1.mid == UserData.mid)
+                {
+                    webSocket.SendEvent<IngameGiveUp>("/ingame", "giveup",
+                    new IngameGiveUp
+                    {
+                        userInfo = player.Item1,
+                        roomId = "RKH6E"
+                    });
+                    break;
+                }
+            }
         }
 
         /*public void FinishRound(ingameEndRound response){
@@ -237,10 +227,5 @@ namespace CatTower
             }
             currentRound++;
         }*/
-         
-        public void MyTurnEnd()
-        {
-            gameState.InFinish();
-        }
     }
 }

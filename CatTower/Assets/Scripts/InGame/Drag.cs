@@ -23,7 +23,7 @@ namespace CatTower
         public GameObject checkObj;
         public bool dragAble;
 
-        public void SetSlot()//필요??
+        public void SetSlot()
         {
             myImage.sprite = mySprite;
             gameObj.GetComponent<SlotManager>().arrSlotBreed[index] = br;
@@ -179,7 +179,6 @@ namespace CatTower
                     //del = false;
                 }
                 GameController.Instance.throwInfo(brS, index);
-                GameController.Instance.MyTurnEnd();
                 br = Breed.none;                              
             }                    
         }

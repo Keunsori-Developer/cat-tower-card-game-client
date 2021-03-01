@@ -2882,7 +2882,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controllAble: 0
-  myCards: {fileID: 5222962578036433921, guid: db04e6917c90f9744a04ba9b43336345, type: 3}
+  myCards: {fileID: 1185709054}
   Slot: {fileID: 625681446}
 --- !u!224 &804702738 stripped
 RectTransform:
@@ -4259,6 +4259,7 @@ MonoBehaviour:
   ragBool: 0
   thrBool: 0
   oddBool: 0
+  savaBool: 0
   siamNum: 0
   russiaNum: 0
   mackNum: 0

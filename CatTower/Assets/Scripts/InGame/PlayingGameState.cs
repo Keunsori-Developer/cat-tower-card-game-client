@@ -6,17 +6,23 @@ namespace CatTower
 {
     public class PlayingGameState : IGameState
     {
-        
         public void InStart()
         {
-
-            GameController.Instance.controllAble = true;
+            if (GameController.Instance.myCards.GetComponent<CheckUsable>().usableCard == true)
+            {
+                GameController.Instance.controllAble = true;
+            }
+            else
+            {
+                GameController.Instance.FindMyGiveUp();
+            }
             // TODO: 포기를 했으면 InFinish() 호출
         }
 
-        public void InFinish()
+        public void InFinish(IngameStatus response)
         {
             GameController.Instance.controllAble = false;
+            GameController.Instance.UpdateBoard(response);
             GameController.Instance.StateChanged();
         }
     }
