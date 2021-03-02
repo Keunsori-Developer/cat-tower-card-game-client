@@ -265,7 +265,7 @@ GameObject:
   - component: {fileID: 63818884}
   - component: {fileID: 63818885}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Host_Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -414,7 +414,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2122953217}
+      - m_Target: {fileID: 1709874605}
         m_MethodName: ChangeIngame
         m_Mode: 1
         m_Arguments:
@@ -789,7 +789,7 @@ GameObject:
   - component: {fileID: 387220199}
   - component: {fileID: 387220200}
   m_Layer: 5
-  m_Name: Text (1)
+  m_Name: User1_text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1452,8 +1452,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 326, y: -143.69998}
-  m_SizeDelta: {x: 364.7, y: 150.3}
+  m_AnchoredPosition: {x: 216.9, y: -106.43}
+  m_SizeDelta: {x: 305, y: 123.45}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &966002248
 MonoBehaviour:
@@ -1756,8 +1756,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -323, y: -143.7}
-  m_SizeDelta: {x: 364.7, y: 150.3}
+  m_AnchoredPosition: {x: -204.5, y: -106.4}
+  m_SizeDelta: {x: 311, y: 123.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1097787302
 MonoBehaviour:
@@ -1890,7 +1890,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.00012207031, y: 121}
+  m_AnchoredPosition: {x: 0, y: 42}
   m_SizeDelta: {x: 0, y: -1688.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1624658809
@@ -1913,8 +1913,8 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 50c63bf42f42b954fb25cb044bf1fe40, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -1968,6 +1968,11 @@ MonoBehaviour:
   printUser4: {fileID: 1943853376}
   printUser5: {fileID: 1886850432}
   ExitPopup: {fileID: 1624658807}
+  roomLobby: 
+  hostLobby:
+    nickname: 
+    mid: 
+  StartButton: {fileID: 72460848}
 --- !u!4 &1709874606
 Transform:
   m_ObjectHideFlags: 0
@@ -1994,7 +1999,7 @@ GameObject:
   - component: {fileID: 1886850431}
   - component: {fileID: 1886850432}
   m_Layer: 5
-  m_Name: Text (5)
+  m_Name: User5_text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2073,7 +2078,7 @@ GameObject:
   - component: {fileID: 1943853375}
   - component: {fileID: 1943853376}
   m_Layer: 5
-  m_Name: Text (4)
+  m_Name: User4_text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2152,7 +2157,7 @@ GameObject:
   - component: {fileID: 2027409858}
   - component: {fileID: 2027409859}
   m_Layer: 5
-  m_Name: Text (2)
+  m_Name: User2_text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2310,7 +2315,7 @@ GameObject:
   - component: {fileID: 2082090474}
   - component: {fileID: 2082090475}
   m_Layer: 5
-  m_Name: Text (3)
+  m_Name: User3_text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
