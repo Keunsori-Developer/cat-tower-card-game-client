@@ -6,9 +6,14 @@ using UnityEngine.SceneManagement;
 
 namespace CatTower
 {
+    
     public class Get_UserInfo : MonoBehaviour
     {
-        List<Userinfo> userList = new List<Userinfo>();
+     List<Userinfo> userList = new List<Userinfo>();
+
+
+        List<UserInfo> userList = new List<UserInfo>();
+
         public Text printRoomName;
         public Text printUser0;
         public Text printUser1;
@@ -17,7 +22,8 @@ namespace CatTower
         public Text printUser4;
         public Text printUser5;
         public GameObject ExitPopup;
-
+        public string roomLobby;
+        public UserInfo hostLobby;
 
 
         void Start()
@@ -74,7 +80,8 @@ namespace CatTower
         public void ReadUserList(UserListResponse temp)
         {
             //0번째 인덱스 멤버는 방장
-
+            roomLobby = temp.roomId;
+            hostLobby = temp.host;
             int i = 0;
             foreach (Userinfo user in temp.user)
             {
@@ -115,7 +122,7 @@ namespace CatTower
                 {
                     printUser5.text = userList[k].nickname;
                 }
-                printRoomName.text = temp.roomid;
+                printRoomName.text = temp.roomId;
 
 
             }
@@ -125,49 +132,91 @@ namespace CatTower
 
         public class UserListResponse
         {
+
             public List<Userinfo> user;
             public string roomid;
             public Userinfo host;
+
+            public List<UserInfo> user;
+            public string roomId;
+            public UserInfo host;
+            
+
         }
+        
         public class ExitUserResponse
         {
+
             public Userinfo user;
             public string roomid;
+
+            public UserInfo userInfo;
+            public string roomId;
+
+
+        }
+        public class ReadyUserResponse
+        {
+            public UserInfo hostInfo;
+            public string roomId;
+
 
         }
         public class StartUserResponse
         {
+
             public Userinfo user;
             public string roomid;
+
+            
+            public string roomId;
+
 
         }
         public void Yes()
         {
-            // WebSocketManager.Instance.Connect("/rooms", () =>
-            {
-                //   WebSocketManager.Instance.SendEvent<ExitUserResponse>("/rooms", "exit",
+            WebSocketManager.Instance.Connect("/rooms", () =>
+           {
+               WebSocketManager.Instance.SendEvent<ExitUserResponse>("/rooms", "exit",
 
-                //     new ExitUserResponse
-                //   {
-                //     user = 
-                //});//Request parameters 전달해야됨.
-                
+                  new ExitUserResponse
+                  {
+
+                      roomId = roomLobby,
+                      userInfo = {
+                          nickname = UserData.nickName, mid = UserData.mid 
+                      }
+
+                  });
+
                 SceneManager.LoadScene("Title");
-            }
+           });
 
 
 
         }
+        
         public void ChangeIngame()
         {
-           // WebSocketManager.Instance.SendEvent<StartUserResponse>("/rooms", "exit",
+            WebSocketManager.Instance.SendEvent<ReadyUserResponse>("/rooms", "Ready",
 
-                // new StartUserResponse
-                 //{
-                   
-                   //   user = ;
-                 //});//Request parameters 전달해야됨.
-           
+                new ReadyUserResponse
+                {
+
+                    hostInfo = hostLobby,
+                    roomId = roomLobby
+
+                }) ;
+            WebSocketManager.Instance.SendEvent<StartUserResponse>("/rooms", "start",
+
+               new StartUserResponse
+               {
+
+
+                   roomId = roomLobby
+
+               });
+
             SceneManager.LoadScene("Ingame");
         }
 
