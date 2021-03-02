@@ -50,15 +50,7 @@ namespace CatTower
                 }
             }
         }
-        public void GetCard()
-        {
-            for (int i = 0; i < 5; i++)
-            {
-                GameObject go = Instantiate(cardPrefab, layoutGroup.transform);
-                go.GetComponent<MyCard>().SetCard(cardDBs[Random.Range(0, 7)]);
-                //go.transform.SetParent(parentObject.transform);
-            }
-        }
+
         void Awake()
         {
             cardDBs = new List<Card>()

@@ -97,7 +97,6 @@ namespace CatTower
                         mid = "GWCSE1622",
                         nickname = "김창렬"
                     }
-
                 });
         }
 
@@ -107,7 +106,12 @@ namespace CatTower
             List<string> cards = new List<string>();
             cards = response.cards;
             GetComponent<CardDB>().GetCard(response.cards);
-            //TODO: 초기화 함수(보드판, 본인카드, 본인카드 수)
+            while (myCards.transform.GetChild(0)) //없을 때 까지 삭제
+            {
+                Destroy(myCards.transform.GetChild(0));
+            }
+            Slot.GetComponent<SlotManager>().ResetSlot();
+            Slot.GetComponent<SlotManager>().ResetSprite();
         }
 
         public void ShowInitialPlayersInfo(IngamePlayerOrder response)

@@ -16,7 +16,6 @@ namespace CatTower
             {
                 GameController.Instance.FindMyGiveUp();
             }
-            // TODO: 포기를 했으면 InFinish() 호출
         }
 
         public void InFinish(IngameStatus response)
