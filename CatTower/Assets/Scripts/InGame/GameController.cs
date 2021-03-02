@@ -16,7 +16,7 @@ namespace CatTower
         private (UserInfo, bool)[] playerOrder; // Tuple 형식으로 첫번째에는 유저 정보를, 두번째에는 유저의 포기 여부를 저장
         private int myOrder;
         private IGameState gameState;
-
+        [SerializeField] private GameUIController uiController;
 
 
         /// <summary>
@@ -125,11 +125,14 @@ namespace CatTower
                 }
                 //TODO: response 데이터를 기반으로 화면에 유저들 정보를 보여주고, 내 순서 또한 확인해서 myOrder에 값을 넣음
             }
+            uiController.ShowInitialPlayerList(response.playerOrder);
             StateChanged();
         }
 
         public void UpdateBoard(IngameStatus response)
         {
+            uiController.UpdatePlayerInfo(response.player, response.order);
+            
             currentOrder = response.order;
 
             for (int i = 0; i < 57; i++)
@@ -184,7 +187,6 @@ namespace CatTower
 
         public void StateChanged()
         {
-            return; //TODO: 추후 지울 것!
             //모든유저 giveup -> 라운드 종료
             if (myOrder == currentOrder)
             {
