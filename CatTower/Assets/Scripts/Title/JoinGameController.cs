@@ -21,10 +21,9 @@ namespace CatTower
         [SerializeField] Button codeJoinButton = null;
         [SerializeField] Button exitCodeButton = null;
         [SerializeField] GameObject codeInputPanel = null;
+        [SerializeField] GameObject errorCanvas = null;
+        [SerializeField] Button exitError = null;
         List<RoomInfo> roomList = new List<RoomInfo>();
-
-        // RoomListResponse roomList = new RoomListResponse();
-        int _dummyNo;
 
         // Start is called before the first frame update
         void Start()
@@ -37,6 +36,7 @@ namespace CatTower
             codePanelButton.onClick.AddListener(OpenCodePanel);
             codeJoinButton.onClick.AddListener(JoinRoomByCode);
             exitCodeButton.onClick.AddListener(CloseCodePanel);
+            exitError.onClick.AddListener(ErrorClose);
             
         }
 
@@ -88,28 +88,26 @@ namespace CatTower
                 }
             }//기존에 생성된 프리팹들 삭제
             WebSocketManager.Instance.ReceiveEvent<RoomListResponse>("/rooms", "active", ReadRoomList);//잠시오픈
-            //HttpManager.Instance.Get<RoomListResponse>("/rooms/active", ReadRoomList);// 방정보 Get후 생성 (코루틴으로 불러오는거라 저 함수서 처리못하면 생성이안됨)
             WebSocketManager.Instance.SendEvent<RoomListRequest>("/rooms", "roomlist",(null));//요청
         }
-        public void Makedummy()
-        {
-            roomList.Add(new RoomInfo() { name = _dummyNo.ToString(), id = _dummyNo.ToString(), capacity = 4, joined = 3, });
-            Debug.Log("made dummy : " + _dummyNo);
-            _dummyNo++;
-        }//방목록 api받는거 아직 미완성이라 일단 실험용으로 만든거
         public void ReadRoomList(RoomListResponse temp) 
         {
             int i = 0;
+            if (ErrorDetect(temp.code) == false)
+            {
+                WebSocketManager.Instance.CancelToReceiveEvent("/rooms", "active");
+                return;
+            }
             foreach(RoomInfo room in temp.rooms)
             {
                 roomList.Add(new RoomInfo() { capacity = temp.rooms[i].capacity, mode = temp.rooms[i].mode, id = temp.rooms[i].id, joined = temp.rooms[i].joined, name = temp.rooms[i].name });
-                Debug.Log("RoomListAdded");
+                //Debug.Log("RoomListAdded");
                 i++;
             }
             for (i = 0; i < roomList.Count; i++)
             {
                 CreateRoomList(roomList[i]);
-                Debug.Log("ID : " + roomList[i].id + " 이름 : " + roomList[i].name + " " + roomList[i].joined + "/" + roomList[i].capacity);
+                //Debug.Log("ID : " + roomList[i].id + " 이름 : " + roomList[i].name + " " + roomList[i].joined + "/" + roomList[i].capacity);
             }//리스트 만드는거
             WebSocketManager.Instance.CancelToReceiveEvent("/rooms", "active");//다 받고 종료
         }
@@ -117,13 +115,6 @@ namespace CatTower
         public void JoinRoomByClick(GameObject room)
         {
             Debug.Log("클릭join요청 , roomid " + room.transform.Find("RoomId").GetComponentInChildren<Text>().text + " userinfo " + UserData.nickName + " id " + UserData.mid);
-            /* HttpManager.Instance.Post<JoinRequest, JoinResponse>("/rooms/join",
-            new JoinRequest
-            {
-                roomId = room.transform.Find("RoomId").GetComponentInChildren<Text>().text,
-                userInfo = { nickname = UserData.nickName, mid = UserData.mid }
-            }, JoinRoom) ;
-            */
             WebSocketManager.Instance.ReceiveEvent<JoinResponse>("/rooms","userlist",JoinRoom);
             WebSocketManager.Instance.SendEvent<JoinRequest>("/rooms", "join",
                 new JoinRequest
@@ -134,14 +125,13 @@ namespace CatTower
         }//버튼클릭으로 입장
         public void JoinRoomByCode()
         {
-            Debug.Log("코드join요청 , roomid " + roomCode.text + " Userinfo " + UserData.nickName + " id " + UserData.mid);
-            /*HttpManager.Instance.Post<JoinRequest, JoinResponse>("/rooms/join",
-            new JoinRequest
+            if (roomCode.text == "")
             {
-                roomId = roomCode.text.ToUpper(),
-                userInfo = { nickname = UserData.nickName, mid = UserData.mid }
-            }, JoinRoom); ;
-            */
+                joinWarnText.gameObject.SetActive(true);
+                return;
+            }
+            Debug.Log("코드join요청 , roomid " + roomCode.text + " Userinfo " + UserData.nickName + " id " + UserData.mid);
+            WebSocketManager.Instance.ReceiveEvent<JoinResponse>("/rooms", "userlist", JoinRoom);
             WebSocketManager.Instance.SendEvent<JoinRequest>("/rooms", "join",
                 new JoinRequest
                 {
@@ -151,7 +141,7 @@ namespace CatTower
         }//방 코드입력으로 입장
         public void JoinRoom(JoinResponse room)
         {
-            if (room.code == 20000)
+            if (ErrorDetect(room.code) == true)
             {
                 JoinedRoom.roomId = room.roomId;
                 Debug.Log(room.roomId + " 입장");
@@ -160,10 +150,53 @@ namespace CatTower
             }
             else
             {
-                if (joinWarnText.activeSelf == false)
-                    joinWarnText.SetActive(true);
-                Debug.Log("잘못된 요청");
+                CloseJoinPanel();
             }
+        }
+        public bool ErrorDetect(int code)
+        {
+            if (code == 20000)
+            {
+                return true;
+            }
+            else
+            {
+                if(code == 40000)
+                {
+                    ErrorMessage("Error 40000\n잘못된 요청입니다.");
+                }
+                else if(code == 40101)
+                {
+                    ErrorMessage("Error 40101\n해당 방정보가 존재하지 않습니다.");
+                }
+                else if (code == 40102)
+                {
+                    ErrorMessage("Error 40102\n인원이 가득 찼습니다.");
+                }
+                else if (code == 40103)
+                {
+                    ErrorMessage("Error 40102\n이미 방에 진입했습니다.");
+                }
+                else if (code == 50000)
+                {
+                    ErrorMessage("Error 50000\n서버에 문제가 발생했습니다.");
+                }
+                else
+                {
+                    ErrorMessage("Error " + code.ToString() + "\n알려지지 않은 에러");
+                }
+                return false;
+            }
+        }
+        public void ErrorMessage(string message)
+        {
+            errorCanvas.gameObject.SetActive(true);
+            errorCanvas.transform.Find("ErrorMessage").GetComponentInChildren<Text>().text = message;
+        }
+        public void ErrorClose()
+        {
+            errorCanvas.gameObject.SetActive(false);
+            
         }
     }
 }

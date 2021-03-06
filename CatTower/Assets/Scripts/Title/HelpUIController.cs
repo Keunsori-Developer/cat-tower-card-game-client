@@ -25,7 +25,6 @@ namespace CatTower
         int lastPage = 2;
         void Start()
         {
-            helpPanel.gameObject.SetActive(false);
             openPanel.onClick.AddListener(OpenHelpPage);
             goLeft.onClick.AddListener(PreviousPage);
             goRight.onClick.AddListener(NextPage);
