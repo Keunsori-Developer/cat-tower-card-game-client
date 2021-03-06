@@ -24,7 +24,7 @@ namespace CatTower
 
         void Start()
         {
-            //StartButton.SetActive(false);
+            StartButton.SetActive(false);
             //WebSocketManager.Instance.Connect("/rooms", () =>
             //{
             WebSocketManager.Instance.ReceiveEvent<UserListResponse>("/rooms", "userlist", ReadUserList);
@@ -120,7 +120,13 @@ namespace CatTower
 
 
             }
+            StartButton.SetActive(false);
+            if (hostLobby.mid == UserData.mid)
+            {
 
+                StartButton.SetActive(true);
+
+            }
         }
 
 
@@ -150,6 +156,11 @@ namespace CatTower
 
             
             public string roomId;
+
+        }
+        public void MoveToIngame(StartUserResponse temp) {
+            
+            SceneManager.LoadScene("Ingame");
 
         }
         public void Yes()
@@ -187,19 +198,9 @@ namespace CatTower
                     roomId = roomLobby
 
                 });
-            WebSocketManager.Instance.SendEvent<StartUserResponse>("/rooms", "start",
-
-               new StartUserResponse
-               {
-
-
-                   roomId = roomLobby
-
-               });
-
-            SceneManager.LoadScene("Ingame");
+            WebSocketManager.Instance.ReceiveEvent<StartUserResponse>("/rooms", "start", MoveToIngame);
         }
-        public void Update()
+        /*public void Update()
         {
             StartButton.SetActive(false);
             if (hostLobby.mid == UserData.mid) 
@@ -208,7 +209,7 @@ namespace CatTower
                 StartButton.SetActive(true);
 
             }
-        }
+        }*/
 
 
     }

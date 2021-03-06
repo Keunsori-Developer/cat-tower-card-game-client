@@ -28,13 +28,13 @@ namespace CatTower {
             ExitPopup.SetActive(true);
         }
 
-        public void No()
+        public void Exitpop_No()
         {
 
             ExitPopup.SetActive(false);
         }
 
-        public void Yes()
+        public void Exitpop_Yes()
         {
            
             SceneManager.LoadScene("Title");
