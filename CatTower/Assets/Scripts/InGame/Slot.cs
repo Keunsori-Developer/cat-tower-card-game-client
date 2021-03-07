@@ -48,7 +48,6 @@ namespace CatTower
                 }
                 else
                 {
-
                     if (target.br == Breed.ThreeColor)
                     {
                         if (index < 8)
@@ -101,8 +100,19 @@ namespace CatTower
                             }
                         }
                     }
+                    else
+                    {
+                        if(GetComponent<CheckUsable>().savaBool == true)
+                        {
 
+                            if (parentSlot.GetComponent<SlotManager>().arrSlotIndex[index] != 0)
+                                return false;
+                            GetComponent<CheckUsable>().myScore -= 5;
+                            SetSlot(target);
 
+                        }
+                        else return false;
+                    }
                 }
                 return true;
             }
@@ -114,7 +124,7 @@ namespace CatTower
             this.gameObject.GetComponent<Image>().sprite = card.catImage;
             parentSlot.GetComponent<SlotManager>().arrSlotBreed[index] = card.br;
             parentSlot.GetComponent<SlotManager>().arrSlotIndex[index] = 1;
-            //del = true;
+            Drag.del = true;
             myCards.GetComponent<CheckUsable>().ResetBr();
             myCards.GetComponent<CheckUsable>().CheckBr();
             canUse = false;

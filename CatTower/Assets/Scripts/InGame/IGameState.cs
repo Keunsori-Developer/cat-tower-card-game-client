@@ -3,6 +3,6 @@
     public interface IGameState
     {
         void InStart();
-        void InFinish();
+        void InFinish(IngameStatus response);
     }
 }

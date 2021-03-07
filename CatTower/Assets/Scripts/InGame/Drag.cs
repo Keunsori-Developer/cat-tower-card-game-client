@@ -8,8 +8,6 @@ namespace CatTower
 {
     public class Drag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
     {
-        private WebSocketManager webSocket;
-
         public static Vector2 defaultposition;
         public static Sprite mySprite;
         public static bool del = true;
@@ -103,6 +101,10 @@ namespace CatTower
             {
                 checkObj.GetComponent<CheckUsable>().thrNum--;
             }
+            if (myCard.card.br == Breed.Savanna)
+            {
+                checkObj.GetComponent<CheckUsable>().savaNum--;
+            }
         }
 
         public void OnBeginDrag(PointerEventData eventData)
@@ -177,7 +179,6 @@ namespace CatTower
                     //del = false;
                 }
                 GameController.Instance.throwInfo(brS, index);
-                GameController.Instance.MyTurnEnd();
                 br = Breed.none;                              
             }                    
         }

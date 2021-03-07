@@ -13,7 +13,6 @@ namespace CatTower
 
         public void GetCard(List<string> list)
         {
-            Debug.Log("zzz");
             for (int i = 0; i < list.Count; i++)
             {
                 GameObject go = Instantiate(cardPrefab, layoutGroup.transform);
@@ -51,15 +50,7 @@ namespace CatTower
                 }
             }
         }
-        public void GetCard()
-        {
-            for (int i = 0; i < 5; i++)
-            {
-                GameObject go = Instantiate(cardPrefab, layoutGroup.transform);
-                go.GetComponent<MyCard>().SetCard(cardDBs[Random.Range(0, 7)]);
-                //go.transform.SetParent(parentObject.transform);
-            }
-        }
+
         void Awake()
         {
             cardDBs = new List<Card>()
@@ -79,7 +70,6 @@ namespace CatTower
         {
             // TODO: 서버로부터 카드 정보 받았을 때 아래 코드 진행되도록 수정해야 함
             if (cardPrefab == null) cardPrefab = Resources.Load("Ingame/MyCard") as GameObject;
-            //GetCard();
         }
     }
 }
