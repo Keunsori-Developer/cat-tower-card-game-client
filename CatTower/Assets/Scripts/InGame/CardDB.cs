@@ -70,7 +70,6 @@ namespace CatTower
         {
             // TODO: 서버로부터 카드 정보 받았을 때 아래 코드 진행되도록 수정해야 함
             if (cardPrefab == null) cardPrefab = Resources.Load("Ingame/MyCard") as GameObject;
-            //GetCard();
         }
     }
 }

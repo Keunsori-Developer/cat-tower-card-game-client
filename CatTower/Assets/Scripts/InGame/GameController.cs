@@ -36,10 +36,10 @@ namespace CatTower
                 });
                 webSocket.ReceiveEvent<IngameCardGive>("/ingame", "cardgive", ShowCardDeck);
                 webSocket.ReceiveEvent<IngamePlayerOrder>("/ingame", "playerorder", ShowInitialPlayersInfo);
-                /*WebSocketManager.ReceiveEvent<InGameEndRound>("/ingame", "endround", (response) =>
+                webSocket.ReceiveEvent<IngameEndRound>("/ingame", "endround", (response) =>
                 {
-                    FinishRound(response)
-                });*/
+                    EndRound(response);
+                });
             });
         }
         // Start is called before the first frame update
@@ -216,7 +216,7 @@ namespace CatTower
             }
         }
 
-        /*public void FinishRound(ingameEndRound response){
+        public void EndRound(IngameEndRound response){
             foreach (var player in playerOrder)
             {
                 if (player.Item1.mid == UserData.mid)
@@ -232,6 +232,6 @@ namespace CatTower
                 }
             }
             currentRound++;
-        }*/
+        }
     }
 }
