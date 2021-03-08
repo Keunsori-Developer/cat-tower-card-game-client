@@ -14,7 +14,7 @@ namespace CatTower
             webSocket = WebSocketManager.Instance;
             webSocket.Connect("/rooms", () =>
             {
-
+                Debug.Log("connected");
             });
             
             
