@@ -30,6 +30,15 @@ namespace CatTower
         //     }
         // }
 
+        public static UserInfo GetUserInfo()
+        {
+            return new UserInfo()
+            {
+                mid = mid,
+                nickname = nickName
+            };
+        }
+
         private static string SetRandomMid()
         {
             System.Random rand = new System.Random();

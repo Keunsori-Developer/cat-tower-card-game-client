@@ -11,10 +11,12 @@ namespace CatTower
         // Start is called before the first frame update
         void Start()
         {
+            LoadingIndicator.Show();
             webSocket = WebSocketManager.Instance;
             webSocket.Connect("/rooms", () =>
             {
                 Debug.Log("connected");
+                LoadingIndicator.Hide();
             });
             
             
