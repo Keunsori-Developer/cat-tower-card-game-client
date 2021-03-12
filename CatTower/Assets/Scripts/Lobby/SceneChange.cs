@@ -11,10 +11,10 @@ namespace CatTower {
         {
             SceneManager.LoadScene("Lobby");
         }
-        public void ChangeIngame()
-        {
-            SceneManager.LoadScene("Ingame");
-        }
+        //public void ChangeIngame()
+        //{
+          //  SceneManager.LoadScene("Ingame");
+        //}
         public void ChangeRoomSelect()
         {
             SceneManager.LoadScene("Title");
@@ -28,13 +28,13 @@ namespace CatTower {
             ExitPopup.SetActive(true);
         }
 
-        public void No()
+        public void Exitpop_No()
         {
 
             ExitPopup.SetActive(false);
         }
 
-        public void Yes()
+        public void Exitpop_Yes()
         {
            
             SceneManager.LoadScene("Title");

@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 namespace CatTower
 {
+
     public class Get_UserInfo : MonoBehaviour
     {
         List<UserInfo> userList = new List<UserInfo>();
@@ -17,17 +18,19 @@ namespace CatTower
         public Text printUser4;
         public Text printUser5;
         public GameObject ExitPopup;
-
-
+        public string roomLobby;
+        public UserInfo hostLobby;
+        public GameObject StartButton;
 
         void Start()
         {
+            StartButton.SetActive(false);
             //WebSocketManager.Instance.Connect("/rooms", () =>
             //{
             WebSocketManager.Instance.ReceiveEvent<UserListResponse>("/rooms", "userlist", ReadUserList);
             //});
             //StartCoroutine(Wait_second());
-
+          
 
         }
         /*IEnumerator Wait_second()
@@ -35,7 +38,6 @@ namespace CatTower
             for (int i = 0; i < 6000; i++)//대기실은 최대 100분간 갱신됨
             {
                
-
                 for (int k = 0; k < userList.Count; k++)
                 {
                     if (k == 0)
@@ -64,17 +66,16 @@ namespace CatTower
                     }
                     printRoomName.text = UserListResponse.roomid;
                         
-
                 }
                 yield return new WaitForSeconds(1);
             }
-
         }*/
 
         public void ReadUserList(UserListResponse temp)
         {
             //0번째 인덱스 멤버는 방장
-
+            roomLobby = temp.roomId;
+            hostLobby = temp.host;
             int i = 0;
             foreach (UserInfo user in temp.user)
             {
@@ -93,6 +94,7 @@ namespace CatTower
                 if (k == 0)
                 {
                     printUser0.text = userList[k].nickname;//리스트 첫번째 멤버는 방장이 들어옴.
+
                 }
                 if (k == 1)
                 {
@@ -114,63 +116,101 @@ namespace CatTower
                 {
                     printUser5.text = userList[k].nickname;
                 }
-                printRoomName.text = temp.roomid;
+                printRoomName.text = temp.roomId;
 
 
             }
+            StartButton.SetActive(false);
+            if (hostLobby.mid == UserData.mid)
+            {
 
+                StartButton.SetActive(true);
+
+            }
         }
 
 
         public class UserListResponse
         {
+
             public List<UserInfo> user;
-            public string roomid;
+            public string roomId;
             public UserInfo host;
         }
+
         public class ExitUserResponse
         {
-            public UserInfo user;
-            public string roomid;
+
+            public UserInfo userInfo;
+            public string roomId;
+        }
+        public class ReadyUserResponse
+        {
+            public UserInfo hostInfo;
+            public string roomId;
+
 
         }
         public class StartUserResponse
         {
-            public UserInfo user;
-            public string roomid;
+
+            
+            public string roomId;
+
+        }
+        public void MoveToIngame(StartUserResponse temp) {
+            
+            SceneManager.LoadScene("Ingame");
 
         }
         public void Yes()
         {
-            // WebSocketManager.Instance.Connect("/rooms", () =>
-            {
-                //   WebSocketManager.Instance.SendEvent<ExitUserResponse>("/rooms", "exit",
+            //WebSocketManager.Instance.Connect("/rooms", () =>
+            //{
+                WebSocketManager.Instance.SendEvent<ExitUserResponse>("/rooms", "exit",
 
-                //     new ExitUserResponse
-                //   {
-                //     user = 
-                //});//Request parameters 전달해야됨.
-                
+                   new ExitUserResponse
+                   {
+
+                       roomId = roomLobby,
+                       userInfo = {
+                          nickname = UserData.nickName, mid = UserData.mid
+                       }
+
+                   });
+
                 SceneManager.LoadScene("Title");
-            }
+            //});
 
 
 
         }
+
         public void ChangeIngame()
         {
-           // WebSocketManager.Instance.SendEvent<StartUserResponse>("/rooms", "exit",
 
-                // new StartUserResponse
-                 //{
-                   
-                   //   user = ;
-                 //});//Request parameters 전달해야됨.
-           
-            SceneManager.LoadScene("Ingame");
+            WebSocketManager.Instance.SendEvent<ReadyUserResponse>("/rooms", "ready",
+
+                new ReadyUserResponse
+                {
+
+                    hostInfo = hostLobby,
+                    roomId = roomLobby
+
+                });
+            WebSocketManager.Instance.ReceiveEvent<StartUserResponse>("/rooms", "start", MoveToIngame);
         }
+        /*public void Update()
+        {
+            StartButton.SetActive(false);
+            if (hostLobby.mid == UserData.mid) 
+            {
+
+                StartButton.SetActive(true);
+
+            }
+        }*/
 
 
     }
 }
-
