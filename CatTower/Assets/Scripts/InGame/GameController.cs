@@ -101,14 +101,17 @@ namespace CatTower
 
         public void ShowCardDeck(IngameCardGive response)
         {
+            var layout = myCards.transform.Find("Layout");
+            for (int i = 0; i< layout.childCount; i++)
+            {
+                Destroy(layout.GetChild(i));
+            }
+            
             Debug.Log(response.cards);
             List<string> cards = new List<string>();
             cards = response.cards;
-            GetComponent<CardDB>().GetCard(response.cards);
-            while (myCards.transform.GetChild(0)) //없을 때 까지 삭제
-            {
-                Destroy(myCards.transform.GetChild(0));
-            }
+            myCards.GetComponent<CardDB>().GetCard(response.cards);
+            
             Slot.GetComponent<SlotManager>().ResetSlot();
             Slot.GetComponent<SlotManager>().ResetSprite();
         }
