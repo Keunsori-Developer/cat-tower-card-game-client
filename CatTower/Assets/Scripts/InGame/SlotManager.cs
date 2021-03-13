@@ -22,6 +22,11 @@ namespace CatTower
         public void ResetSprite()
         {
             for (int i = 0; i < 8; i++) {
+                this.transform.GetChild(7).transform.GetChild(i).GetComponent<Image>().sprite = backGround;
+                this.transform.GetChild(7).transform.GetChild(i).GetComponent<Slot>().myBr = Breed.none;
+            }
+            for (int i = 0; i < 7; i++)
+            {
                 this.transform.GetChild(6).transform.GetChild(i).GetComponent<Image>().sprite = backGround;
                 this.transform.GetChild(6).transform.GetChild(i).GetComponent<Slot>().myBr = Breed.none;
             }
