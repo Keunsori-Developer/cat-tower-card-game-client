@@ -104,9 +104,9 @@ namespace CatTower
             var layout = myCards.transform.Find("Layout");
             for (int i = 0; i< layout.childCount; i++)
             {
-                Destroy(layout.GetChild(i));
+                Destroy(layout.GetChild(i).gameObject);
             }
-            
+
             Debug.Log(response.cards);
             List<string> cards = new List<string>();
             cards = response.cards;
