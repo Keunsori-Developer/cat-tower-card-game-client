@@ -22,18 +22,18 @@ namespace CatTower
         public void ResetSprite()
         {
             for (int i = 0; i < 8; i++) {
-                this.transform.GetChild(0).transform.GetChild(i).GetComponent<Image>().sprite = backGround;
-                this.transform.GetChild(0).transform.GetChild(i).GetComponent<Slot>().myBr = Breed.none;
+                this.transform.GetChild(6).transform.GetChild(i).GetComponent<Image>().sprite = backGround;
+                this.transform.GetChild(6).transform.GetChild(i).GetComponent<Slot>().myBr = Breed.none;
             }
             for (int i = 0; i < 6; i++)
             {
-                this.transform.GetChild(1).transform.GetChild(i).GetComponent<Image>().sprite = backGround;
-                this.transform.GetChild(1).transform.GetChild(i).GetComponent<Slot>().myBr = Breed.none;
+                this.transform.GetChild(5).transform.GetChild(i).GetComponent<Image>().sprite = backGround;
+                this.transform.GetChild(5).transform.GetChild(i).GetComponent<Slot>().myBr = Breed.none;
             }
             for (int i = 0; i < 5; i++)
             {
-                this.transform.GetChild(2).transform.GetChild(i).GetComponent<Image>().sprite = backGround;
-                this.transform.GetChild(2).transform.GetChild(i).GetComponent<Slot>().myBr = Breed.none;
+                this.transform.GetChild(4).transform.GetChild(i).GetComponent<Image>().sprite = backGround;
+                this.transform.GetChild(4).transform.GetChild(i).GetComponent<Slot>().myBr = Breed.none;
             }
             for (int i = 0; i < 4; i++)
             {
@@ -42,16 +42,16 @@ namespace CatTower
             }
             for (int i = 0; i < 3; i++)
             {
-                this.transform.GetChild(4).transform.GetChild(i).GetComponent<Image>().sprite = backGround;
-                this.transform.GetChild(4).transform.GetChild(i).GetComponent<Slot>().myBr = Breed.none;
+                this.transform.GetChild(2).transform.GetChild(i).GetComponent<Image>().sprite = backGround;
+                this.transform.GetChild(2).transform.GetChild(i).GetComponent<Slot>().myBr = Breed.none;
             }
             for (int i = 0; i < 2; i++)
             {
-                this.transform.GetChild(5).transform.GetChild(i).GetComponent<Image>().sprite = backGround;
-                this.transform.GetChild(5).transform.GetChild(i).GetComponent<Slot>().myBr = Breed.none;
+                this.transform.GetChild(1).transform.GetChild(i).GetComponent<Image>().sprite = backGround;
+                this.transform.GetChild(1).transform.GetChild(i).GetComponent<Slot>().myBr = Breed.none;
             }
-            this.transform.GetChild(6).transform.GetChild(0).GetComponent<Image>().sprite = backGround;
-            this.transform.GetChild(6).transform.GetChild(0).GetComponent<Slot>().myBr = Breed.none;
+            this.transform.GetChild(0).transform.GetChild(0).GetComponent<Image>().sprite = backGround;
+            this.transform.GetChild(0).transform.GetChild(0).GetComponent<Slot>().myBr = Breed.none;
 
         }
         void Start()
