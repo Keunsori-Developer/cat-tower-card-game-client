@@ -20,7 +20,7 @@ namespace CatTower
         public bool Connect(string _namespace, Action connectedAction = null)
         {
             Socket socket = Socket.Connect(_url + _namespace);
-            socketList.Add(_namespace, socket);
+            if (!socketList.ContainsKey(_namespace)) socketList.Add(_namespace, socket);
             if (connectedAction != null)
             {
                 socket.On(SystemEvents.connect, connectedAction);
