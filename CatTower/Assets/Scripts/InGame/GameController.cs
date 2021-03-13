@@ -76,7 +76,7 @@ namespace CatTower
                     webSocket.SendEvent<IngameThrow>("/ingame", "throw",
                     new IngameThrow
                     {
-                        roomId = "RKH6E", // TODO: 추후 민호가 구현한거에서 받아와야함
+                        roomId = JoinedRoom.roomId,
                         user = player.Item1,
                         card = myCardinfo
                     });
@@ -89,8 +89,7 @@ namespace CatTower
             webSocket.SendEvent<IngameStart>("/ingame", "start",
                 new IngameStart
                 {
-                    //RKH6E {"mid" : "GWCSE1622", "nickname" : "김창렬"}
-                    roomId = JoinedRoom.roomId, // TODO: 추후 민호가 구현한거에서 받아와야함
+                    roomId = JoinedRoom.roomId,
                     round = currentRound,
                     user = new UserInfo
                     {
