@@ -21,13 +21,14 @@ namespace CatTower
         {
             ShowInitialLobbyUserList();
             StartButton.GetComponent<Button>().onClick.AddListener(ChangeIngame);
-            printRoomName.text = JoinedRoom.roomId;
             WebSocketManager.Instance.ReceiveEvent<UserListResponse>("/rooms", "userlist", ReadUserList);
+            WebSocketManager.Instance.ReceiveEvent<StartGameResponse>("/rooms", "start", MoveToIngame);
             exitButton.onClick.AddListener(() => { exitPopup.SetActive(true); });
         }
 
         void ShowInitialLobbyUserList()
         {
+            printRoomName.text = JoinedRoom.roomId;
             for (int i = 0; i < printUser.Length; i++)
             {
                 printUser[i].text = "";
@@ -103,11 +104,9 @@ namespace CatTower
                 new ReadyByHostRequest
                 {
                     hostInfo = UserData.GetUserInfo(),
-                    roomId = JoinedRoom.roomId
+                    roomId = roomId
                 }
             );
-            
-            WebSocketManager.Instance.ReceiveEvent<StartGameResponse>("/rooms", "start", MoveToIngame);
         }
     }
 }
