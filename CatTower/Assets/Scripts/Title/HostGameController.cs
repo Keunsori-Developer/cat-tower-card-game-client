@@ -112,6 +112,8 @@ namespace CatTower
             if (room.code == 20000)
             {
                 JoinedRoom.roomId = room.roomId;
+                JoinedRoom.joinedUserList = room.userList;
+                JoinedRoom.host = room.host;
                 Debug.Log(room.roomId + " 입장");
                 //WebSocketManager.Instance.CancelToReceiveEvent("/rooms", "userlist");
                 SceneManager.LoadScene("Lobby");

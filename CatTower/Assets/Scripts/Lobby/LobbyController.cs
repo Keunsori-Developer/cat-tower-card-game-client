@@ -45,6 +45,7 @@ namespace CatTower
 
             if (JoinedRoom.host.mid == UserData.mid)
             {
+                Debug.Log("방장임");
                 StartButton.SetActive(true);
             }
 
@@ -71,6 +72,7 @@ namespace CatTower
 
             if (response.host.mid == UserData.mid)
             {
+                Debug.Log("방장임");
                 StartButton.SetActive(true);
             }
         }
