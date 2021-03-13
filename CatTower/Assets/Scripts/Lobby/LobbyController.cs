@@ -24,6 +24,32 @@ namespace CatTower
             exitButton.onClick.AddListener(() => { exitPopup.SetActive(true); });
         }
 
+        void ShowInitialLobbyUserList()
+        {
+            for (int i = 0; i < printUser.Length; i++)
+            {
+                printUser[i].text = "";
+            }
+
+            var userlist = JoinedRoom.joinedUserList;
+            hostInfo = JoinedRoom.host;
+
+            for (int i = 0; i < userlist.Count; i++)
+            {
+                printUser[i].text = userlist[i].nickname + " (" + userlist[i].mid + ")";
+                if (userlist[i].mid == JoinedRoom.host.mid) printUser[i].color = Color.blue;
+            }
+
+            StartButton.SetActive(false);
+
+            if (JoinedRoom.host.mid == UserData.mid)
+            {
+                StartButton.SetActive(true);
+            }
+
+            JoinedRoom.ClearAllData();
+        }
+
         public void ReadUserList(UserListResponse response)
         {
             for (int i = 0; i < printUser.Length; i++)

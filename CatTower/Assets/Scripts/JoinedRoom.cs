@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using System.Collections.Generic;
 
 namespace CatTower
 {
@@ -14,6 +15,16 @@ namespace CatTower
             {
                 PlayerPrefs.SetString(_roomId, value);
             }
+        }
+
+        public static List<UserInfo> joinedUserList = new List<UserInfo>();
+        public static UserInfo host;
+
+        public static void ClearAllData()
+        {
+            roomId = "";
+            joinedUserList = new List<UserInfo>();
+            host = new UserInfo();
         }
     }
     

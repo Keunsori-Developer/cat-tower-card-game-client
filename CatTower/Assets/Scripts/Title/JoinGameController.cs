@@ -124,6 +124,7 @@ namespace CatTower
                 userInfo = { nickname = UserData.nickName, mid = UserData.mid }
             }, JoinRoom) ;
             */
+            LoadingIndicator.Show();
             WebSocketManager.Instance.ReceiveEvent<JoinResponse>("/rooms","userlist",JoinRoom);
             WebSocketManager.Instance.SendEvent<JoinRequest>("/rooms", "join",
                 new JoinRequest
@@ -151,11 +152,14 @@ namespace CatTower
         }//방 코드입력으로 입장
         public void JoinRoom(JoinResponse room)
         {
+            LoadingIndicator.Hide();
             if (room.code == 20000)
             {
                 JoinedRoom.roomId = room.roomId;
+                JoinedRoom.joinedUserList = room.userList;
+                JoinedRoom.host = room.host;
                 Debug.Log(room.roomId + " 입장");
-                //WebSocketManager.Instance.CancelToReceiveEvent("/rooms", "userlist");
+                WebSocketManager.Instance.CancelToReceiveEvent("/rooms", "userlist");
                 SceneManager.LoadScene("Lobby");
             }
             else
