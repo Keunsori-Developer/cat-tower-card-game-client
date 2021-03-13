@@ -15,6 +15,7 @@ namespace CatTower
         public Button exitButton;
         public GameObject exitPopup;
         private UserInfo hostInfo;
+        private string roomId;
 
         void Start()
         {
@@ -46,12 +47,13 @@ namespace CatTower
                 Debug.Log("방장이 아님");
                 StartButton.gameObject.SetActive(false);
             }
-
+            roomId = JoinedRoom.roomId;
             JoinedRoom.ClearAllData();
         }
 
         public void ReadUserList(UserListResponse response)
         {
+            Debug.Log("userlist 이벤트 도착!!!!!!!!!!!!!!!");
             for (int i = 0; i < printUser.Length; i++)
             {
                 printUser[i].text = "";
