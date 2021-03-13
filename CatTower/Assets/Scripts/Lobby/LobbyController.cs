@@ -19,7 +19,7 @@ namespace CatTower
         void Start()
         {
             ShowInitialLobbyUserList();
-            StartButton.SetActive(false);
+            StartButton.gameObject.SetActive(false);
             printRoomName.text = JoinedRoom.roomId;
             WebSocketManager.Instance.ReceiveEvent<UserListResponse>("/rooms", "userlist", ReadUserList);
             exitButton.onClick.AddListener(() => { exitPopup.SetActive(true); });
@@ -41,12 +41,12 @@ namespace CatTower
                 if (userlist[i].mid == JoinedRoom.host.mid) printUser[i].color = Color.blue;
             }
 
-            StartButton.SetActive(false);
+            StartButton.gameObject.SetActive(false);
 
             if (JoinedRoom.host.mid == UserData.mid)
             {
                 Debug.Log("방장임");
-                StartButton.SetActive(true);
+                StartButton.gameObject.SetActive(true);
             }
 
             JoinedRoom.ClearAllData();
@@ -79,6 +79,7 @@ namespace CatTower
 
         public void MoveToIngame(StartGameResponse temp)
         {
+            LoadingIndicator.Hide();
             SceneManager.LoadScene("Ingame");
         }
 
@@ -98,7 +99,7 @@ namespace CatTower
         public void ChangeIngame()
         {
             if(UserData.mid != hostInfo.mid) return;
-
+            LoadingIndicator.Show();
             WebSocketManager.Instance.SendEvent<ReadyByHostRequest>("/rooms", "ready",
                 new ReadyByHostRequest
                 {

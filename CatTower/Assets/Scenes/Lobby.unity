@@ -1581,8 +1581,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d5fd43472b683a4ea322883332a4a21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  yesButton: {fileID: 0}
-  noButton: {fileID: 0}
+  yesButton: {fileID: 1097787302}
+  noButton: {fileID: 966002248}
 --- !u!1 &919466105
 GameObject:
   m_ObjectHideFlags: 0
