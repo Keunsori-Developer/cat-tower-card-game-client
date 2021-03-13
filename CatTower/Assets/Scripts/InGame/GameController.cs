@@ -90,12 +90,12 @@ namespace CatTower
                 new IngameStart
                 {
                     //RKH6E {"mid" : "GWCSE1622", "nickname" : "김창렬"}
-                    roomId = "RKH6E", // TODO: 추후 민호가 구현한거에서 받아와야함
+                    roomId = JoinedRoom.roomId, // TODO: 추후 민호가 구현한거에서 받아와야함
                     round = currentRound,
                     user = new UserInfo
                     {
-                        mid = "GWCSE1622",
-                        nickname = "김창렬"
+                        mid = UserData.mid,
+                        nickname = UserData.nickName
                     }
                 });
         }
@@ -209,7 +209,7 @@ namespace CatTower
                     new IngameGiveUp
                     {
                         userInfo = player.Item1,
-                        roomId = "RKH6E"
+                        roomId = JoinedRoom.roomId
                     });
                     break;
                 }
@@ -224,7 +224,7 @@ namespace CatTower
                     webSocket.SendEvent<IngameFinish>("/ingame", "finish",
                     new IngameFinish
                     {
-                        roomId = "RKH6E",
+                        roomId = JoinedRoom.roomId,
                         user = player.Item1,
                         round = currentRound,
                         leftCard = GetComponent<CheckUsable>().myScore

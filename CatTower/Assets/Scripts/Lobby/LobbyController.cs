@@ -49,7 +49,6 @@ namespace CatTower
                 StartButton.gameObject.SetActive(false);
             }
             roomId = JoinedRoom.roomId;
-            JoinedRoom.ClearAllData();
         }
 
         public void ReadUserList(UserListResponse response)
