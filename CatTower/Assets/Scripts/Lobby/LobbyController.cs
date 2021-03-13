@@ -18,6 +18,7 @@ namespace CatTower
 
         void Start()
         {
+            ShowInitialLobbyUserList();
             StartButton.SetActive(false);
             printRoomName.text = JoinedRoom.roomId;
             WebSocketManager.Instance.ReceiveEvent<UserListResponse>("/rooms", "userlist", ReadUserList);
