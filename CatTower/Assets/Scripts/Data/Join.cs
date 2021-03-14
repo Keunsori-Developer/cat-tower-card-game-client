@@ -16,6 +16,7 @@ namespace CatTower
     public class JoinResponse : BaseResponse
     {
         public string roomId;
+        public string roomName;
         public UserInfo host;
         public List<UserInfo> userList;
     }

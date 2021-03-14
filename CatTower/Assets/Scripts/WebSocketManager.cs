@@ -8,7 +8,16 @@ namespace CatTower
 {
     public class WebSocketManager : SingletonGameObject<WebSocketManager>
     {
-        private string _url = "http://cat-tower-game.herokuapp.com";
+        private bool localTest = false;
+        private string _url
+        {
+            get
+            {
+                if (localTest) return "http://localhost:8005";
+                else return "http://cat-tower-game.herokuapp.com";
+            }
+        }
+
         //private Socket socket;
         private Dictionary<string, Socket> socketList = new Dictionary<string, Socket>();
 
@@ -82,7 +91,6 @@ namespace CatTower
             {
                 Debug.Log("response data:\n" + response);
                 var change = response.Substring(1, response.Length - 2).Replace("\\", "");
-                Debug.Log(change);
                 TResponse responseObject = JsonUtility.FromJson<TResponse>(change);
                 if (responseHandler != null) responseHandler(responseObject);
             });

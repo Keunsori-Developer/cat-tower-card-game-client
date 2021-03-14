@@ -28,7 +28,7 @@ namespace CatTower
 
         void ShowInitialLobbyUserList()
         {
-            printRoomName.text = JoinedRoom.roomId;
+            printRoomName.text = JoinedRoom.roomName;
             for (int i = 0; i < printUser.Length; i++)
             {
                 printUser[i].text = "";

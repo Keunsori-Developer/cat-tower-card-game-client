@@ -112,6 +112,7 @@ namespace CatTower
             if (room.code == 20000)
             {
                 JoinedRoom.roomId = room.roomId;
+                JoinedRoom.roomName = room.roomName;
                 JoinedRoom.joinedUserList = room.userList;
                 JoinedRoom.host = room.host;
                 Debug.Log(room.roomId + " 입장");

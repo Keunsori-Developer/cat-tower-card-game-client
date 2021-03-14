@@ -6,6 +6,7 @@ namespace CatTower
     {
         public List<UserInfo> userList;
         public string roomId;
+        public string roomName;
         public UserInfo host;
     }
 

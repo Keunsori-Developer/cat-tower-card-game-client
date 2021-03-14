@@ -12,7 +12,6 @@ namespace CatTower
         public static void Show()
         {
             if (indicatorPrefab == null) indicatorPrefab = Resources.Load("LoadingIndicator") as GameObject;
-            Debug.Log(indicatorPrefab == null);
             if (loadingGameObject == null)
                 loadingGameObject = Instantiate(indicatorPrefab);
         }
