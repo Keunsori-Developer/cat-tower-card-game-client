@@ -18,7 +18,6 @@ namespace CatTower
     // Start is called before the first frame update
         void Start()
         {
-            warnText.gameObject.SetActive(false);
             changeNickname.onClick.AddListener(NicknameChangeOpen);
             okButton.onClick.AddListener(OkButtonClicked);
             nicknameDisplay.GetComponent<Text>().text = UserData.nickName;
@@ -34,7 +33,7 @@ namespace CatTower
             //if (nicknamePanel.activeSelf == true)
             //    nicknamePanel.gameObject.SetActive(false);
             //else
-            
+            warnText.gameObject.SetActive(false);
             nicknamePanel.gameObject.SetActive(true);
             nicknameCanvas.gameObject.SetActive(true);
         }

@@ -17,8 +17,6 @@ namespace CatTower
         [SerializeField] GameObject helpPage3 = null;
         [SerializeField] Button openPanel = null;
         [SerializeField] Button closePanel = null;
-        [SerializeField] Button goLeft = null;
-        [SerializeField] Button goRight = null;
         // Start is called before the first frame update
         int page;
         int firstPage = 0;
@@ -26,8 +24,8 @@ namespace CatTower
         void Start()
         {
             openPanel.onClick.AddListener(OpenHelpPage);
-            goLeft.onClick.AddListener(PreviousPage);
-            goRight.onClick.AddListener(NextPage);
+            previousPage.onClick.AddListener(PreviousPage);
+            nextPage.onClick.AddListener(NextPage);
             closePanel.onClick.AddListener(CloseHelpPage);
         }
 
