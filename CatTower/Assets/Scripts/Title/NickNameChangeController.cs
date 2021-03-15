@@ -8,6 +8,7 @@ namespace CatTower
     public class NickNameChangeController : MonoBehaviour
     {
         [SerializeField] NickNameController controller = null;
+        [SerializeField] Canvas nicknameCanvas = null;
         [SerializeField] GameObject nicknamePanel = null;
         [SerializeField] Button okButton = null;
         [SerializeField] InputField inputField = null;
@@ -30,10 +31,12 @@ namespace CatTower
         }
         public void NicknameChangeOpen()
         {
-            if (nicknamePanel.activeSelf == true)
-                nicknamePanel.gameObject.SetActive(false);
-            else
-                nicknamePanel.gameObject.SetActive(true);
+            //if (nicknamePanel.activeSelf == true)
+            //    nicknamePanel.gameObject.SetActive(false);
+            //else
+            
+            nicknamePanel.gameObject.SetActive(true);
+            nicknameCanvas.gameObject.SetActive(true);
         }
         private void OkButtonClicked()
         {
@@ -44,6 +47,8 @@ namespace CatTower
             }
             controller.UpdateUserInfo(inputField.text);
             nicknameDisplay.GetComponent<Text>().text = UserData.nickName;
+            nicknamePanel.gameObject.SetActive(false);
+            nicknameCanvas.gameObject.SetActive(false);
         }
     }
 }
