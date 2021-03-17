@@ -21,7 +21,7 @@ namespace CatTower
     [Serializable]
     public class IngamePlayerOrder
     {
-        public List<PlayerOrder> playerOrder;
+        public List<PlayerOrder> player;
     }
 
     [Serializable]

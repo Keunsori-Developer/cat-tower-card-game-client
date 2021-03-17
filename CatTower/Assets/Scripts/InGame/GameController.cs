@@ -59,7 +59,6 @@ namespace CatTower
             CardInfo myCardinfo = new CardInfo();
             myCardinfo.breed = s;
             myCardinfo.index = i;
-            Debug.Log("END!!!!!");
             foreach (var player in playerOrder)
             {
                 if (player.Item1.mid == UserData.mid)
@@ -99,8 +98,6 @@ namespace CatTower
             }
 
             Debug.Log(response.cards);
-            List<string> cards = new List<string>();
-            cards = response.cards;
             myCards.GetComponent<CardDB>().GetCard(response.cards);
             
             Slot.GetComponent<SlotManager>().ResetSlot();
@@ -109,19 +106,18 @@ namespace CatTower
 
         public void ShowInitialPlayersInfo(IngamePlayerOrder response)
         {
-            Debug.Log("userdatat mid" + UserData.mid);
-            playerOrder = new (UserInfo, bool)[response.playerOrder.Count];
-            for (int i = 0; i < response.playerOrder.Count; i++)
+            for (int i = 0; i < response.player.Count; i++)
             {
-                if (response.playerOrder[i].userInfo.mid == UserData.mid)
+                if (response.player[i].userInfo.mid == UserData.mid)
                 {
-                    myOrder = response.playerOrder[i].order;
+                    myOrder = response.player[i].order;
                 }
             }
-            Debug.Log("myorder:" + myOrder);
-            uiController.ShowInitialPlayerList(response.playerOrder);
+            uiController.ShowInitialPlayerList(response.player);
             StateChanged();
         }
+
+
 
         public void UpdateBoard(IngameStatus response)
         {
