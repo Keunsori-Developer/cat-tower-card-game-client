@@ -111,12 +111,11 @@ namespace CatTower
         {
             Debug.Log("userdatat mid" + UserData.mid);
             playerOrder = new (UserInfo, bool)[response.playerOrder.Count];
-            foreach (var player in response.playerOrder)
+            for (int i = 0; i < response.playerOrder.Count; i++)
             {
-                Debug.Log(player + player.userInfo.mid);
-                if (player.userInfo.mid == UserData.mid)
+                if (response.playerOrder[i].userInfo.mid == UserData.mid)
                 {
-                    myOrder = player.order;
+                    myOrder = response.playerOrder[i].order;
                 }
             }
             Debug.Log("myorder:" + myOrder);
