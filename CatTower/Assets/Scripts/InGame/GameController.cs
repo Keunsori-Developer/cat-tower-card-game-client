@@ -59,11 +59,11 @@ namespace CatTower
             CardInfo myCardinfo = new CardInfo();
             myCardinfo.breed = s;
             myCardinfo.index = i;
+            Debug.Log("END!!!!!");
             foreach (var player in playerOrder)
             {
                 if (player.Item1.mid == UserData.mid)
-                {
-                    Debug.Log("END!!!!!");
+                {                  
                     webSocket.SendEvent<IngameThrow>("/ingame", "throw",
                     new IngameThrow
                     {
@@ -109,14 +109,15 @@ namespace CatTower
 
         public void ShowInitialPlayersInfo(IngamePlayerOrder response)
         {
+            Debug.Log("userdatat mid" + UserData.mid);
             playerOrder = new (UserInfo, bool)[response.playerOrder.Count];
             foreach (var player in response.playerOrder)
             {
+                Debug.Log(player + player.userInfo.mid);
                 if (player.userInfo.mid == UserData.mid)
                 {
                     myOrder = player.order;
                 }
-                //TODO: response 데이터를 기반으로 화면에 유저들 정보를 보여주고, 내 순서 또한 확인해서 myOrder에 값을 넣음
             }
             Debug.Log("myorder:" + myOrder);
             uiController.ShowInitialPlayerList(response.playerOrder);
