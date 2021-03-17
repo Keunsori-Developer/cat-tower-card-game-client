@@ -176,6 +176,7 @@ namespace CatTower
   
         void Start()
         {
+            usableCard = true;
             SumScore();
             CheckBr(); //본인 차례 시작할 때  한번 호출
         }

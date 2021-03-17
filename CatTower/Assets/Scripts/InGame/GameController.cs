@@ -117,6 +117,7 @@ namespace CatTower
                 }
                 //TODO: response 데이터를 기반으로 화면에 유저들 정보를 보여주고, 내 순서 또한 확인해서 myOrder에 값을 넣음
             }
+            Debug.Log("myorder:" + myOrder);
             uiController.ShowInitialPlayerList(response.playerOrder);
             StateChanged();
         }
