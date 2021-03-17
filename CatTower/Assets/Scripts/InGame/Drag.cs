@@ -178,7 +178,6 @@ namespace CatTower
                     checkObj.GetComponent<CheckUsable>().CheckCard();
                     checkObj.GetComponent<CheckUsable>().SumScore();
                     Destroy(this.gameObject);
-                    //del = false;
                 }
 
                 GameController.Instance.throwInfo(brS, index);

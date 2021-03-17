@@ -63,6 +63,7 @@ namespace CatTower
             {
                 if (player.Item1.mid == UserData.mid)
                 {
+                    Debug.Log("END!!!!!");
                     webSocket.SendEvent<IngameThrow>("/ingame", "throw",
                     new IngameThrow
                     {
