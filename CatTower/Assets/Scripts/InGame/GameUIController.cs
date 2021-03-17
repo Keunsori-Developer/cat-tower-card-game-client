@@ -18,7 +18,6 @@ namespace CatTower
             playerInfo = new SortedList<string, GameObject>();
         }
 
-        // Start is called before the first frame update
         void Start()
         {
             //TODO: 이거는 테스트하려고 추가한거니까 제거 필요
@@ -29,12 +28,6 @@ namespace CatTower
             });
             HighlightCurrentPlayer(new UserInfo { mid = "ASDFg", nickname = "승곰이" });
             // 여기까지 제거
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
         }
 
         /// <summary>

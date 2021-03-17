@@ -47,16 +47,10 @@ namespace CatTower {
                 gameObj.GetComponent<CheckUsable>().thrNum++;
             }
         }
-        // Start is called before the first frame update
+
         void Start()
         {
             FindObj();
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
         }
     }
 }

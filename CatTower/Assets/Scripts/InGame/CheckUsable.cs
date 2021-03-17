@@ -25,7 +25,8 @@ namespace CatTower
         public int oddNum = 0;
         public int savaNum = 0;
         public int myScore = 0;
-        public int roundScore; //확인 후 수정
+        public int roundScore;
+
         public void CheckCard() //사용가능 카드를 확인
         {
             if (!((siamBool == true && siamNum > 0) || (russianBool == true && russiaNum > 0) || (mackBool == true && mackNum > 0) || (persBool == true && persNum > 0) || (ragBool == true && ragNum > 0) || (thrBool == true && thrNum > 0) || (oddBool == true && oddNum > 0) || (savaBool == true && savaNum > 0)))
@@ -75,6 +76,7 @@ namespace CatTower
                 }
             }
         }
+
         public void CheckBr() //누군가 카드를 놓을때 호출, 사용가능한 고양이를 true로 바꿔줌
         {
             if(myScore == 1 && savaNum == 1)
@@ -170,18 +172,12 @@ namespace CatTower
             ragBool = false;
             thrBool = false;
             oddBool = false;
-        }//bool변수들 초기화
-        // Start is called before the first frame update
+        }
+  
         void Start()
         {
             SumScore();
             CheckBr(); //본인 차례 시작할 때  한번 호출
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
         }
     }
 }

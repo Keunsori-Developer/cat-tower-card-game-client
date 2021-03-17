@@ -19,6 +19,7 @@ namespace CatTower
                 arrSlotBreed[i] = Breed.none;
             }
         }
+
         public void ResetSprite()
         {
             for (int i = 0; i < 8; i++) {
@@ -59,14 +60,10 @@ namespace CatTower
             this.transform.GetChild(0).transform.GetChild(0).GetComponent<Slot>().myBr = Breed.none;
 
         }
+
         void Start()
         {
             ResetSlot();
-        }
-
-        void Update()
-        {
-
         }
     }
 }

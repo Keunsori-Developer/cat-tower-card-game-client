@@ -71,7 +71,7 @@ namespace CatTower
             }
         }
 
-        public void DecreaseCard() //사용할때마다 카드 수 감소시킴
+        public void DecreaseCard()
         {
             if (myCard.card.br == Breed.Mackerel)
             {
@@ -149,13 +149,16 @@ namespace CatTower
                 List<RaycastResult> results = new List<RaycastResult>();
                 gr.Raycast(ped, results);
                 GameObject slotObject = null;
+
                 foreach (var h in results)
                 {
                     Debug.Log(h.gameObject.name);
                     slotObject = h.gameObject;
                     break;
                 }
+
                 Slot slot;
+
                 if (slotObject == null || !slotObject.TryGetComponent<Slot>(out slot))
                 {
                     this.transform.position = defaultposition;
@@ -167,8 +170,7 @@ namespace CatTower
                     del = false;
                     this.transform.position = defaultposition;
                     return;
-                }
-                
+                }              
                 if (del == true)
                 {
                     checkObj = GameObject.Find("MyCards");
@@ -178,6 +180,7 @@ namespace CatTower
                     Destroy(this.gameObject);
                     //del = false;
                 }
+
                 GameController.Instance.throwInfo(brS, index);
                 br = Breed.none;                              
             }                    

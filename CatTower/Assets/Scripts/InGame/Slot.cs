@@ -117,8 +117,8 @@ namespace CatTower
                 return true;
             }
             else return false;
-
         }
+
         public void SetSlot(Card card)
         {
             this.gameObject.GetComponent<Image>().sprite = card.catImage;

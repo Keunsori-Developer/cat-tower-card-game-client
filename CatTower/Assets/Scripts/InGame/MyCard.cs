@@ -15,7 +15,8 @@ namespace CatTower
             this.gameObject.GetComponent<Image>().sprite = card.catImage;
             IncreaseCard();
         }
-        public void IncreaseCard() //본인카드의 갯수
+
+        public void IncreaseCard()
         {
             GameObject gameObjectForCardData = GameObject.Find("MyCards");
 
@@ -51,14 +52,6 @@ namespace CatTower
             {
                 gameObjectForCardData.GetComponent<CheckUsable>().thrNum++;
             }
-        }
-        void Start()
-        {
-
-        }
-        void Update()
-        {
-
         }
     }
 }

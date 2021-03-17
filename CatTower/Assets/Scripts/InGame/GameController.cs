@@ -18,10 +18,6 @@ namespace CatTower
         private IGameState gameState;
         [SerializeField] private GameUIController uiController;
 
-
-        /// <summary>
-        /// Awake is called when the script instance is being loaded.
-        /// </summary>
         void Awake()
         {
             currentRound = 0;
@@ -42,13 +38,7 @@ namespace CatTower
                 });
             });
         }
-        // Start is called before the first frame update
-        void Start()
-        {
-
-        }
-
-        // Update is called once per frame
+  
         void Update()
         {
             if (Input.GetMouseButtonDown(0))
