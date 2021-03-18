@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 namespace CatTower
 {
@@ -26,10 +27,7 @@ namespace CatTower
             webSocket.Connect("/ingame", () =>
             {
                 AlertRoundStart();
-                webSocket.ReceiveEvent<IngameStatus>("/ingame", "status", (response) =>
-                {
-                    gameState.InFinish(response);
-                });
+                webSocket.ReceiveEvent<IngameStatus>("/ingame", "status", StatusEventReceived);
                 webSocket.ReceiveEvent<IngameCardGive>("/ingame", "cardgive", ShowCardDeck);
                 webSocket.ReceiveEvent<IngamePlayerOrder>("/ingame", "playerorder", ShowInitialPlayersInfo);
                 webSocket.ReceiveEvent<IngameEndRound>("/ingame", "endround", (response) =>
@@ -38,7 +36,7 @@ namespace CatTower
                 });
             });
         }
-  
+
         void Update()
         {
             if (Input.GetMouseButtonDown(0))
@@ -62,7 +60,7 @@ namespace CatTower
             foreach (var player in playerOrder)
             {
                 if (player.Item1.mid == UserData.mid)
-                {                  
+                {
                     webSocket.SendEvent<IngameThrow>("/ingame", "throw",
                     new IngameThrow
                     {
@@ -92,22 +90,26 @@ namespace CatTower
         public void ShowCardDeck(IngameCardGive response)
         {
             var layout = myCards.transform.Find("Layout");
-            for (int i = 0; i< layout.childCount; i++)
+            for (int i = 0; i < layout.childCount; i++)
             {
                 Destroy(layout.GetChild(i).gameObject);
             }
 
             Debug.Log(response.cards);
             myCards.GetComponent<CardDB>().GetCard(response.cards);
-            
+
             Slot.GetComponent<SlotManager>().ResetSlot();
             Slot.GetComponent<SlotManager>().ResetSprite();
         }
 
         public void ShowInitialPlayersInfo(IngamePlayerOrder response)
         {
+            playerOrder = new (UserInfo, bool)[response.player.Count];
+
             for (int i = 0; i < response.player.Count; i++)
             {
+                playerOrder[i] = (response.player[i].userInfo, response.player[i].giveup);
+
                 if (response.player[i].userInfo.mid == UserData.mid)
                 {
                     myOrder = response.player[i].order;
@@ -122,7 +124,7 @@ namespace CatTower
         public void UpdateBoard(IngameStatus response)
         {
             uiController.UpdatePlayerInfo(response.player, response.order);
-            
+
             currentOrder = response.order;
 
             for (int i = 0; i < 57; i++)
@@ -162,17 +164,21 @@ namespace CatTower
                 GetComponent<Drag>().SetSprite();
             }
 
-            // TODO: response 정보를 토대로 게임판을 업데이트하고, 플레이어가 포기를 했는지 안했는지 또한 체크
-            foreach (var player in response.player)
+            if (!response.giveup) return;
+
+            for (int i = 0; i < playerOrder.Length; i++)
             {
-                if (player.userInfo.mid != UserData.mid)
+                if (playerOrder[i].Item1.mid == response.user.mid) 
                 {
-                    if (player.giveup == true)
-                    {
-                        //TODO: 닉네임 옆에 포기! 가 뜨게 구현
-                    }
+                    playerOrder[i].Item2 = response.giveup;
+                    return;
                 }
             }
+        }
+
+        public void StatusEventReceived(IngameStatus response)
+        {
+            gameState.InFinish(response);
         }
 
         public void StateChanged()
@@ -206,7 +212,8 @@ namespace CatTower
             }
         }
 
-        public void EndRound(IngameEndRound response){
+        public void EndRound(IngameEndRound response)
+        {
             foreach (var player in playerOrder)
             {
                 if (player.Item1.mid == UserData.mid)

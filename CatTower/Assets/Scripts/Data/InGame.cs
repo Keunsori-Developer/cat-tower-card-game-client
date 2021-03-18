@@ -62,6 +62,7 @@ namespace CatTower
         public List<string> board; //TODO: string 이 맞는지 확인 필요
         public int order;
         public List<PlayerOrder> player;
+        public bool giveup;
     }
 
     [Serializable]
