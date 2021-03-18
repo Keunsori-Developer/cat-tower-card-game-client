@@ -21,12 +21,12 @@ namespace CatTower
         void Start()
         {
             //TODO: 이거는 테스트하려고 추가한거니까 제거 필요
-            ShowInitialPlayerList(new List<PlayerOrder>{
-                new PlayerOrder{
-                    score = 0, userInfo = new UserInfo{mid = "ASDFg", nickname = "승곰이"}
-                }
-            });
-            HighlightCurrentPlayer(new UserInfo { mid = "ASDFg", nickname = "승곰이" });
+            // ShowInitialPlayerList(new List<PlayerOrder>{
+            //     new PlayerOrder{
+            //         score = 0, userInfo = new UserInfo{mid = "ASDFg", nickname = "승곰이"}
+            //     }
+            // });
+            // HighlightCurrentPlayer(new UserInfo { mid = "ASDFg", nickname = "승곰이" });
             // 여기까지 제거
         }
 
