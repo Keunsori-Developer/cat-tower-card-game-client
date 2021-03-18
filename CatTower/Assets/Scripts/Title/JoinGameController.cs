@@ -49,6 +49,8 @@ namespace CatTower
         {
             joinGamePanel.gameObject.SetActive(false);
             joinWarnText.gameObject.SetActive(false);
+            codeInputPanel.gameObject.SetActive(false);
+            joinWarnText.gameObject.SetActive(false);
         }
         public void OpenCodePanel()
         {
