@@ -9,8 +9,8 @@ namespace CatTower
     public class HostGameController : MonoBehaviour
     {
         [SerializeField] GameObject hostGamePanel = null;
-        [SerializeField] Text roomName = null;
-        [SerializeField] Text capacity = null;
+        [SerializeField] InputField roomName = null;
+        [SerializeField] InputField capacity = null;
         [SerializeField] GameObject roomNameError = null;
         [SerializeField] GameObject capacityError = null;
         [SerializeField] Button openButton = null;

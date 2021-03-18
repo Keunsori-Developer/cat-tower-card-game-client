@@ -18,6 +18,8 @@ namespace CatTower
     // Start is called before the first frame update
         void Start()
         {
+            if (UserData.nickName == null)
+                UserData.nickName = "GUESTPLAYER";
             changeNickname.onClick.AddListener(NicknameChangeOpen);
             okButton.onClick.AddListener(OkButtonClicked);
             nicknameDisplay.GetComponent<Text>().text = UserData.nickName;
