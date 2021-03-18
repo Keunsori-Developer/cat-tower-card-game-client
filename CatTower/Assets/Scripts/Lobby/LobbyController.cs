@@ -73,6 +73,11 @@ namespace CatTower
                 Debug.Log("방장이 아님");
                 StartButton.gameObject.SetActive(false);
             }
+            else
+            {
+                Debug.Log("내가 방장임");
+                StartButton.gameObject.SetActive(true);
+            }
         }
 
         public void MoveToIngame(StartGameResponse temp)
