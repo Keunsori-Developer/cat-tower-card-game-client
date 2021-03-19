@@ -158,6 +158,7 @@ namespace CatTower
                 }
 
                 Slot slot;
+                index = GetComponent<Slot>().index;
 
                 if (slotObject == null || !slotObject.TryGetComponent<Slot>(out slot))
                 {
