@@ -71,7 +71,7 @@ namespace CatTower
             playerInfo.TryGetValue(playerToHighlight.mid, out gameObject);
             if (gameObject != null) gameObject.GetComponent<Image>().color = new Color(0, 1, 1, 0.2666f);
 
-            currentPlayerText.text = "<color=aqua>" + playerToHighlight.mid + "</color> 차례!";
+            currentPlayerText.text = "<color=aqua>" + playerToHighlight.nickname + "</color> 차례!";
         }
 
         /// <summary>

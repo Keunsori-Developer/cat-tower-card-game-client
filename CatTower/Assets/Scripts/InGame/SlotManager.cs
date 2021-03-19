@@ -115,7 +115,7 @@ namespace CatTower
             {
                 slotToChange = this.transform.GetChild(0).transform.GetChild(0);
             }
-
+            Debug.Log(slotToChange.name + " 의 이미지를 변경!!!!!!!!!!!!!!!!")
             if(slotToChange != null) slotToChange.GetComponent<Image>().sprite = catImageDic[breed];
         }
     }

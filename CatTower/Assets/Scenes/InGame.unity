@@ -3955,7 +3955,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uD604\uC7AC \uCC28\uB840!"
+  m_Text: 
 --- !u!222 &1181643625
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4043,7 +4043,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!224 &1185709058
 RectTransform:
