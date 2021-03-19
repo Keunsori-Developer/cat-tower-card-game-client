@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace CatTower
 {
-    public class CardDB : MonoBehaviour
+    public class MyCardDeck : MonoBehaviour
     {
         private List<Card> cardDBs;
         public GameObject layoutGroup;

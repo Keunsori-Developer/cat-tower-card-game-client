@@ -18,9 +18,22 @@ namespace CatTower
         private int myOrder;
         private IGameState gameState;
         [SerializeField] private GameUIController uiController;
+        public Dictionary<string, Breed> cardAlphabet;
 
         void Awake()
         {
+            cardAlphabet = new Dictionary<string, Breed>
+            {
+                {"A", Breed.Mackerel},
+                {"B", Breed.Siamese},
+                {"C", Breed.Persian},
+                {"D", Breed.Ragdoll},
+                {"E", Breed.RussianBlue},
+                {"S0", Breed.Savanna},
+                {"S1", Breed.ThreeColor},
+                {"S2", Breed.Odd}
+            };
+
             currentRound = 0;
             currentOrder = 0;
             webSocket = WebSocketManager.Instance;
@@ -96,7 +109,7 @@ namespace CatTower
             }
 
             Debug.Log(response.cards);
-            myCards.GetComponent<CardDB>().GetCard(response.cards);
+            myCards.GetComponent<MyCardDeck>().GetCard(response.cards);
 
             Slot.GetComponent<SlotManager>().ResetSlot();
             Slot.GetComponent<SlotManager>().ResetSprite();
@@ -119,13 +132,25 @@ namespace CatTower
             StateChanged();
         }
 
-
-
         public void UpdateBoard(IngameStatus response)
         {
             uiController.UpdatePlayerInfo(response.player, response.order);
 
             currentOrder = response.order;
+
+            var board = response.board;
+            var boardSize = board.Count;
+            for (int i = 0; i < boardSize; i++)
+            {
+                if (Slot.GetComponent<SlotManager>().arrSlotIndex[i] == 1) continue; // 이미 확인된 슬롯이라 체크 안함
+
+                Breed breedValue;
+                if (!cardAlphabet.TryGetValue(board[i], out breedValue)) continue;
+                var slotManager = Slot.GetComponent<SlotManager>();
+                slotManager.arrSlotIndex[i] = 1;
+                slotManager.arrSlotBreed[i] = breedValue;
+                slotManager.SetSprite(i, breedValue);
+            }
 
             for (int i = 0; i < 57; i++)
             {
@@ -168,7 +193,7 @@ namespace CatTower
 
             for (int i = 0; i < playerOrder.Length; i++)
             {
-                if (playerOrder[i].Item1.mid == response.user.mid) 
+                if (playerOrder[i].Item1.mid == response.user.mid)
                 {
                     playerOrder[i].Item2 = response.giveup;
                     return;

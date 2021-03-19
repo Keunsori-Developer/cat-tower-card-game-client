@@ -9,6 +9,7 @@ namespace CatTower
     {
         [SerializeField] private Text roundText;
         [SerializeField] private GameObject playerListLayout;
+        [SerializeField] private Text currentPlayerText;
         private SortedList<string, GameObject> playerInfo;
         private GameObject playerInfoPrefab;
 
@@ -54,13 +55,23 @@ namespace CatTower
 
         /// <summary>
         /// 화면에 현재 차례인 플레이어가 누군지 한눈에 알 수 있도록 파란색으로 강조합니다.
+        /// 또한 현재 순서를 텍스트로 표시합니다.
         /// </summary>
         /// <param name="playerToHighlight">현재 차례임을 표시할 플레이어 정보</param>
         private void HighlightCurrentPlayer(UserInfo playerToHighlight)
         {
+            foreach (var go in playerInfo.Values)
+            {
+                // 모든 색상들을 흰색으로 변경
+                go.GetComponent<Image>().color = new Color(1, 1, 1, 0.2666f);
+            }
+
+            // 파란색으로 바꿀 플레이어만 찾아서 바꿈
             GameObject gameObject = null;
             playerInfo.TryGetValue(playerToHighlight.mid, out gameObject);
             if (gameObject != null) gameObject.GetComponent<Image>().color = new Color(0, 1, 1, 0.2666f);
+
+            currentPlayerText.text = "<color=aqua>" + playerToHighlight.mid + "</color> 차례!";
         }
 
         /// <summary>
