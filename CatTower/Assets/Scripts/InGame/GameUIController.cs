@@ -48,6 +48,8 @@ namespace CatTower
 
                 playerInfo.Add(player.userInfo.mid, playerObject);
             }
+
+            HighlightCurrentPlayer(players.Find(x => x.order == 0).userInfo); //TODO: 수정할거임(집에서)
         }
 
         /// <summary>

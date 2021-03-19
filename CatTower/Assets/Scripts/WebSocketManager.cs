@@ -69,7 +69,7 @@ namespace CatTower
             if (!socketList.TryGetValue(_namespace, out socket)) return false;
 
             var requestToJson = JsonUtility.ToJson(request);
-            Debug.Log("request data:\n" + requestToJson);
+            Debug.Log(eventName + " request data:\n" + requestToJson);
             socket.Emit(eventName, requestToJson.Replace("\"", "'"));
             return true;
         }
@@ -89,7 +89,7 @@ namespace CatTower
             if (!socketList.TryGetValue(_namespace, out socket)) return false;
             socket.On(eventName, (string response) =>
             {
-                Debug.Log("response data:\n" + response);
+                Debug.Log(eventName + " response data:\n" + response);
                 var change = response.Substring(1, response.Length - 2).Replace("\\", "");
                 TResponse responseObject = JsonUtility.FromJson<TResponse>(change);
                 if (responseHandler != null) responseHandler(responseObject);
