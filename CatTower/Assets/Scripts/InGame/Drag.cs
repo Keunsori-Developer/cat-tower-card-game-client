@@ -158,13 +158,16 @@ namespace CatTower
                 }
 
                 Slot slot;
-                index = GetComponent<Slot>().index;
+   
 
                 if (slotObject == null || !slotObject.TryGetComponent<Slot>(out slot))
                 {
                     this.transform.position = defaultposition;
                     return;
                 }
+
+                index = slot.index;
+
                 if (!slot.CheckSlot(this.gameObject.GetComponent<MyCard>().card))
                 {
                     Debug.Log("여기엔 둘 수 없음");
