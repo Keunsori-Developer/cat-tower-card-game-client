@@ -91,13 +91,13 @@ namespace CatTower
             {
                 slotToChange = this.transform.GetChild(6).transform.GetChild(index - 8);
             }
-            else if (index - 24 <= 0)
-            {
-                slotToChange = this.transform.GetChild(5).transform.GetChild(index - 24);
-            }
             else if (index - 16 <= 0)
             {
-                slotToChange = this.transform.GetChild(4).transform.GetChild(index - 16);
+                slotToChange = this.transform.GetChild(5).transform.GetChild(index - 16);
+            }
+            else if (index - 24 <= 0)
+            {
+                slotToChange = this.transform.GetChild(4).transform.GetChild(index - 24);
             }
             else if (index - 32 <= 0)
             {
