@@ -152,43 +152,6 @@ namespace CatTower
                 slotManager.SetSprite(i, breedValue);
             }
 
-            for (int i = 0; i < 57; i++)
-            {
-                if (response.board[i] != "X" && Slot.GetComponent<SlotManager>().arrSlotIndex[i] == 0) // 확인되지 않은 것만 업데이트
-                {
-                    Slot.GetComponent<SlotManager>().arrSlotIndex[i] = 1;
-                    if (response.board[i] == "A")
-                    {
-                        Slot.GetComponent<SlotManager>().arrSlotBreed[i] = Breed.Mackerel;
-                    }
-                    else if (response.board[i] == "B")
-                    {
-                        Slot.GetComponent<SlotManager>().arrSlotBreed[i] = Breed.Siamese;
-                    }
-                    else if (response.board[i] == "C")
-                    {
-                        Slot.GetComponent<SlotManager>().arrSlotBreed[i] = Breed.Persian;
-                    }
-                    else if (response.board[i] == "D")
-                    {
-                        Slot.GetComponent<SlotManager>().arrSlotBreed[i] = Breed.Ragdoll;
-                    }
-                    else if (response.board[i] == "E")
-                    {
-                        Slot.GetComponent<SlotManager>().arrSlotBreed[i] = Breed.RussianBlue;
-                    }
-                    else if (response.board[i] == "S1")
-                    {
-                        Slot.GetComponent<SlotManager>().arrSlotBreed[i] = Breed.ThreeColor;
-                    }
-                    else if (response.board[i] == "S2")
-                    {
-                        Slot.GetComponent<SlotManager>().arrSlotBreed[i] = Breed.Odd;
-                    }
-                }
-                GetComponent<Drag>().SetSprite();
-            }
-
             if (!response.giveup) return;
 
             for (int i = 0; i < playerOrder.Length; i++)
