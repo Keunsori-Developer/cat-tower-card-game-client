@@ -87,27 +87,27 @@ namespace CatTower
             {
                 slotToChange = this.transform.GetChild(7).transform.GetChild(index);
             }
-            else if (index - 8 <= 0)
+            else if (index - 14 <= 0)
             {
                 slotToChange = this.transform.GetChild(6).transform.GetChild(index - 8);
             }
-            else if (index - 16 <= 0)
+            else if (index - 21 <= 0)
             {
                 slotToChange = this.transform.GetChild(5).transform.GetChild(index - 16);
             }
-            else if (index - 24 <= 0)
+            else if (index - 28 <= 0)
             {
                 slotToChange = this.transform.GetChild(4).transform.GetChild(index - 24);
             }
-            else if (index - 32 <= 0)
+            else if (index - 35 <= 0)
             {
                 slotToChange = this.transform.GetChild(3).transform.GetChild(index - 32);
             }
-            else if (index - 40 <= 0)
+            else if (index - 42 <= 0)
             {
                 slotToChange = this.transform.GetChild(2).transform.GetChild(index - 40);
             }
-            else if (index - 48 <= 0)
+            else if (index - 49 <= 0)
             {
                 slotToChange = this.transform.GetChild(1).transform.GetChild(index - 48);
             }
