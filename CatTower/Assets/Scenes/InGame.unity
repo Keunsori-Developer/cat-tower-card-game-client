@@ -4483,7 +4483,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   layoutGroup: {fileID: 1154014759}
-  cardPrefab: {fileID: 5222962578036433921, guid: db04e6917c90f9744a04ba9b43336345,
+  cardPrefab: {fileID: 5222962578036433921, guid: d944139683cbdb141a6bfdd9ab32c54a,
     type: 3}
 --- !u!224 &1187503225 stripped
 RectTransform:
