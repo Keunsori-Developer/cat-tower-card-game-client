@@ -10,6 +10,8 @@ namespace CatTower
         [SerializeField] private Text roundText;
         [SerializeField] private GameObject playerListLayout;
         [SerializeField] private Text currentPlayerText;
+        [SerializeField] private GameObject warning;
+
         private SortedList<string, GameObject> playerInfo;
         private GameObject playerInfoPrefab;
 
@@ -21,14 +23,7 @@ namespace CatTower
 
         void Start()
         {
-            //TODO: 이거는 테스트하려고 추가한거니까 제거 필요
-            // ShowInitialPlayerList(new List<PlayerOrder>{
-            //     new PlayerOrder{
-            //         score = 0, userInfo = new UserInfo{mid = "ASDFg", nickname = "승곰이"}
-            //     }
-            // });
-            // HighlightCurrentPlayer(new UserInfo { mid = "ASDFg", nickname = "승곰이" });
-            // 여기까지 제거
+            
         }
 
         /// <summary>
@@ -94,6 +89,18 @@ namespace CatTower
             }
 
             HighlightCurrentPlayer(players[nextOrder].userInfo);
+        }
+
+        public void WarningWrongPosition()
+        {
+            StartCoroutine(ShowWarningText());
+        }
+
+        private IEnumerator ShowWarningText()
+        {
+            warning.SetActive(true);
+            yield return new WaitForSecondsRealtime(0.5f);
+            warning.SetActive(false);
         }
     }
 }
