@@ -192,7 +192,7 @@ namespace CatTower
                     webSocket.SendEvent<IngameGiveUp>("/ingame", "giveup",
                     new IngameGiveUp
                     {
-                        userInfo = player.Item1,
+                        user = player.Item1,
                         roomId = JoinedRoom.roomId
                     });
                     break;
