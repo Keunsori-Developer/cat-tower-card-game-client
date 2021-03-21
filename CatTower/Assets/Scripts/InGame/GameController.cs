@@ -133,7 +133,7 @@ namespace CatTower
                     myOrder = response.player[i].order;
                 }
             }
-            uiController.ShowInitialPlayerList(response.player);
+            uiController.ShowInitialPlayerList(response.player, currentRound);
             StateChanged();
         }
 

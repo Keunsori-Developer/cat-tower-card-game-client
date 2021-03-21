@@ -8,6 +8,7 @@ namespace CatTower
     public class GameUIController : SingletonGameObject<GameUIController>
     {
         [SerializeField] private Text roundText;
+        [SerializeField] private GameObject roundPopup;
         [SerializeField] private GameObject playerListLayout;
         [SerializeField] private Text currentPlayerText;
         [SerializeField] private GameObject warning;
@@ -31,16 +32,20 @@ namespace CatTower
 
         void Start()
         {
-
+            
         }
 
         /// <summary>
-        /// 게임이 처음 시작되었을 때 플레이어들의 정보를 표시합니다.
+        /// 게임이 처음 시작되었을 때 플레이어들의 정보, 현재 라운드 수를 표시합니다.
         /// 또한 내 닉네임은 노란색으로 표시합니다.
+        /// 
         /// </summary>
         /// <param name="players">표시할 플레이어들의 정보</param>
-        public void ShowInitialPlayerList(List<PlayerOrder> players)
+        /// <param name="currentRound">현재 라운드</param>
+        public void ShowInitialPlayerList(List<PlayerOrder> players, int currentRound)
         {
+            ShowCurrentRound(currentRound);
+
             foreach (var player in players)
             {
                 GameObject playerObject = Instantiate(playerInfoPrefab, playerListLayout.transform);
@@ -99,6 +104,9 @@ namespace CatTower
             HighlightCurrentPlayer(players[nextOrder].userInfo);
         }
 
+        /// <summary>
+        /// 현재 슬롯에 카드를 올려둘 수 없다는 경고 문구를 띄웁니다.
+        /// </summary>
         public void WarningWrongPosition()
         {
             StartCoroutine(ShowWarningText());
@@ -111,6 +119,10 @@ namespace CatTower
             warning.SetActive(false);
         }
 
+        /// <summary>
+        /// 버튼을 누를 때마다 BGM을 끄고 켭니다.
+        /// 현재 BGM 상태에 따라 버튼 이미지도 변경합니다.
+        /// </summary>
         private void SetBgmButtonStatus()
         {
             var audioSource = soundButton.GetComponent<AudioSource>();
@@ -127,6 +139,23 @@ namespace CatTower
                 audioSource.Play();
                 image.sprite = playImage;
             }
+        }
+
+        public void ShowCurrentRound(int round)
+        {
+            StartCoroutine(PopupCurrentRound(round));
+        }
+
+        private IEnumerator PopupCurrentRound(int round)
+        {
+            roundPopup.SetActive(true);
+            roundText.gameObject.SetActive(false);
+            var roundtextInPopup = roundPopup.transform.Find("Text").gameObject;
+            roundtextInPopup.GetComponent<Text>().text = "Round <color=yellow>" + (round + 1) + "</color>";
+            yield return new WaitForSecondsRealtime(1.5f);
+            roundPopup.SetActive(false);
+            roundText.text = "Round " + (round + 1);
+            roundText.gameObject.SetActive(true);
         }
     }
 }
