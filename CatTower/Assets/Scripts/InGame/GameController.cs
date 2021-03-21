@@ -19,9 +19,14 @@ namespace CatTower
         private IGameState gameState;
         [SerializeField] private GameUIController uiController;
         public Dictionary<string, Breed> cardAlphabet;
+        
+        AudioClip catClip;
+        AudioSource audioSource;
 
         void Awake()
         {
+            catClip = Resources.Load("Sound/yatong") as AudioClip;
+            
             cardAlphabet = new Dictionary<string, Breed>
             {
                 {"A", Breed.Mackerel},
@@ -222,8 +227,8 @@ namespace CatTower
 
         private void RingingCatSound()
         {
-            AudioClip catClip = Resources.Load("Sound/yatong") as AudioClip;
-            AudioSource audioSource = this.gameObject.AddComponent<AudioSource>();
+            bool isExistAudioSource = this.TryGetComponent<AudioSource>(out audioSource);
+            if (!isExistAudioSource) audioSource = this.gameObject.AddComponent<AudioSource>();
             audioSource.clip = catClip;
             audioSource.Play();
         }
