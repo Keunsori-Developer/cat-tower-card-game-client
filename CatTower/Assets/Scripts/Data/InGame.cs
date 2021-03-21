@@ -51,7 +51,7 @@ namespace CatTower
     [Serializable]
     public class IngameGiveUp
     {
-        public UserInfo userInfo;
+        public UserInfo user;
         public string roomId;
     }
 
