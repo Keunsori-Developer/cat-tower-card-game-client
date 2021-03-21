@@ -12,23 +12,23 @@ namespace CatTower
         /// <summary>
         /// 유저의 고유 번호
         /// </summary>
-        public static string mid = SetRandomMid();
-        // {
-        //     get => PlayerPrefs.GetString(_midKey, "");
-        // }
+        public static string mid
+        {
+            get => PlayerPrefs.GetString(_midKey, "");
+        }
 
         /// <summary>
         /// 유저가 설정한 닉네임
         /// </summary>
-        public static string nickName;
-        // {
-        //     get => PlayerPrefs.GetString(_nickNameKey, "");
-        //     set
-        //     {
-        //         PlayerPrefs.SetString(_nickNameKey, value);
-        //         if (string.IsNullOrEmpty(mid)) PlayerPrefs.SetString(_midKey, SetRandomMid());
-        //     }
-        // }
+        public static string nickName
+        {
+            get => PlayerPrefs.GetString(_nickNameKey, "");
+            set
+            {
+                PlayerPrefs.SetString(_nickNameKey, value);
+                if (string.IsNullOrEmpty(mid)) PlayerPrefs.SetString(_midKey, SetRandomMid());
+            }
+        }
 
         public static UserInfo GetUserInfo()
         {

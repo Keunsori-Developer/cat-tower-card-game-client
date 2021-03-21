@@ -27,7 +27,7 @@ namespace CatTower
 
         private IEnumerator Loader()
         {
-            //if (string.IsNullOrEmpty(UserData.mid)) // 실행할 때마다 닉네임 입력받도록 하기 위해 주석 처리
+            if (string.IsNullOrEmpty(UserData.mid))
             {
                 var controller = this.gameObject.GetComponent<NickNameController>();
                 if (controller != null) controller.OpenInputUI();
