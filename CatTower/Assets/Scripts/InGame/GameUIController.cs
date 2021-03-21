@@ -11,19 +11,27 @@ namespace CatTower
         [SerializeField] private GameObject playerListLayout;
         [SerializeField] private Text currentPlayerText;
         [SerializeField] private GameObject warning;
+        [SerializeField] private GameObject soundButton;
+        bool playingBGM = true;
+        Sprite playImage;
+        Sprite stopImage;
 
         private SortedList<string, GameObject> playerInfo;
         private GameObject playerInfoPrefab;
 
         void Awake()
         {
+            playImage = Resources.Load<Sprite>("Ingame/audioPlay");
+            stopImage = Resources.Load<Sprite>("Ingame/audioStop");
+
             playerInfoPrefab = Resources.Load("Ingame/PlayerInfo") as GameObject;
             playerInfo = new SortedList<string, GameObject>();
+            soundButton.GetComponent<Button>().onClick.AddListener(SetBgmButtonStatus);
         }
 
         void Start()
         {
-            
+
         }
 
         /// <summary>
@@ -101,6 +109,24 @@ namespace CatTower
             warning.SetActive(true);
             yield return new WaitForSecondsRealtime(0.5f);
             warning.SetActive(false);
+        }
+
+        private void SetBgmButtonStatus()
+        {
+            var audioSource = soundButton.GetComponent<AudioSource>();
+            var image = soundButton.GetComponent<Image>();
+            if (playingBGM)
+            {
+                playingBGM = false;
+                audioSource.Stop();
+                image.sprite = stopImage;
+            }
+            else
+            {
+                playingBGM = true;
+                audioSource.Play();
+                image.sprite = playImage;
+            }
         }
     }
 }
