@@ -175,6 +175,7 @@ namespace CatTower
             if (myOrder == currentOrder)
             {
                 gameState = new PlayingGameState();
+                RingingCatSound();
             }
             else
             {
@@ -217,6 +218,14 @@ namespace CatTower
                 }
             }
             currentRound++;
+        }
+
+        private void RingingCatSound()
+        {
+            AudioClip catClip = Resources.Load("Sound/yatong") as AudioClip;
+            AudioSource audioSource = this.gameObject.AddComponent<AudioSource>();
+            audioSource.clip = catClip;
+            audioSource.Play();
         }
     }
 }
