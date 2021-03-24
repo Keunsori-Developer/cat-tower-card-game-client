@@ -167,8 +167,6 @@ namespace CatTower
                     return;
                 }
             }
-            myCards.GetComponent<CheckUsable>().ResetBr();
-            myCards.GetComponent<CheckUsable>().CheckBr();
         }
 
         public void StatusEventReceived(IngameStatus response)
