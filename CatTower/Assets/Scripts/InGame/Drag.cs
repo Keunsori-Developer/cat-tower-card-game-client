@@ -159,8 +159,6 @@ namespace CatTower
                 }
 
                 Slot slot;
-                checkObj.GetComponent<CheckUsable>().ResetBr();
-                checkObj.GetComponent<CheckUsable>().CheckBr();
                 if (slotObject == null || !slotObject.TryGetComponent<Slot>(out slot))
                 {
                     this.transform.position = defaultposition;
@@ -187,8 +185,10 @@ namespace CatTower
                 }
 
                 GameController.Instance.throwInfo(brS, index);
-                br = Breed.none;                              
-            }                    
+                br = Breed.none;
+                checkObj.GetComponent<CheckUsable>().ResetBr();
+                checkObj.GetComponent<CheckUsable>().CheckBr();
+            }
         }
     }
 }
