@@ -176,6 +176,8 @@ namespace CatTower
 
         public void StateChanged()
         {
+            myCards.GetComponent<CheckUsable>().ResetBr();
+            myCards.GetComponent<CheckUsable>().CheckBr();
             //모든유저 giveup -> 라운드 종료
             if (myOrder == currentOrder)
             {
