@@ -51,6 +51,7 @@ namespace CatTower
                 webSocket.ReceiveEvent<IngameEndRound>("/ingame", "endround", (response) =>
                 {
                     EndRound(response);
+                    AlertRoundStart();
                 });
             });
         }
