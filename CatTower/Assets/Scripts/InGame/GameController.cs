@@ -220,7 +220,7 @@ namespace CatTower
                         roomId = JoinedRoom.roomId,
                         user = player.Item1,
                         round = currentRound,
-                        leftCard = GetComponent<CheckUsable>().myScore
+                        leftCard = myCards.GetComponent<CheckUsable>().myScore
                     });
                 }
             }
