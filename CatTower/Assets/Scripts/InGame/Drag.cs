@@ -172,6 +172,7 @@ namespace CatTower
                 if (!slot.CheckSlot(this.gameObject.GetComponent<MyCard>().card))
                 {
                     Debug.Log("여기엔 둘 수 없음");
+                    GameUIController.Instance.WarningWrongPosition();
                     del = false;
                     this.transform.position = defaultposition;
                     return;

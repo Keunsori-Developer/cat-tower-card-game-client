@@ -12,6 +12,8 @@ namespace CatTower
         void Start()
         {
             LoadingIndicator.Show();
+            if (UserData.nickName == null)
+                UserData.nickName = "GUESTPLAYER";
             webSocket = WebSocketManager.Instance;
             webSocket.Connect("/rooms", () =>
             {

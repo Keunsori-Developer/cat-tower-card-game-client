@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 namespace CatTower
 {
-
     public class Slot : MonoBehaviour
     {
         public int index;
@@ -14,7 +13,8 @@ namespace CatTower
         private GameObject myCards;
         private bool canUse;
 
-        private void Awake() {
+        private void Awake()
+        {
             parentSlot = GameObject.Find("SlotManager");
             myCards = GameObject.Find("MyCards");
             canUse = true;
@@ -26,7 +26,6 @@ namespace CatTower
             {
                 if (target.special == false)
                 {
-
                     if (index < 8)
                     {
                         if (parentSlot.GetComponent<SlotManager>().arrSlotIndex[index] != 0)
@@ -102,12 +101,11 @@ namespace CatTower
                     }
                     else
                     {
-                        if(GetComponent<CheckUsable>().savaBool == true)
+                        if (myCards.GetComponent<CheckUsable>().savaBool)
                         {
-
                             if (parentSlot.GetComponent<SlotManager>().arrSlotIndex[index] != 0)
                                 return false;
-                            GetComponent<CheckUsable>().myScore -= 5;
+                            myCards.GetComponent<CheckUsable>().myScore -= 5;
                             SetSlot(target);
 
                         }

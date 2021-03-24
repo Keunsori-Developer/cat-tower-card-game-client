@@ -19,9 +19,14 @@ namespace CatTower
         private IGameState gameState;
         [SerializeField] private GameUIController uiController;
         public Dictionary<string, Breed> cardAlphabet;
+        
+        AudioClip catClip;
+        AudioSource audioSource;
 
         void Awake()
         {
+            catClip = Resources.Load("Sound/yatong") as AudioClip;
+            
             cardAlphabet = new Dictionary<string, Breed>
             {
                 {"A", Breed.Mackerel},
@@ -128,7 +133,7 @@ namespace CatTower
                     myOrder = response.player[i].order;
                 }
             }
-            uiController.ShowInitialPlayerList(response.player);
+            uiController.ShowInitialPlayerList(response.player, currentRound);
             StateChanged();
         }
 
@@ -175,6 +180,7 @@ namespace CatTower
             if (myOrder == currentOrder)
             {
                 gameState = new PlayingGameState();
+                RingingCatSound();
             }
             else
             {
@@ -217,6 +223,14 @@ namespace CatTower
                 }
             }
             currentRound++;
+        }
+
+        private void RingingCatSound()
+        {
+            bool isExistAudioSource = this.TryGetComponent<AudioSource>(out audioSource);
+            if (!isExistAudioSource) audioSource = this.gameObject.AddComponent<AudioSource>();
+            audioSource.clip = catClip;
+            audioSource.Play();
         }
     }
 }

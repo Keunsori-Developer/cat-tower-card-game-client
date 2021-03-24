@@ -55,14 +55,14 @@ namespace CatTower
         {
             cardDBs = new List<Card>()
             {
-                new Card(Breed.Mackerel, Resources.Load<Sprite>("Ingame/Cat/mack"), "A", false),
-                new Card(Breed.Siamese, Resources.Load<Sprite>("Ingame/Cat/siam"), "B" , false),
-                new Card(Breed.Persian, Resources.Load<Sprite>("Ingame/Cat/persian"), "C",  false),
-                new Card(Breed.Ragdoll, Resources.Load<Sprite>("Ingame/Cat/rag"), "D", false),
-                new Card(Breed.RussianBlue, Resources.Load<Sprite>("Ingame/Cat/russian"), "E", false),
-                new Card(Breed.Savanna, Resources.Load<Sprite>("Ingame/Cat/savanna"), "S0", true),
-                new Card(Breed.ThreeColor, Resources.Load<Sprite>("Ingame/Cat/three"), "S1", true),
-                new Card(Breed.Odd, Resources.Load<Sprite>("Ingame/Cat/odd"), "S2", true)
+                new Card(Breed.Mackerel, Resources.Load<Sprite>("Ingame/Cat/mack1"), "A", false),
+                new Card(Breed.Siamese, Resources.Load<Sprite>("Ingame/Cat/siam1"), "B" , false),
+                new Card(Breed.Persian, Resources.Load<Sprite>("Ingame/Cat/persian1"), "C",  false),
+                new Card(Breed.Ragdoll, Resources.Load<Sprite>("Ingame/Cat/rag1"), "D", false),
+                new Card(Breed.RussianBlue, Resources.Load<Sprite>("Ingame/Cat/russian1"), "E", false),
+                new Card(Breed.Savanna, Resources.Load<Sprite>("Ingame/Cat/savanna1"), "S0", true),
+                new Card(Breed.ThreeColor, Resources.Load<Sprite>("Ingame/Cat/three1"), "S1", true),
+                new Card(Breed.Odd, Resources.Load<Sprite>("Ingame/Cat/odd1"), "S2", true)
             };
         }
 
