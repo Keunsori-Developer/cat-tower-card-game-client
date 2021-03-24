@@ -30,6 +30,7 @@ namespace CatTower
             gameObj.GetComponent<SlotManager>().arrSlotIndex[index] = 1;
             del = true;
             checkObj.GetComponent<CheckUsable>().ResetBr();
+            Debug.Log("리셋");
             checkObj.GetComponent<CheckUsable>().CheckBr();
         }
   
@@ -158,8 +159,8 @@ namespace CatTower
                 }
 
                 Slot slot;
-   
-
+                checkObj.GetComponent<CheckUsable>().ResetBr();
+                checkObj.GetComponent<CheckUsable>().CheckBr();
                 if (slotObject == null || !slotObject.TryGetComponent<Slot>(out slot))
                 {
                     this.transform.position = defaultposition;
@@ -167,7 +168,7 @@ namespace CatTower
                 }
 
                 index = slot.index;
-
+                
                 if (!slot.CheckSlot(this.gameObject.GetComponent<MyCard>().card))
                 {
                     Debug.Log("여기엔 둘 수 없음");
