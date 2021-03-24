@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 
@@ -70,24 +68,6 @@ namespace CatTower
         }
         public void HelpPageControl()
         {
-            
-            if (page == firstPage)
-            {
-                helpPage1.gameObject.SetActive(true);
-                helpPage2.gameObject.SetActive(false);
-                previousPage.gameObject.SetActive(false);
-                nextPage.gameObject.SetActive(true);
-
-            }
-            else if (page == lastPage)
-            {
-                helpPage6.gameObject.SetActive(false);
-                helpPage7.gameObject.SetActive(true);
-                previousPage.gameObject.SetActive(true);
-                nextPage.gameObject.SetActive(false);
-            }
-            else
-            {
                 helpPage1.gameObject.SetActive(false);
                 helpPage2.gameObject.SetActive(false);
                 helpPage3.gameObject.SetActive(false);
@@ -97,6 +77,9 @@ namespace CatTower
                 helpPage7.gameObject.SetActive(false);
                 switch (page+1)
                 {
+                    case 1:
+                        helpPage2.gameObject.SetActive(true);
+                        break;
                     case 2:
                         helpPage2.gameObject.SetActive(true);
                         break;
@@ -112,7 +95,23 @@ namespace CatTower
                     case 6:
                         helpPage6.gameObject.SetActive(true);
                         break;
-                }
+                     case 7:
+                        helpPage7.gameObject.SetActive(true);
+                        break;
+            }
+            if (page == firstPage)
+            {
+                previousPage.gameObject.SetActive(false);
+                nextPage.gameObject.SetActive(true);
+
+            }
+            else if (page == lastPage)
+            {
+                previousPage.gameObject.SetActive(true);
+                nextPage.gameObject.SetActive(false);
+            }
+            else
+            {
                 previousPage.gameObject.SetActive(true);
                 nextPage.gameObject.SetActive(true);
             }
