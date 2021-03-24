@@ -87,12 +87,15 @@ namespace CatTower
             {
                 if (gameObj.GetComponent<SlotManager>().arrSlotIndex[i] == 0)
                 {
-                    siamBool = true;
-                    russianBool = true;
-                    mackBool = true;
-                    persBool = true;
-                    ragBool = true;
-                    thrBool = true;
+                    if (i != 8)
+                    {
+                        siamBool = true;
+                        russianBool = true;
+                        mackBool = true;
+                        persBool = true;
+                        ragBool = true;
+                        thrBool = true;
+                    }
                     if ((i == 0 && gameObj.GetComponent<SlotManager>().arrSlotIndex[1] == 0) || (i == 7 && gameObj.GetComponent<SlotManager>().arrSlotIndex[6] == 0))
                     {
                         oddBool = true;

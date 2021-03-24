@@ -23,17 +23,6 @@ namespace CatTower
         public GameObject checkObj;
         public bool dragAble;
 
-        public void SetSlot()
-        {
-            myImage.sprite = mySprite;
-            gameObj.GetComponent<SlotManager>().arrSlotBreed[index] = br;
-            gameObj.GetComponent<SlotManager>().arrSlotIndex[index] = 1;
-            del = true;
-            checkObj.GetComponent<CheckUsable>().ResetBr();
-            Debug.Log("리셋");
-            checkObj.GetComponent<CheckUsable>().CheckBr();
-        }
-  
         public void SetSprite()
         {
             for (int i = 0; i < 57; i++)
@@ -186,8 +175,6 @@ namespace CatTower
 
                 GameController.Instance.throwInfo(brS, index);
                 br = Breed.none;
-                checkObj.GetComponent<CheckUsable>().ResetBr();
-                checkObj.GetComponent<CheckUsable>().CheckBr();
             }
         }
     }
