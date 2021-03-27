@@ -14,7 +14,7 @@ namespace CatTower
         private GameObject ResultScoreprefab;
         public GameObject ResultPopup;
         public Button Exitbutton;
-        public int[] rank = new int[6];
+        private PlayerOrder[] rank = new PlayerOrder[6];
 
         void Awake()
         {
@@ -25,44 +25,46 @@ namespace CatTower
         {
             Exitbutton.onClick.AddListener(ChangeTitle);
         }
-        
-        public void ShowPlayerList(List<PlayerOrder> players)
+
+        public void ShowGameResult(IngameResult result)
+        {
+            ResultPopup.SetActive(true);
+            ShowPlayerList(result.player);
+        }
+
+        private void ShowPlayerList(List<PlayerOrder> players)
         {
             int N = players.Count;
-            for (int l = 0; l < players.Count; l++)
+            List<PlayerOrder> sortedPlayer = new List<PlayerOrder>();
+
+            for (int l = 0; l < N; l++)
             {
-                rank[l] = l + 1;
+                rank[l] = players[l];
             }
 
             for (int k = 0; k < N - 1; k++)
             {
                 for (int j = k + 1; j < N; j++)
                 {
-                    if (players[k].score > players[j].score)
+                    if (players[k].score < players[j].score)
                     {
-                        int temp = rank[k];
+                        var temp = rank[k];
                         rank[k] = rank[j];
                         rank[j] = temp;
                     }
                 }
             }
-            for (int i = 0; i < players.Count; i++)
+            for (int i = 0; i < N; i++)
             {
-                string rankstr = Convert.ToString(rank[i]);
                 GameObject playerObject = Instantiate(ResultScoreprefab, ResultScoreLayout.transform);
                 var nickname = playerObject.transform.Find("name").GetComponent<Text>();
-                nickname.text = players[i].userInfo.nickname;
+                nickname.text = rank[i].userInfo.nickname;
                 var ranking = playerObject.transform.Find("rank").GetComponent<Text>();
-                ranking.text = rankstr;
-                if (players[i].userInfo.mid == UserData.mid) nickname.color = Color.yellow;
+                ranking.text = (i != 0 && rank[i - 1].score == rank[i].score) ? i + "등" : (i + 1) + "등";
+                if (rank[i].userInfo.mid == UserData.mid) nickname.color = Color.yellow;
                 var score = playerObject.transform.Find("score").GetComponent<Text>();
-                score.text = players[i].score.ToString();
+                score.text = rank[i].score.ToString();
             }
-        }
-
-        public void ShowPlayersInfo(IngamePlayerOrder response)
-        {
-            ShowPlayerList(response.player);
         }
 
         public void ChangeTitle()

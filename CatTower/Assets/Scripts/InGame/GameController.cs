@@ -222,7 +222,8 @@ namespace CatTower
         private void ShowGameResult(IngameResult result)
         {
             Debug.Log("게임 끝");
-            //TODO: 구현필요
+            
+            GameResultUIcontroller.Instance.ShowGameResult(result);
         }
     }
 }
