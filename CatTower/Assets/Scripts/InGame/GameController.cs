@@ -50,9 +50,9 @@ namespace CatTower
                 webSocket.ReceiveEvent<IngamePlayerOrder>("/ingame", "playerorder", ShowInitialPlayersInfo);
                 webSocket.ReceiveEvent<IngameEndRound>("/ingame", "endround", (response) =>
                 {
-                    EndRound(response);
                     AlertRoundStart();
                 });
+                webSocket.ReceiveEvent<IngameResult>("/ingame", "result", ShowGameResult);
             });
         }
 
@@ -93,11 +93,12 @@ namespace CatTower
 
         public void AlertRoundStart()
         {
+            currentRound++;
+
             webSocket.SendEvent<IngameStart>("/ingame", "start",
                 new IngameStart
                 {
                     roomId = JoinedRoom.roomId,
-                    round = currentRound,
                     user = new UserInfo
                     {
                         mid = UserData.mid,
@@ -202,30 +203,12 @@ namespace CatTower
                     new IngameGiveUp
                     {
                         user = player.Item1,
-                        roomId = JoinedRoom.roomId
+                        roomId = JoinedRoom.roomId,
+                        leftCard = myCards.GetComponent<CheckUsable>().myScore
                     });
                     break;
                 }
             }
-        }
-
-        public void EndRound(IngameEndRound response)
-        {
-            foreach (var player in playerOrder)
-            {
-                if (player.Item1.mid == UserData.mid)
-                {
-                    webSocket.SendEvent<IngameFinish>("/ingame", "finish",
-                    new IngameFinish
-                    {
-                        roomId = JoinedRoom.roomId,
-                        user = player.Item1,
-                        round = currentRound,
-                        leftCard = myCards.GetComponent<CheckUsable>().myScore
-                    });
-                }
-            }
-            currentRound++;
         }
 
         private void RingingCatSound()
@@ -234,6 +217,12 @@ namespace CatTower
             if (!isExistAudioSource) audioSource = this.gameObject.AddComponent<AudioSource>();
             audioSource.clip = catClip;
             audioSource.Play();
+        }
+
+        private void ShowGameResult(IngameResult result)
+        {
+            Debug.Log("게임 끝");
+            //TODO: 구현필요
         }
     }
 }

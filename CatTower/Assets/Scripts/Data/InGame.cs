@@ -8,7 +8,6 @@ namespace CatTower
     public class IngameStart
     {
         public string roomId;
-        public int round;
         public UserInfo user;
     }
 
@@ -53,6 +52,7 @@ namespace CatTower
     {
         public UserInfo user;
         public string roomId;
+        public int leftCard;
     }
 
     [Serializable]
@@ -72,15 +72,6 @@ namespace CatTower
         public List<string> board; //TODO: string 이 맞는지 확인 필요
         public int order;
         public List<PlayerOrder> player;
-    }
-
-    [Serializable]
-    public class IngameFinish
-    {
-        public string roomId;
-        public UserInfo user;
-        public int round;
-        public int leftCard;
     }
 
     [Serializable]

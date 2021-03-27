@@ -44,6 +44,7 @@ namespace CatTower
         /// <param name="currentRound">현재 라운드</param>
         public void ShowInitialPlayerList(List<PlayerOrder> players, int currentRound)
         {
+            DeletePlayerInfo();
             ShowCurrentRound(currentRound);
 
             foreach (var player in players)
@@ -119,6 +120,16 @@ namespace CatTower
             warning.SetActive(false);
         }
 
+        private void DeletePlayerInfo()
+        {
+            var count = playerListLayout.transform.childCount;
+
+            for (int i = 0; i < count; i++)
+            {
+                Destroy(playerListLayout.transform.GetChild(i).gameObject);
+            }
+        }
+
         /// <summary>
         /// 버튼을 누를 때마다 BGM을 끄고 켭니다.
         /// 현재 BGM 상태에 따라 버튼 이미지도 변경합니다.
@@ -146,6 +157,11 @@ namespace CatTower
             StartCoroutine(PopupCurrentRound(round));
         }
 
+        /// <summary>
+        /// 각 라운드가 시작될 때, 현재 라운드 정보를 보여줍니다.
+        /// </summary>
+        /// <param name="round">현재 라운드 수</param>
+        /// <returns></returns>
         private IEnumerator PopupCurrentRound(int round)
         {
             roundPopup.SetActive(true);
