@@ -78,7 +78,7 @@ namespace CatTower
                 switch (page+1)
                 {
                     case 1:
-                        helpPage2.gameObject.SetActive(true);
+                        helpPage1.gameObject.SetActive(true);
                         break;
                     case 2:
                         helpPage2.gameObject.SetActive(true);
