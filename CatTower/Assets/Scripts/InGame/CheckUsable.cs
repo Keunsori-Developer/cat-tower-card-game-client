@@ -40,11 +40,13 @@ namespace CatTower
         }
         public void CheckCard() //사용가능 카드를 확인
         {
+            Debug.Log(string.Format("siam: {0}&{1} / russian: {2}&{3} / mack: {4}&{5} / pers: {6}&{7} / rag: {8}&{9} / thr: {10}&{11} / odd: {12}&{13}  sava: {14}&{15}", siamBool, siamNum, russianBool, russiaNum, mackBool, mackNum, persBool, persNum, ragBool, ragNum, thrBool, thrNum, oddBool, oddNum, savaBool, savaNum));
             if (!((siamBool == true && siamNum > 0) || (russianBool == true && russiaNum > 0) || (mackBool == true && mackNum > 0) || (persBool == true && persNum > 0) || (ragBool == true && ragNum > 0) || (thrBool == true && thrNum > 0) || (oddBool == true && oddNum > 0) || (savaBool == true && savaNum > 0)))
             {
                 usableCard = false;
             }
             else usableCard = true;
+            Debug.Log("usableCard : " + usableCard + "!!!!!!");
         }
 
         public void SetBreedBool(int i)
@@ -90,7 +92,7 @@ namespace CatTower
 
         public void CheckBr() //누군가 카드를 놓을때 호출, 사용가능한 고양이를 true로 바꿔줌
         {
-            if(myScore == 1 && savaNum == 1)
+            if (myScore == 1 && savaNum == 1)
             {
                 savaBool = true;
             }
@@ -111,11 +113,11 @@ namespace CatTower
                     {
                         oddBool = true;
                     }
-                    if(i > 0 && i < 7 && gameObj.GetComponent<SlotManager>().arrSlotIndex[i-1] == 0 && gameObj.GetComponent<SlotManager>().arrSlotIndex[i + 1] == 0)
+                    if (i > 0 && i < 7 && gameObj.GetComponent<SlotManager>().arrSlotIndex[i - 1] == 0 && gameObj.GetComponent<SlotManager>().arrSlotIndex[i + 1] == 0)
                     {
                         oddBool = true;
                     }
-                    if(i == 8 && gameObj.GetComponent<SlotManager>().arrSlotIndex[9] == 0 && gameObj.GetComponent<SlotManager>().arrSlotIndex[i - 8] == 1 && gameObj.GetComponent<SlotManager>().arrSlotIndex[i - 7] == 1)
+                    if (i == 8 && gameObj.GetComponent<SlotManager>().arrSlotIndex[9] == 0 && gameObj.GetComponent<SlotManager>().arrSlotIndex[i - 8] == 1 && gameObj.GetComponent<SlotManager>().arrSlotIndex[i - 7] == 1)
                     {
                         oddBool = true;
                     }
@@ -125,7 +127,7 @@ namespace CatTower
             {
                 SetBreedBool(i);
             }
-            for(int i = 16; i < 22; i++)
+            for (int i = 16; i < 22; i++)
             {
                 SetBreedBool(i);
             }
@@ -176,7 +178,7 @@ namespace CatTower
         {
             myScore = siamNum + russiaNum + mackNum + ragNum + persNum + thrNum + oddNum + savaNum;
         }
-                
+
         public void ResetBr()
         {
             siamBool = false;
@@ -187,7 +189,7 @@ namespace CatTower
             thrBool = false;
             oddBool = false;
         }
-  
+
         void Start()
         {
             usableCard = true;

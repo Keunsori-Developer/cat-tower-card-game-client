@@ -8,11 +8,12 @@ namespace CatTower
     {
         public void InStart()
         {
-            
+            Debug.Log("WaitGameState InStart()");
         }
 
         public void InFinish(IngameStatus response)
         {
+            Debug.Log("WaitGameState InFinish()");
             GameController.Instance.UpdateBoard(response);
             GameController.Instance.StateChanged();
         }

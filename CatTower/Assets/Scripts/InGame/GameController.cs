@@ -127,6 +127,7 @@ namespace CatTower
         public void ShowInitialPlayersInfo(IngamePlayerOrder response)
         {
             playerOrder = new (UserInfo, bool)[response.player.Count];
+            currentOrder = 0;
 
             for (int i = 0; i < response.player.Count; i++)
             {
@@ -135,6 +136,7 @@ namespace CatTower
                 if (response.player[i].userInfo.mid == UserData.mid)
                 {
                     myOrder = response.player[i].order;
+                    Debug.Log("myOrder : " + myOrder);
                 }
             }
             uiController.ShowInitialPlayerList(response.player, currentRound);
@@ -225,7 +227,7 @@ namespace CatTower
         private void ShowGameResult(IngameResult result)
         {
             Debug.Log("게임 끝");
-            
+            uiController.DeletePlayerInfo();
             GameResultUIcontroller.Instance.ShowGameResult(result);
         }
     }
