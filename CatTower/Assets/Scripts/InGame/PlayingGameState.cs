@@ -8,6 +8,7 @@ namespace CatTower
     {
         public void InStart()
         {
+            Debug.Log("PlayingGameState InStart()");
             if (GameController.Instance.myCards.GetComponent<CheckUsable>().usableCard == true)
             {
                 GameController.Instance.controllAble = true;
@@ -20,6 +21,7 @@ namespace CatTower
 
         public void InFinish(IngameStatus response)
         {
+            Debug.Log("PlayingGameState InFinish()");
             GameController.Instance.controllAble = false;
             GameController.Instance.UpdateBoard(response);
             GameController.Instance.StateChanged();

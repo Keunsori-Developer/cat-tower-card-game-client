@@ -54,13 +54,15 @@ namespace CatTower
                     }
                 }
             }
+            string preRanking = "";
             for (int i = 0; i < N; i++)
             {
                 GameObject playerObject = Instantiate(ResultScoreprefab, ResultScoreLayout.transform);
                 var nickname = playerObject.transform.Find("name").GetComponent<Text>();
                 nickname.text = rank[i].userInfo.nickname;
                 var ranking = playerObject.transform.Find("rank").GetComponent<Text>();
-                ranking.text = (i + 1) + "등";
+                ranking.text = (i != 0 && rank[i - 1].score == rank[i].score) ? preRanking : (i + 1) + "등";
+                preRanking = ranking.text;
                 if (rank[i].userInfo.mid == UserData.mid) nickname.color = Color.yellow;
                 var score = playerObject.transform.Find("score").GetComponent<Text>();
                 score.text = rank[i].score.ToString();

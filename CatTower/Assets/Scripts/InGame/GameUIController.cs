@@ -53,13 +53,13 @@ namespace CatTower
                 var nickname = playerObject.transform.Find("nickname").GetComponent<Text>();
                 nickname.text = player.userInfo.nickname;
                 if (player.userInfo.mid == UserData.mid) nickname.color = Color.yellow;
-                playerObject.transform.Find("score").GetComponent<Text>().text = "0";
+                playerObject.transform.Find("score").GetComponent<Text>().text = player.score.ToString();
                 playerObject.transform.Find("giveup").gameObject.SetActive(false);
 
                 playerInfo.Add(player.userInfo.mid, playerObject);
             }
 
-            HighlightCurrentPlayer(players.Find(x => x.order == 0).userInfo); //TODO: 수정할거임(집에서)
+            HighlightCurrentPlayer(players.Find(x => x.order == 0).userInfo);
         }
 
         /// <summary>
@@ -120,7 +120,7 @@ namespace CatTower
             warning.SetActive(false);
         }
 
-        private void DeletePlayerInfo()
+        public void DeletePlayerInfo()
         {
             var count = playerListLayout.transform.childCount;
 
