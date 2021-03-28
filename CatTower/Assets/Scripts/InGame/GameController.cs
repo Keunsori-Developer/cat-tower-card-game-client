@@ -116,8 +116,10 @@ namespace CatTower
             }
 
             Debug.Log(response.cards);
-            myCards.GetComponent<MyCardDeck>().GetCard(response.cards);
 
+            myCards.GetComponent<CheckUsable>().resetCardNum();
+            myCards.GetComponent<MyCardDeck>().GetCard(response.cards);
+            
             Slot.GetComponent<SlotManager>().ResetSlot();
             Slot.GetComponent<SlotManager>().ResetSprite();
         }

@@ -27,6 +27,17 @@ namespace CatTower
         public int myScore = 0;
         public int roundScore;
 
+        public void resetCardNum()
+        {
+            siamNum = 0;
+            russiaNum = 0;
+            mackNum = 0;
+            ragNum = 0;
+            persNum = 0;
+            thrNum = 0;
+            oddNum = 0;
+            savaNum = 0;
+        }
         public void CheckCard() //사용가능 카드를 확인
         {
             if (!((siamBool == true && siamNum > 0) || (russianBool == true && russiaNum > 0) || (mackBool == true && mackNum > 0) || (persBool == true && persNum > 0) || (ragBool == true && ragNum > 0) || (thrBool == true && thrNum > 0) || (oddBool == true && oddNum > 0) || (savaBool == true && savaNum > 0)))
