@@ -170,7 +170,7 @@ namespace CatTower
             roundtextInPopup.GetComponent<Text>().text = "Round <color=yellow>" + round + "</color>";
             yield return new WaitForSecondsRealtime(1.5f);
             roundPopup.SetActive(false);
-            roundText.text = "Round " + (round + 1);
+            roundText.text = "Round " + round;
             roundText.gameObject.SetActive(true);
         }
     }
