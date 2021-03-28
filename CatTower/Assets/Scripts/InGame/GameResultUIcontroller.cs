@@ -46,7 +46,7 @@ namespace CatTower
             {
                 for (int j = k + 1; j < N; j++)
                 {
-                    if (players[k].score < players[j].score)
+                    if (rank[k].score < rank[j].score)
                     {
                         var temp = rank[k];
                         rank[k] = rank[j];
@@ -60,7 +60,7 @@ namespace CatTower
                 var nickname = playerObject.transform.Find("name").GetComponent<Text>();
                 nickname.text = rank[i].userInfo.nickname;
                 var ranking = playerObject.transform.Find("rank").GetComponent<Text>();
-                ranking.text = (i != 0 && rank[i - 1].score == rank[i].score) ? i + "등" : (i + 1) + "등";
+                ranking.text = (i + 1) + "등";
                 if (rank[i].userInfo.mid == UserData.mid) nickname.color = Color.yellow;
                 var score = playerObject.transform.Find("score").GetComponent<Text>();
                 score.text = rank[i].score.ToString();
