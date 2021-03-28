@@ -120,7 +120,7 @@ namespace CatTower
             warning.SetActive(false);
         }
 
-        public void DeletePlayerInfo()
+        private void DeletePlayerInfo()
         {
             var count = playerListLayout.transform.childCount;
 
@@ -173,6 +173,16 @@ namespace CatTower
             roundPopup.SetActive(false);
             roundText.text = "Round " + round;
             roundText.gameObject.SetActive(true);
+        }
+
+        /// <summary>
+        /// 완전히 게임이 끝났을 때 화면 내 모든 정보를 숨깁니다.
+        /// </summary>
+        public void DeleteAllGameInfo()
+        {
+            DeletePlayerInfo();
+            roundText.gameObject.SetActive(false);
+            currentPlayerText.gameObject.SetActive(false);
         }
     }
 }

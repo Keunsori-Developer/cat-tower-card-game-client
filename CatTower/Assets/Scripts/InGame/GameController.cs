@@ -227,7 +227,7 @@ namespace CatTower
         private void ShowGameResult(IngameResult result)
         {
             Debug.Log("게임 끝");
-            uiController.DeletePlayerInfo();
+            uiController.DeleteAllGameInfo();
             GameResultUIcontroller.Instance.ShowGameResult(result);
         }
     }
