@@ -128,6 +128,7 @@ namespace CatTower
             {
                 Destroy(playerListLayout.transform.GetChild(i).gameObject);
             }
+            playerInfo.Clear();
         }
 
         /// <summary>
