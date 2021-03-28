@@ -125,7 +125,7 @@ namespace CatTower
             Drag.del = true;
             myCards.GetComponent<CheckUsable>().ResetBr();
             myCards.GetComponent<CheckUsable>().CheckBr();
-            Debug.Log("리셋");
+            myCards.GetComponent<CheckUsable>().CheckCard();
             canUse = false;
         }
     }
