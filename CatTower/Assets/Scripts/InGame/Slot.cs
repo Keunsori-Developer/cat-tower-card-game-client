@@ -74,6 +74,8 @@ namespace CatTower
                             {
                                 SetSlot(target);
                             }
+                            else
+                                return false;
                         }
                         else if (index == 7)
                         {
@@ -81,6 +83,8 @@ namespace CatTower
                             {
                                 SetSlot(target);
                             }
+                            else
+                                return false;
                         }
                         else if (index < 7 && index > 0)
                         {
@@ -88,6 +92,8 @@ namespace CatTower
                             {
                                 SetSlot(target);
                             }
+                            else
+                                return false;
                         }
                         else
                         {
