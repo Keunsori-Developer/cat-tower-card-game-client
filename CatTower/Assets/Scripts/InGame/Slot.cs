@@ -101,8 +101,11 @@ namespace CatTower
                             {
                                 if (parentSlot.GetComponent<SlotManager>().arrSlotIndex[index] != 0)
                                     return false;
-                                SetSlot(target);
+                                else
+                                    SetSlot(target);
                             }
+                            else
+                                return false;
                         }
                     }
                     else
