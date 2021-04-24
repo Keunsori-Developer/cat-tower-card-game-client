@@ -23,6 +23,11 @@ namespace CatTower
         public GameObject checkObj;
         public bool dragAble;
 
+        private void Awake()
+        {
+            Input.multiTouchEnabled = false;
+        }
+
         public void SetSprite()
         {
             for (int i = 0; i < 57; i++)
@@ -155,7 +160,7 @@ namespace CatTower
                 }
 
                 index = slot.index;
-                
+
                 if (!slot.CheckSlot(this.gameObject.GetComponent<MyCard>().card))
                 {
                     Debug.Log("여기엔 둘 수 없음");
@@ -163,7 +168,7 @@ namespace CatTower
                     del = false;
                     this.transform.position = defaultposition;
                     return;
-                }              
+                }
                 if (del == true)
                 {
                     checkObj = GameObject.Find("MyCards");
